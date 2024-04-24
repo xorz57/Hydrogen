@@ -10,7 +10,6 @@
 #include <cinttypes>
 #include <cstdlib>
 #include <iostream>
-#include <vector>
 
 int main() {
     if (!glfwInit()) {
