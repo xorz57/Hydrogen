@@ -63,7 +63,7 @@ int main() {
     while (!glfwWindowShouldClose(window)) {
         ++frame;
         const double t1 = glfwGetTime();
-        const double deltaTime = t1 - t0;
+        const double dt = t1 - t0;
         t0 = t1;
 
         glfwPollEvents();
@@ -74,7 +74,7 @@ int main() {
 
         ImGui::Begin("Graphite");
         ImGui::Text("frame: %" PRIu64, frame);
-        ImGui::Text("deltaTime: %.5lf sec", deltaTime);
+        ImGui::Text("dt: %.5lf sec", dt);
         ImGui::End();
 
         ImGui::Render();
