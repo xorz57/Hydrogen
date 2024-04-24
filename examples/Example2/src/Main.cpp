@@ -60,18 +60,18 @@ int main() {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    GLuint vao = 0;
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
+    GLuint VAO = 0;
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
 
     const std::vector<GLfloat> vertices{
             +0.5f, -0.5f, +0.0f, +1.0f, +0.0f, +0.0f,
             -0.5f, -0.5f, +0.0f, +0.0f, +1.0f, +0.0f,
             +0.0f, +0.5f, +0.0f, +0.0f, +0.0f, +1.0f};
 
-    GLuint vbo = 0;
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    GLuint VBO = 0;
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices.size() * sizeof(GLfloat)), vertices.data(), GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
@@ -82,9 +82,9 @@ int main() {
 
     const std::vector<GLint> elements{0, 1, 2};
 
-    GLuint ebo = 0;
-    glGenBuffers(1, &ebo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    GLuint EBO = 0;
+    glGenBuffers(1, &EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(elements.size() * sizeof(GLfloat)), elements.data(), GL_STATIC_DRAW);
 
     const char *vShaderSource = R"(
@@ -193,7 +193,7 @@ void main() {
         ///////////////////////////////////////////////////////////////////////
 
         glUseProgram(program);
-        glBindVertexArray(vao);
+        glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
 
         ///////////////////////////////////////////////////////////////////////
@@ -211,9 +211,9 @@ void main() {
     }
 
     glDeleteProgram(program);
-    glDeleteVertexArrays(1, &vao);
-    glDeleteBuffers(1, &vbo);
-    glDeleteBuffers(1, &ebo);
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
 
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
