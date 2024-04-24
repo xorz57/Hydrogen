@@ -10,6 +10,7 @@
 #include <cinttypes>
 #include <cstdlib>
 #include <iostream>
+#include <vector>
 
 int main() {
     if (!glfwInit()) {
@@ -21,7 +22,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow *window = glfwCreateWindow(1280, 720, "Graphite", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(800, 600, "Graphite", nullptr, nullptr);
     if (window == nullptr) {
         glfwTerminate();
         std::exit(EXIT_FAILURE);
