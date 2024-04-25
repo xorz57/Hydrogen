@@ -1,7 +1,0 @@
-add_subdirectory(Example1)
-add_subdirectory(Example2)
-add_subdirectory(Example3)
-add_subdirectory(Example4)
-add_subdirectory(Example5)
-add_subdirectory(Example6)
-add_subdirectory(Example7)
