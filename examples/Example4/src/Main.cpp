@@ -65,9 +65,9 @@ int main() {
     glBindVertexArray(VAO);
 
     const std::vector<GLfloat> vertices{
-            +0.5f, -0.5f, +0.0f,
-            -0.5f, -0.5f, +0.0f,
-            +0.0f, +0.5f, +0.0f};
+            +0.5f, -0.5f, +0.0f, +1.0f, +0.0f, +0.0f,
+            -0.5f, -0.5f, +0.0f, +0.0f, +1.0f, +0.0f,
+            +0.0f, +0.5f, +0.0f, +0.0f, +0.0f, +1.0f};
 
     GLuint VBO = 0;
     glGenBuffers(1, &VBO);
@@ -75,7 +75,10 @@ int main() {
     glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices.size() * sizeof(GLfloat)), vertices.data(), GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) nullptr);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) nullptr);
+
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) (3 * sizeof(GLfloat)));
 
     const std::vector<GLint> elements{0, 1, 2};
 
@@ -88,9 +91,13 @@ int main() {
 #version 330 core
 
 layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aCol;
+
+out vec3 vertCol;
 
 void main() {
     gl_Position = vec4(aPos, 1.0);
+    vertCol = aCol;
 }
         )";
 
@@ -98,11 +105,10 @@ void main() {
 #version 330 core
 
 out vec4 fragCol;
-
-uniform vec4 ourColor;
+in vec3 vertCol;
 
 void main() {
-    fragCol = ourColor;
+    fragCol = vec4(vertCol, 1.0);
 }
         )";
 
@@ -186,10 +192,6 @@ void main() {
         ///////////////////////////////////////////////////////////////////////
 
         glUseProgram(program);
-
-        auto r = static_cast<GLfloat>(sin(glfwGetTime()) / 2.0 + 0.5);
-        glUniform4f(glGetUniformLocation(program, "ourColor"), r, 0.0f, 0.0f, 1.0f);
-
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
 
