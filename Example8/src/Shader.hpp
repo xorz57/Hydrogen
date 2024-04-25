@@ -6,7 +6,7 @@
 
 class Shader {
 public:
-    Shader(const char *vShaderSource, const char *fShaderSource);
+    Shader(const GLchar *vShaderSource, const GLchar *fShaderSource);
     ~Shader();
 
     void use();

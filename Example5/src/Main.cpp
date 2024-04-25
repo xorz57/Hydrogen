@@ -38,10 +38,10 @@ int main() {
         std::exit(EXIT_FAILURE);
     }
 
-    std::clog << "OpenGL Vendor: " << (const char *) glGetString(GL_VENDOR) << std::endl;
-    std::clog << "OpenGL Renderer: " << (const char *) glGetString(GL_RENDERER) << std::endl;
-    std::clog << "OpenGL Version: " << (const char *) glGetString(GL_VERSION) << std::endl;
-    std::clog << "OpenGL Shading Language Version: " << (const char *) glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+    std::clog << "OpenGL Vendor: " << (const GLchar *) glGetString(GL_VENDOR) << std::endl;
+    std::clog << "OpenGL Renderer: " << (const GLchar *) glGetString(GL_RENDERER) << std::endl;
+    std::clog << "OpenGL Version: " << (const GLchar *) glGetString(GL_VERSION) << std::endl;
+    std::clog << "OpenGL Shading Language Version: " << (const GLchar *) glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -87,7 +87,7 @@ int main() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(elements.size() * sizeof(GLfloat)), elements.data(), GL_STATIC_DRAW);
 
-    const char *vShaderSource = R"(
+    const GLchar *vShaderSource = R"(
 #version 330 core
 
 layout (location = 0) in vec3 position;
@@ -101,7 +101,7 @@ void main() {
 }
         )";
 
-    const char *fShaderSource = R"(
+    const GLchar *fShaderSource = R"(
 #version 330 core
 
 out vec4 f_Color;

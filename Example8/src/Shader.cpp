@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-Shader::Shader(const char *vShaderSource, const char *fShaderSource) {
+Shader::Shader(const GLchar *vShaderSource, const GLchar *fShaderSource) {
     GLint success;
 
     GLuint vShader = glCreateShader(GL_VERTEX_SHADER);

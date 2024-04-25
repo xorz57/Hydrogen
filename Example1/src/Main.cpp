@@ -37,10 +37,10 @@ int main() {
         std::exit(EXIT_FAILURE);
     }
 
-    std::clog << "OpenGL Vendor: " << (const char *) glGetString(GL_VENDOR) << std::endl;
-    std::clog << "OpenGL Renderer: " << (const char *) glGetString(GL_RENDERER) << std::endl;
-    std::clog << "OpenGL Version: " << (const char *) glGetString(GL_VERSION) << std::endl;
-    std::clog << "OpenGL Shading Language Version: " << (const char *) glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+    std::clog << "OpenGL Vendor: " << (const GLchar *) glGetString(GL_VENDOR) << std::endl;
+    std::clog << "OpenGL Renderer: " << (const GLchar *) glGetString(GL_RENDERER) << std::endl;
+    std::clog << "OpenGL Version: " << (const GLchar *) glGetString(GL_VERSION) << std::endl;
+    std::clog << "OpenGL Shading Language Version: " << (const GLchar *) glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
