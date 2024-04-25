@@ -26,7 +26,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "Graphite", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(800, 600, "OpenGLSandbox | Example7", nullptr, nullptr);
     if (window == nullptr) {
         glfwTerminate();
         std::exit(EXIT_FAILURE);
@@ -181,7 +181,7 @@ int main() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        ImGui::Begin("Graphite");
+        ImGui::Begin("Statistics");
         ImGui::Text("frame: %" PRIu64, frame);
         ImGui::Text("dt: %.5lf sec", dt);
         ImGui::End();
