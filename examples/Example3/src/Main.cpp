@@ -89,22 +89,22 @@ int main() {
     const char *vShaderSource = R"(
 #version 330 core
 
-layout (location = 0) in vec3 aPos;
+layout (location = 0) in vec3 position;
 
 void main() {
-    gl_Position = vec4(aPos, 1.0);
+    gl_Position = vec4(position, 1.0);
 }
         )";
 
     const char *fShaderSource = R"(
 #version 330 core
 
-out vec4 fragCol;
+out vec4 f_Color;
 
-uniform vec4 ourColor;
+uniform vec4 color;
 
 void main() {
-    fragCol = ourColor;
+    f_Color = color;
 }
         )";
 
@@ -192,7 +192,7 @@ void main() {
         glUseProgram(program);
 
         auto r = static_cast<GLfloat>(glm::sin(glfwGetTime()) / 2.0 + 0.5);
-        glUniform4f(glGetUniformLocation(program, "ourColor"), r, 0.0f, 0.0f, 1.0f);
+        glUniform4f(glGetUniformLocation(program, "color"), r, 0.0f, 0.0f, 1.0f);
 
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
 

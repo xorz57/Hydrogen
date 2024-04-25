@@ -100,25 +100,25 @@ int main() {
     const char *vShaderSource = R"(
 #version 330 core
 
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec3 aCol;
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec3 color;
 
-out vec3 vertCol;
+out vec3 v_Color;
 
 void main() {
-    gl_Position = vec4(aPos, 1.0);
-    vertCol = aCol;
+    gl_Position = vec4(position, 1.0);
+    v_Color = color;
 }
         )";
 
     const char *fShaderSource = R"(
 #version 330 core
 
-out vec4 fragCol;
-in vec3 vertCol;
+out vec4 f_Color;
+in vec3 v_Color;
 
 void main() {
-    fragCol = vec4(vertCol, 1.0);
+    f_Color = vec4(v_Color, 1.0);
 }
         )";
 
