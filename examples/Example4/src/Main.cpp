@@ -156,6 +156,8 @@ void main() {
 
     glDetachShader(program, vShader);
     glDetachShader(program, fShader);
+    glDeleteShader(vShader);
+    glDeleteShader(fShader);
 
     ///////////////////////////////////////////////////////////////////////////
 

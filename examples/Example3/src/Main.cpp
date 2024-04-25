@@ -7,6 +7,8 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
+#include <glm/glm.hpp>
+
 #include <cinttypes>
 #include <cstdlib>
 #include <iostream>
@@ -150,6 +152,8 @@ void main() {
 
     glDetachShader(program, vShader);
     glDetachShader(program, fShader);
+    glDeleteShader(vShader);
+    glDeleteShader(fShader);
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -187,7 +191,7 @@ void main() {
 
         glUseProgram(program);
 
-        auto r = static_cast<GLfloat>(sin(glfwGetTime()) / 2.0 + 0.5);
+        auto r = static_cast<GLfloat>(glm::sin(glfwGetTime()) / 2.0 + 0.5);
         glUniform4f(glGetUniformLocation(program, "ourColor"), r, 0.0f, 0.0f, 1.0f);
 
         glBindVertexArray(VAO);
