@@ -60,14 +60,16 @@ int main() {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    GLuint VAO = 0;
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-
     const std::vector<GLfloat> vertices{
             +0.5f, -0.5f, +0.0f,
             -0.5f, -0.5f, +0.0f,
             +0.0f, +0.5f, +0.0f};
+
+    const std::vector<GLint> elements{0, 1, 2};
+
+    GLuint VAO = 0;
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
 
     GLuint VBO = 0;
     glGenBuffers(1, &VBO);
@@ -76,8 +78,6 @@ int main() {
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *) nullptr);
-
-    const std::vector<GLint> elements{0, 1, 2};
 
     GLuint EBO = 0;
     glGenBuffers(1, &EBO);
