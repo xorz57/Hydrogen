@@ -89,8 +89,11 @@ int main() {
 
 layout (location = 0) in vec3 aPos;
 
+out vec4 vertCol;
+
 void main() {
     gl_Position = vec4(aPos, 1.0);
+    vertCol = vec4(1.0, 0.0, 0.0, 1.0);
 }
         )";
 
@@ -98,9 +101,10 @@ void main() {
 #version 330 core
 
 out vec4 fragCol;
+in vec4 vertCol;
 
 void main() {
-    fragCol = vec4(1.0, 0.0, 0.0, 1.0);
+    fragCol = vertCol;
 }
         )";
 
