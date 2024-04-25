@@ -64,21 +64,31 @@ int main() {
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
 
-    const std::vector<GLfloat> vertices{
-            +0.5f, -0.5f, +0.0f, +1.0f, +0.0f, +0.0f,
-            -0.5f, -0.5f, +0.0f, +0.0f, +1.0f, +0.0f,
-            +0.0f, +0.5f, +0.0f, +0.0f, +0.0f, +1.0f};
+    const std::vector<GLfloat> vertices1{
+            +0.5f, -0.5f, +0.0f,
+            -0.5f, -0.5f, +0.0f,
+            +0.0f, +0.5f, +0.0f};
 
-    GLuint VBO = 0;
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices.size() * sizeof(GLfloat)), vertices.data(), GL_STATIC_DRAW);
+    GLuint VBO1 = 0;
+    glGenBuffers(1, &VBO1);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO1);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices1.size() * sizeof(GLfloat)), vertices1.data(), GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *) nullptr);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *) nullptr);
+
+    const std::vector<GLfloat> vertices2{
+            +1.0f, +0.0f, +0.0f,
+            +0.0f, +1.0f, +0.0f,
+            +0.0f, +0.0f, +1.0f};
+
+    GLuint VBO2 = 0;
+    glGenBuffers(1, &VBO2);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO2);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices2.size() * sizeof(GLfloat)), vertices2.data(), GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *) (3 * sizeof(GLfloat)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *) nullptr);
 
     const std::vector<GLint> elements{0, 1, 2};
 
@@ -213,7 +223,8 @@ void main() {
 
     glDeleteProgram(program);
     glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &VBO1);
+    glDeleteBuffers(1, &VBO2);
     glDeleteBuffers(1, &EBO);
 
     ImGui_ImplOpenGL3_Shutdown();
