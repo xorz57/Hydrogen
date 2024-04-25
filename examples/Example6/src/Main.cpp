@@ -9,7 +9,9 @@
 
 #include <cinttypes>
 #include <cstdlib>
+#include <fstream>
 #include <iostream>
+#include <sstream>
 #include <vector>
 
 int main() {
@@ -64,31 +66,21 @@ int main() {
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
 
-    const std::vector<GLfloat> vertices1{
-            +0.5f, -0.5f, +0.0f,
-            -0.5f, -0.5f, +0.0f,
-            +0.0f, +0.5f, +0.0f};
+    const std::vector<GLfloat> vertices{
+            +0.5f, -0.5f, +0.0f, +1.0f, +0.0f, +0.0f,
+            -0.5f, -0.5f, +0.0f, +0.0f, +1.0f, +0.0f,
+            +0.0f, +0.5f, +0.0f, +0.0f, +0.0f, +1.0f};
 
-    GLuint VBO1 = 0;
-    glGenBuffers(1, &VBO1);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO1);
-    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices1.size() * sizeof(GLfloat)), vertices1.data(), GL_STATIC_DRAW);
+    GLuint VBO = 0;
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices.size() * sizeof(GLfloat)), vertices.data(), GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *) nullptr);
-
-    const std::vector<GLfloat> vertices2{
-            +1.0f, +0.0f, +0.0f,
-            +0.0f, +1.0f, +0.0f,
-            +0.0f, +0.0f, +1.0f};
-
-    GLuint VBO2 = 0;
-    glGenBuffers(1, &VBO2);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO2);
-    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices2.size() * sizeof(GLfloat)), vertices2.data(), GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *) nullptr);
 
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *) nullptr);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *) (3 * sizeof(GLfloat)));
 
     const std::vector<GLint> elements{0, 1, 2};
 
@@ -97,30 +89,26 @@ int main() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(elements.size() * sizeof(GLfloat)), elements.data(), GL_STATIC_DRAW);
 
-    const char *vShaderSource = R"(
-#version 330 core
+    std::ifstream vShaderFile;
+    std::ifstream fShaderFile;
 
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec3 aCol;
+    vShaderFile.open("assets/shaders/shader.vert");
+    fShaderFile.open("assets/shaders/shader.frag");
 
-out vec3 vertCol;
+    std::stringstream vShaderStream;
+    std::stringstream fShaderStream;
 
-void main() {
-    gl_Position = vec4(aPos, 1.0);
-    vertCol = aCol;
-}
-        )";
+    vShaderStream << vShaderFile.rdbuf();
+    fShaderStream << fShaderFile.rdbuf();
 
-    const char *fShaderSource = R"(
-#version 330 core
+    vShaderFile.close();
+    fShaderFile.close();
 
-out vec4 fragCol;
-in vec3 vertCol;
+    const std::string vShaderText = vShaderStream.str();
+    const std::string fShaderText = fShaderStream.str();
 
-void main() {
-    fragCol = vec4(vertCol, 1.0);
-}
-        )";
+    const char *vShaderSource = vShaderText.c_str();
+    const char *fShaderSource = fShaderText.c_str();
 
     GLint success;
 
@@ -223,8 +211,7 @@ void main() {
 
     glDeleteProgram(program);
     glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO1);
-    glDeleteBuffers(1, &VBO2);
+    glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
 
     ImGui_ImplOpenGL3_Shutdown();
