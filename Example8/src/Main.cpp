@@ -1,3 +1,5 @@
+#include "Vertex.hpp"
+
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -6,8 +8,6 @@
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
-
-#include <glm/glm.hpp>
 
 #include <cinttypes>
 #include <cstdlib>
@@ -126,11 +126,6 @@ int main() {
     ImGui_ImplOpenGL3_Init("#version 330");
 
     ///////////////////////////////////////////////////////////////////////////
-
-    struct Vertex {
-        glm::vec3 Position;
-        glm::vec3 Color;
-    };
 
     GLuint VAO = 0;
     glGenVertexArrays(1, &VAO);
