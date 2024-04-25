@@ -1,4 +1,4 @@
-add_executable(Example8 src/Main.cpp)
+add_executable(Example8 src/Main.cpp src/Shader.cpp)
 
 target_include_directories(Example8 PRIVATE ${Stb_INCLUDE_DIR})
 
