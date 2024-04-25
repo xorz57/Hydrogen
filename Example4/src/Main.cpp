@@ -224,6 +224,7 @@ void main() {
     ///////////////////////////////////////////////////////////////////////////
 
     glDeleteProgram(program);
+
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO1);
     glDeleteBuffers(1, &VBO2);
