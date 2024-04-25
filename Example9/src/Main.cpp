@@ -13,9 +13,7 @@
 
 #include <cinttypes>
 #include <cstdlib>
-#include <fstream>
 #include <iostream>
-#include <sstream>
 #include <vector>
 
 int main() {
@@ -75,28 +73,7 @@ int main() {
 
     Mesh mesh(vertices, elements);
 
-    std::ifstream vShaderFile;
-    std::ifstream fShaderFile;
-
-    vShaderFile.open("assets/shaders/shader.vert");
-    fShaderFile.open("assets/shaders/shader.frag");
-
-    std::stringstream vShaderStream;
-    std::stringstream fShaderStream;
-
-    vShaderStream << vShaderFile.rdbuf();
-    fShaderStream << fShaderFile.rdbuf();
-
-    vShaderFile.close();
-    fShaderFile.close();
-
-    const std::string vShaderText = vShaderStream.str();
-    const std::string fShaderText = fShaderStream.str();
-
-    const GLchar *vShaderSource = vShaderText.c_str();
-    const GLchar *fShaderSource = fShaderText.c_str();
-
-    Shader shader(vShaderSource, fShaderSource);
+    Shader shader = Shader::loadFromFile("assets/shaders/shader.vert", "assets/shaders/shader.frag");
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -133,6 +110,7 @@ int main() {
         ///////////////////////////////////////////////////////////////////////
 
         shader.use();
+
         mesh.draw();
 
         ///////////////////////////////////////////////////////////////////////

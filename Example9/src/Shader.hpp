@@ -9,6 +9,7 @@ public:
     Shader(const GLchar *vShaderSource, const GLchar *fShaderSource);
     ~Shader();
 
+    static Shader loadFromFile(const char *vShaderPath, const char *fShaderPath);
     void use();
 
 private:

@@ -1,7 +1,9 @@
 #include "Shader.hpp"
 #include "Vertex.hpp"
 
+#include <fstream>
 #include <iostream>
+#include <sstream>
 #include <vector>
 
 Shader::Shader(const GLchar *vShaderSource, const GLchar *fShaderSource) {
@@ -51,6 +53,31 @@ Shader::Shader(const GLchar *vShaderSource, const GLchar *fShaderSource) {
     glDetachShader(mProgram, fShader);
     glDeleteShader(vShader);
     glDeleteShader(fShader);
+}
+
+Shader Shader::loadFromFile(const char *vShaderPath, const char *fShaderPath) {
+    std::ifstream vShaderFile;
+    std::ifstream fShaderFile;
+
+    vShaderFile.open(vShaderPath);
+    fShaderFile.open(fShaderPath);
+
+    std::stringstream vShaderStream;
+    std::stringstream fShaderStream;
+
+    vShaderStream << vShaderFile.rdbuf();
+    fShaderStream << fShaderFile.rdbuf();
+
+    vShaderFile.close();
+    fShaderFile.close();
+
+    const std::string vShaderText = vShaderStream.str();
+    const std::string fShaderText = fShaderStream.str();
+
+    const GLchar *vShaderSource = vShaderText.c_str();
+    const GLchar *fShaderSource = fShaderText.c_str();
+
+    return Shader(vShaderSource, fShaderSource);
 }
 
 Shader::~Shader() {
