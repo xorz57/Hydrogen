@@ -7,5 +7,5 @@ target_link_libraries(Example6 PRIVATE glfw)
 target_link_libraries(Example6 PRIVATE glm::glm)
 target_link_libraries(Example6 PRIVATE imgui::imgui)
 
-add_custom_target(CopyExample6Assets COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/assets)
-add_dependencies(Example6 CopyExample6Assets)
+add_custom_target(Example6Assets COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/assets)
+add_dependencies(Example6 Example6Assets)
