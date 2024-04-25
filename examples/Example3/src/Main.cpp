@@ -194,7 +194,6 @@ void main() {
         auto r = static_cast<GLfloat>(glm::sin(glfwGetTime()) / 2.0 + 0.5);
         glUniform4f(glGetUniformLocation(program, "ourColor"), r, 0.0f, 0.0f, 1.0f);
 
-        glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
 
         ///////////////////////////////////////////////////////////////////////

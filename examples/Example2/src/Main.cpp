@@ -190,7 +190,7 @@ void main() {
         ///////////////////////////////////////////////////////////////////////
 
         glUseProgram(program);
-        glBindVertexArray(VAO);
+
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
 
         ///////////////////////////////////////////////////////////////////////
