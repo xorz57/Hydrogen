@@ -63,8 +63,8 @@ int main() {
     ///////////////////////////////////////////////////////////////////////////
 
     const std::vector<GLfloat> vertices{
-            +0.5f, -0.5f, +0.0f,
             -0.5f, -0.5f, +0.0f,
+            +0.5f, -0.5f, +0.0f,
             +0.0f, +0.5f, +0.0f};
 
     const std::vector<GLint> elements{0, 1, 2};
