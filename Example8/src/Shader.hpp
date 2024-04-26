@@ -10,7 +10,7 @@ public:
     ~Shader();
 
     static Shader loadFromFile(const char *vShaderPath, const char *fShaderPath);
-    void use();
+    void use() const;
 
 private:
     GLint mProgram = 0;

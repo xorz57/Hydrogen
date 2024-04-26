@@ -1,5 +1,4 @@
 #include "Shader.hpp"
-#include "Vertex.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -77,13 +76,13 @@ Shader Shader::loadFromFile(const char *vShaderPath, const char *fShaderPath) {
     const GLchar *vShaderSource = vShaderText.c_str();
     const GLchar *fShaderSource = fShaderText.c_str();
 
-    return Shader(vShaderSource, fShaderSource);
+    return {vShaderSource, fShaderSource};
 }
 
 Shader::~Shader() {
     glDeleteProgram(mProgram);
 }
 
-void Shader::use() {
+void Shader::use() const {
     glUseProgram(mProgram);
 }
