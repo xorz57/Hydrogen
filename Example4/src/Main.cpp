@@ -12,7 +12,12 @@
 #include <iostream>
 #include <vector>
 
+static void glfw_error_callback(int error, const char *description) {
+    std::fprintf(stderr, "GLFW Error %d: %s\n", error, description);
+}
+
 int main() {
+    glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit()) {
         std::exit(EXIT_FAILURE);
     }
