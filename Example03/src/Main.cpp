@@ -106,10 +106,10 @@ void main() {
 
 out vec4 f_Color;
 
-uniform vec4 color;
+uniform vec4 u_Color;
 
 void main() {
-    f_Color = color;
+    f_Color = u_Color;
 }
         )";
 
@@ -197,7 +197,7 @@ void main() {
         glUseProgram(program);
 
         auto r = static_cast<GLfloat>(glm::sin(glfwGetTime()) / 2.0 + 0.5);
-        glUniform4f(glGetUniformLocation(program, "color"), r, 0.0f, 0.0f, 1.0f);
+        glUniform4f(glGetUniformLocation(program, "u_Color"), r, 0.0f, 0.0f, 1.0f);
 
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
 
