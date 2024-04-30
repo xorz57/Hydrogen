@@ -37,7 +37,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "Example14", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(800, 600, "Example13", nullptr, nullptr);
     if (window == nullptr) {
         glfwTerminate();
         std::exit(EXIT_FAILURE);
@@ -82,27 +82,46 @@ int main() {
             {{+0.5f, -0.5f, -0.5f}, {+1.0f, +0.0f}},// 1
             {{+0.5f, +0.5f, -0.5f}, {+1.0f, +1.0f}},// 2
             {{-0.5f, +0.5f, -0.5f}, {+0.0f, +1.0f}},// 3
+
             {{-0.5f, -0.5f, +0.5f}, {+0.0f, +0.0f}},// 4
             {{+0.5f, -0.5f, +0.5f}, {+1.0f, +0.0f}},// 5
             {{+0.5f, +0.5f, +0.5f}, {+1.0f, +1.0f}},// 6
             {{-0.5f, +0.5f, +0.5f}, {+0.0f, +1.0f}},// 7
+
             {{-0.5f, +0.5f, +0.5f}, {+1.0f, +0.0f}},// 8
             {{-0.5f, +0.5f, -0.5f}, {+1.0f, +1.0f}},// 9
             {{-0.5f, -0.5f, -0.5f}, {+0.0f, +1.0f}},// 10
-            {{+0.5f, +0.5f, +0.5f}, {+1.0f, +0.0f}},// 11
-            {{+0.5f, -0.5f, -0.5f}, {+0.0f, +1.0f}},// 12
-            {{+0.5f, -0.5f, +0.5f}, {+0.0f, +0.0f}},// 13
-            {{+0.5f, -0.5f, -0.5f}, {+1.0f, +1.0f}},// 14
-            {{-0.5f, +0.5f, +0.5f}, {+0.0f, +0.0f}},// 15
+            {{-0.5f, -0.5f, +0.5f}, {+0.0f, +0.0f}},// 11
+
+            {{+0.5f, +0.5f, +0.5f}, {+1.0f, +0.0f}},// 12
+            {{+0.5f, +0.5f, -0.5f}, {+1.0f, +1.0f}},// 13
+            {{+0.5f, -0.5f, -0.5f}, {+0.0f, +1.0f}},// 14
+            {{+0.5f, -0.5f, +0.5f}, {+0.0f, +0.0f}},// 15
+
+            {{-0.5f, -0.5f, -0.5f}, {+0.0f, +1.0f}},// 16
+            {{+0.5f, -0.5f, -0.5f}, {+1.0f, +1.0f}},// 17
+            {{+0.5f, -0.5f, +0.5f}, {+1.0f, +0.0f}},// 18
+            {{-0.5f, -0.5f, +0.5f}, {+0.0f, +0.0f}},// 19
+
+            {{-0.5f, +0.5f, -0.5f}, {+0.0f, +1.0f}},// 20
+            {{+0.5f, +0.5f, -0.5f}, {+1.0f, +1.0f}},// 21
+            {{+0.5f, +0.5f, +0.5f}, {+1.0f, +0.0f}},// 22
+            {{-0.5f, +0.5f, +0.5f}, {+0.0f, +0.0f}},// 23
     };
 
     const std::vector<GLint> elements{
             0, 1, 2, 2, 3, 0,
             4, 5, 6, 6, 7, 4,
-            8, 9, 10, 10, 4, 8,
-            11, 2, 12, 12, 13, 11,
-            10, 14, 5, 5, 4, 10,
-            3, 2, 11, 11, 15, 3};
+            8, 9, 10, 10, 11, 8,
+            12, 13, 14, 14, 15, 12,
+            16, 17, 18, 18, 19, 16,
+            20, 21, 22, 22, 23, 20};
+
+    const std::vector<glm::vec3> positions = {
+            glm::vec3(-2.0f, +0.0f, +0.0f),// 0
+            glm::vec3(+0.0f, +0.0f, +0.0f),// 1
+            glm::vec3(+2.0f, +0.0f, +0.0f),// 2
+    };
 
     GLuint VAO = 0;
     glGenVertexArrays(1, &VAO);
@@ -180,15 +199,20 @@ int main() {
 
         shader.use();
 
-        glm::mat4 model = glm::rotate(glm::mat4(1.0f), (float) glfwGetTime() * glm::radians(-55.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f));
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f), static_cast<float>(display_w) / static_cast<float>(display_h), 0.1f, 100.0f);
+        for (const auto position: positions) {
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+            model = glm::translate(model, position);
+            model = glm::rotate(model, (float) glfwGetTime() * glm::radians(-55.0f), glm::vec3(1.0f, 1.0f, 0.0f));
+            glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f));
+            glm::mat4 projection = glm::perspective(glm::radians(45.0f), static_cast<float>(display_w) / static_cast<float>(display_h), 0.1f, 100.0f);
 
-        shader.setMat4("u_Model", model);
-        shader.setMat4("u_View", view);
-        shader.setMat4("u_Projection", projection);
+            shader.setMat4("u_Model", model);
+            shader.setMat4("u_View", view);
+            shader.setMat4("u_Projection", projection);
 
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
+            glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
+        }
 
         ///////////////////////////////////////////////////////////////////////
 
