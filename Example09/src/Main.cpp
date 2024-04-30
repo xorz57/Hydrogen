@@ -96,7 +96,7 @@ int main() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(elements.size() * sizeof(GLfloat)), elements.data(), GL_STATIC_DRAW);
 
-    Shader shader = Shader::loadFromFile("assets/shaders/shader.vert", "assets/shaders/shader.frag");
+    Shader shader = Shader::loadFromFile("assets/shaders/shader_vert.glsl", "assets/shaders/shader_frag.glsl");
 
     ///////////////////////////////////////////////////////////////////////////
 

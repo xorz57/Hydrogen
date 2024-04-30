@@ -97,8 +97,8 @@ int main() {
     std::ifstream vShaderFile;
     std::ifstream fShaderFile;
 
-    vShaderFile.open("assets/shaders/shader.vert");
-    fShaderFile.open("assets/shaders/shader.frag");
+    vShaderFile.open("assets/shaders/shader_vert.glsl");
+    fShaderFile.open("assets/shaders/shader_frag.glsl");
 
     std::stringstream vShaderStream;
     std::stringstream fShaderStream;

@@ -117,7 +117,7 @@ int main() {
         stbi_image_free(pixels);
     }
 
-    Shader shader = Shader::loadFromFile("assets/shaders/shader.vert", "assets/shaders/shader.frag");
+    Shader shader = Shader::loadFromFile("assets/shaders/shader_vert.glsl", "assets/shaders/shader_frag.glsl");
 
     ///////////////////////////////////////////////////////////////////////////
 
