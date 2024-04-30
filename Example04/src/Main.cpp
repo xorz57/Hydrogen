@@ -67,16 +67,22 @@ int main() {
     ///////////////////////////////////////////////////////////////////////////
 
     const std::vector<GLfloat> vertices1{
-            -0.5f, -0.5f, +0.0f,
-            +0.5f, -0.5f, +0.0f,
-            +0.0f, +0.5f, +0.0f};
+            -0.5f, -0.5f, +0.0f,// 0
+            +0.5f, -0.5f, +0.0f,// 1
+            +0.0f, +0.5f, +0.0f,// 2
+    };
 
     const std::vector<GLfloat> vertices2{
-            +1.0f, +0.0f, +0.0f,
-            +0.0f, +1.0f, +0.0f,
-            +0.0f, +0.0f, +1.0f};
+            +1.0f, +0.0f, +0.0f,// 0
+            +0.0f, +1.0f, +0.0f,// 1
+            +0.0f, +0.0f, +1.0f,// 2
+    };
 
-    const std::vector<GLint> elements{0, 1, 2};
+    const std::vector<GLint> elements{
+            0,// 0
+            1,// 1
+            2,// 2
+    };
 
     GLuint VAO = 0;
     glGenVertexArrays(1, &VAO);
