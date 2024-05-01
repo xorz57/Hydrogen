@@ -205,10 +205,10 @@ int main() {
 
         for (const auto position: positions) {
             glm::mat4 model = glm::mat4(1.0f);
-            model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+            model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::translate(model, position);
-            model = glm::rotate(model, (float) glfwGetTime() * glm::radians(-55.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-            glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f));
+            model = glm::rotate(model, (float) glfwGetTime() * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
+            glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -6.0f));
             glm::mat4 projection = glm::perspective(glm::radians(45.0f), static_cast<float>(display_w) / static_cast<float>(display_h), 0.1f, 100.0f);
 
             shader.setMat4("u_Model", model);
