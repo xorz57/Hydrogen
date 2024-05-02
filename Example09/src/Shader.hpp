@@ -7,10 +7,11 @@
 class Shader {
 public:
     Shader(const GLchar *vShaderSource, const GLchar *fShaderSource);
-    ~Shader();
 
     static Shader LoadFromFile(const char *vShaderPath, const char *fShaderPath);
+
     void Use() const;
+    void Delete() const;
 
 private:
     GLint mProgram = 0;

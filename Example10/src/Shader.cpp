@@ -79,10 +79,10 @@ Shader Shader::LoadFromFile(const char *vShaderPath, const char *fShaderPath) {
     return {vShaderSource, fShaderSource};
 }
 
-Shader::~Shader() {
-    glDeleteProgram(mProgram);
-}
-
 void Shader::Use() const {
     glUseProgram(mProgram);
+}
+
+void Shader::Delete() const {
+    glDeleteProgram(mProgram);
 }
