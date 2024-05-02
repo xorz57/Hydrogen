@@ -14,10 +14,12 @@ public:
 
     void Use() const;
     void Delete() const;
-    void SetVec3(const char *name, const glm::vec3 &value) const;
-    void SetVec4(const char *name, const glm::vec4 &value) const;
-    void SetMat3(const char *name, const glm::mat3 &matrix) const;
-    void SetMat4(const char *name, const glm::mat4 &matrix) const;
+    void SetFloat(const char *name, float s) const;
+    void SetFloat2(const char *name, const glm::vec2 &v) const;
+    void SetFloat3(const char *name, const glm::vec3 &v) const;
+    void SetFloat4(const char *name, const glm::vec4 &v) const;
+    void SetFloat3x3(const char *name, const glm::mat3 &m) const;
+    void SetFloat4x4(const char *name, const glm::mat4 &m) const;
 
 private:
     GLint mProgram = 0;
