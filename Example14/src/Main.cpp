@@ -155,6 +155,7 @@ int main() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     int width, height;
+    stbi_set_flip_vertically_on_load(true);
     stbi_uc *pixels = stbi_load("assets/textures/texture.png", &width, &height, nullptr, STBI_rgb_alpha);
     if (pixels) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (void *) pixels);
