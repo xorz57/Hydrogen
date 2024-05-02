@@ -56,7 +56,7 @@ Shader::Shader(const GLchar *vShaderSource, const GLchar *fShaderSource) {
     glDeleteShader(fShader);
 }
 
-Shader Shader::loadFromFile(const char *vShaderPath, const char *fShaderPath) {
+Shader Shader::LoadFromFile(const char *vShaderPath, const char *fShaderPath) {
     std::ifstream vShaderFile;
     std::ifstream fShaderFile;
 
@@ -81,26 +81,26 @@ Shader Shader::loadFromFile(const char *vShaderPath, const char *fShaderPath) {
     return {vShaderSource, fShaderSource};
 }
 
-Shader::~Shader() {
-    glDeleteProgram(mProgram);
-}
-
-void Shader::use() const {
+void Shader::Use() const {
     glUseProgram(mProgram);
 }
 
-void Shader::setVec3(const char *name, const glm::vec3 &value) const {
-    glUniform3fv(glGetUniformLocation(mProgram, name), 1, glm::value_ptr(value));
+void Shader::Delete() const {
+    glDeleteProgram(mProgram);
 }
 
-void Shader::setVec4(const char *name, const glm::vec4 &value) const {
-    glUniform4fv(glGetUniformLocation(mProgram, name), 1, glm::value_ptr(value));
+void Shader::SetVec3(const char *name, const glm::vec3 &v) const {
+    glUniform3fv(glGetUniformLocation(mProgram, name), 1, glm::value_ptr(v));
 }
 
-void Shader::setMat3(const char *name, const glm::mat3 &matrix) const {
-    glUniformMatrix3fv(glGetUniformLocation(mProgram, name), 1, GL_FALSE, glm::value_ptr(matrix));
+void Shader::SetVec4(const char *name, const glm::vec4 &v) const {
+    glUniform4fv(glGetUniformLocation(mProgram, name), 1, glm::value_ptr(v));
 }
 
-void Shader::setMat4(const char *name, const glm::mat4 &matrix) const {
-    glUniformMatrix4fv(glGetUniformLocation(mProgram, name), 1, GL_FALSE, glm::value_ptr(matrix));
+void Shader::SetMat3(const char *name, const glm::mat3 &m) const {
+    glUniformMatrix3fv(glGetUniformLocation(mProgram, name), 1, GL_FALSE, glm::value_ptr(m));
+}
+
+void Shader::SetMat4(const char *name, const glm::mat4 &m) const {
+    glUniformMatrix4fv(glGetUniformLocation(mProgram, name), 1, GL_FALSE, glm::value_ptr(m));
 }

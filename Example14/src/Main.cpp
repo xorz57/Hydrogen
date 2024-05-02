@@ -1,5 +1,8 @@
 #include "Shader.hpp"
 #include "Vertex.hpp"
+#include "EBO.hpp"
+#include "VAO.hpp"
+#include "VBO.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -130,14 +133,9 @@ int main() {
             glm::vec3(+2.0f, -2.0f, +0.0f),// 8
     };
 
-    GLuint VAO = 0;
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
+    VAO vao;
 
-    GLuint VBO = 0;
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices.size() * sizeof(Vertex)), vertices.data(), GL_STATIC_DRAW);
+    VBO vbo(vertices);
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *) offsetof(Vertex, position));
@@ -145,10 +143,7 @@ int main() {
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *) offsetof(Vertex, textureCoordinates));
 
-    GLuint EBO = 0;
-    glGenBuffers(1, &EBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(elements.size() * sizeof(GLfloat)), elements.data(), GL_STATIC_DRAW);
+    EBO ebo(elements);
 
     GLuint texture;
     glGenTextures(1, &texture);
@@ -168,7 +163,7 @@ int main() {
         stbi_image_free(pixels);
     }
 
-    Shader shader = Shader::loadFromFile("assets/shaders/shader_vert.glsl", "assets/shaders/shader_frag.glsl");
+    Shader shader = Shader::LoadFromFile("assets/shaders/shader_vert.glsl", "assets/shaders/shader_frag.glsl");
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -204,7 +199,7 @@ int main() {
 
         ///////////////////////////////////////////////////////////////////////
 
-        shader.use();
+        shader.Use();
 
         const glm::vec3 eye = 10.0f * glm::vec3(glm::sin(glfwGetTime()), 0.0, glm::cos(glfwGetTime()));
         const glm::vec3 center = glm::vec3(0.0, 0.0, 0.0);
@@ -214,8 +209,8 @@ int main() {
         const glm::mat4 projection = glm::perspective(glm::radians(45.0f), static_cast<float>(display_w) / static_cast<float>(display_h), 0.1f, 100.0f);
         // const glm::mat4 projection = glm::ortho(-4.0f, 4.0f, -3.0f, 3.0f, 0.1f, 100.0f);
 
-        shader.setMat4("u_View", view);
-        shader.setMat4("u_Projection", projection);
+        shader.SetMat4("u_View", view);
+        shader.SetMat4("u_Projection", projection);
 
         for (const auto position: positions) {
             glm::mat4 model = glm::mat4(1.0f);
@@ -223,7 +218,7 @@ int main() {
             model = glm::translate(model, position);
             model = glm::rotate(model, static_cast<float>(glfwGetTime()) * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
 
-            shader.setMat4("u_Model", model);
+            shader.SetMat4("u_Model", model);
 
             glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
         }
@@ -244,9 +239,10 @@ int main() {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
+    vao.Delete();
+    vbo.Delete();
+    ebo.Delete();
+    shader.Delete();
 
     ///////////////////////////////////////////////////////////////////////////
 
