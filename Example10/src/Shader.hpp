@@ -9,8 +9,8 @@ public:
     Shader(const GLchar *vShaderSource, const GLchar *fShaderSource);
     ~Shader();
 
-    static Shader loadFromFile(const char *vShaderPath, const char *fShaderPath);
-    void use() const;
+    static Shader LoadFromFile(const char *vShaderPath, const char *fShaderPath);
+    void Use() const;
 
 private:
     GLint mProgram = 0;

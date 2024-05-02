@@ -126,7 +126,7 @@ int main() {
         stbi_image_free(pixels);
     }
 
-    Shader shader = Shader::loadFromFile("assets/shaders/shader_vert.glsl", "assets/shaders/shader_frag.glsl");
+    Shader shader = Shader::LoadFromFile("assets/shaders/shader_vert.glsl", "assets/shaders/shader_frag.glsl");
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -162,7 +162,7 @@ int main() {
 
         ///////////////////////////////////////////////////////////////////////
 
-        shader.use();
+        shader.Use();
 
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
 

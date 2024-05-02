@@ -54,7 +54,7 @@ Shader::Shader(const GLchar *vShaderSource, const GLchar *fShaderSource) {
     glDeleteShader(fShader);
 }
 
-Shader Shader::loadFromFile(const char *vShaderPath, const char *fShaderPath) {
+Shader Shader::LoadFromFile(const char *vShaderPath, const char *fShaderPath) {
     std::ifstream vShaderFile;
     std::ifstream fShaderFile;
 
@@ -83,6 +83,6 @@ Shader::~Shader() {
     glDeleteProgram(mProgram);
 }
 
-void Shader::use() const {
+void Shader::Use() const {
     glUseProgram(mProgram);
 }
