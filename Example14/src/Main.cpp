@@ -1,8 +1,9 @@
-#include "Shader.hpp"
-#include "Vertex.hpp"
+#include "Camera.hpp"
 #include "EBO.hpp"
+#include "Shader.hpp"
 #include "VAO.hpp"
 #include "VBO.hpp"
+#include "Vertex.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -17,7 +18,6 @@
 #include <stb_image.h>
 
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 
 #include <cinttypes>
 #include <cstdlib>
@@ -138,8 +138,8 @@ int main() {
     VBO vbo(vertices);
 
     vbo.Bind();
-    vao.SetVec3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
-    vao.SetVec2(1, sizeof(Vertex), (void *) offsetof(Vertex, textureCoordinates));
+    vao.SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
+    vao.SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, textureCoordinates));
     vbo.Unbind();
 
     EBO ebo(elements);
@@ -164,6 +164,8 @@ int main() {
     }
 
     Shader shader = Shader::LoadFromFile("assets/shaders/shader_vert.glsl", "assets/shaders/shader_frag.glsl");
+
+    Camera camera;
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -194,6 +196,8 @@ int main() {
         glfwGetFramebufferSize(window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
 
+        const float display_a = static_cast<float>(display_w) / static_cast<float>(display_h);
+
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -201,16 +205,7 @@ int main() {
 
         shader.Use();
 
-        const glm::vec3 eye = 10.0f * glm::vec3(glm::sin(glfwGetTime()), 0.0, glm::cos(glfwGetTime()));
-        const glm::vec3 center = glm::vec3(0.0, 0.0, 0.0);
-        const glm::vec3 up = glm::vec3(0.0, 1.0, 0.0);
-        const glm::mat4 view = glm::lookAt(eye, center, up);
-
-        const glm::mat4 projection = glm::perspective(glm::radians(45.0f), static_cast<float>(display_w) / static_cast<float>(display_h), 0.1f, 100.0f);
-        // const glm::mat4 projection = glm::ortho(-4.0f, 4.0f, -3.0f, 3.0f, 0.1f, 100.0f);
-
-        shader.SetMat4("u_View", view);
-        shader.SetMat4("u_Projection", projection);
+        camera.Focus(shader, glm::radians(45.0f), display_a, 0.1f, 100.0f);
 
         for (const auto position: positions) {
             glm::mat4 model = glm::mat4(1.0f);
@@ -218,7 +213,7 @@ int main() {
             model = glm::translate(model, position);
             model = glm::rotate(model, static_cast<float>(glfwGetTime()) * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
 
-            shader.SetMat4("u_Model", model);
+            shader.SetFloat4x4("u_Model", model);
 
             glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
         }

@@ -11,8 +11,9 @@ public:
     void Bind() const;
     void Unbind() const;
     void Delete() const;
-    void SetVec2(GLuint index, GLsizei stride, void *pointer) const;
-    void SetVec3(GLuint index, GLsizei stride, void *pointer) const;
+    void SetFloat(GLuint index, GLsizei stride, void *pointer) const;
+    void SetFloat2(GLuint index, GLsizei stride, void *pointer) const;
+    void SetFloat3(GLuint index, GLsizei stride, void *pointer) const;
 
 private:
     GLuint mID = 0;
