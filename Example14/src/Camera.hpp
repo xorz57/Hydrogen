@@ -18,5 +18,4 @@ private:
     glm::vec3 mEye{0.0f, 0.0f, 8.0f};
     glm::vec3 mCenter{0.0f, 0.0f, 0.0f};
     glm::vec3 mUp{0.0f, 1.0f, 0.0f};
-    float speed = 0.5f;
 };
