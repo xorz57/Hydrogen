@@ -213,7 +213,6 @@ int main() {
             model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::translate(model, position);
             model = glm::rotate(model, static_cast<float>(glfwGetTime()) * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-
             shader.SetFloat4x4("u_Model", model);
 
             glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
