@@ -1,9 +1,6 @@
 #include "Camera.hpp"
-#include "EBO.hpp"
 #include "Shader.hpp"
-#include "VAO.hpp"
-#include "VBO.hpp"
-#include "Vertex.hpp"
+#include "Cube.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -80,47 +77,6 @@ int main() {
 
     glEnable(GL_DEPTH_TEST);
 
-    const std::vector<Vertex> vertices{
-            {{-0.5f, -0.5f, -0.5f}, {+0.0f, +0.0f}},// 0
-            {{+0.5f, -0.5f, -0.5f}, {+1.0f, +0.0f}},// 1
-            {{+0.5f, +0.5f, -0.5f}, {+1.0f, +1.0f}},// 2
-            {{-0.5f, +0.5f, -0.5f}, {+0.0f, +1.0f}},// 3
-
-            {{-0.5f, -0.5f, +0.5f}, {+0.0f, +0.0f}},// 4
-            {{+0.5f, -0.5f, +0.5f}, {+1.0f, +0.0f}},// 5
-            {{+0.5f, +0.5f, +0.5f}, {+1.0f, +1.0f}},// 6
-            {{-0.5f, +0.5f, +0.5f}, {+0.0f, +1.0f}},// 7
-
-            {{-0.5f, +0.5f, +0.5f}, {+1.0f, +0.0f}},// 8
-            {{-0.5f, +0.5f, -0.5f}, {+1.0f, +1.0f}},// 9
-            {{-0.5f, -0.5f, -0.5f}, {+0.0f, +1.0f}},// 10
-            {{-0.5f, -0.5f, +0.5f}, {+0.0f, +0.0f}},// 11
-
-            {{+0.5f, +0.5f, +0.5f}, {+1.0f, +0.0f}},// 12
-            {{+0.5f, +0.5f, -0.5f}, {+1.0f, +1.0f}},// 13
-            {{+0.5f, -0.5f, -0.5f}, {+0.0f, +1.0f}},// 14
-            {{+0.5f, -0.5f, +0.5f}, {+0.0f, +0.0f}},// 15
-
-            {{-0.5f, -0.5f, -0.5f}, {+0.0f, +1.0f}},// 16
-            {{+0.5f, -0.5f, -0.5f}, {+1.0f, +1.0f}},// 17
-            {{+0.5f, -0.5f, +0.5f}, {+1.0f, +0.0f}},// 18
-            {{-0.5f, -0.5f, +0.5f}, {+0.0f, +0.0f}},// 19
-
-            {{-0.5f, +0.5f, -0.5f}, {+0.0f, +1.0f}},// 20
-            {{+0.5f, +0.5f, -0.5f}, {+1.0f, +1.0f}},// 21
-            {{+0.5f, +0.5f, +0.5f}, {+1.0f, +0.0f}},// 22
-            {{-0.5f, +0.5f, +0.5f}, {+0.0f, +0.0f}},// 23
-    };
-
-    const std::vector<GLint> elements{
-            0, 1, 2, 2, 3, 0,      // 0
-            4, 5, 6, 6, 7, 4,      // 1
-            8, 9, 10, 10, 11, 8,   // 2
-            12, 13, 14, 14, 15, 12,// 3
-            16, 17, 18, 18, 19, 16,// 4
-            20, 21, 22, 22, 23, 20,// 5
-    };
-
     const std::vector<glm::vec3> positions = {
             glm::vec3(-2.0f, +2.0f, +0.0f),// 0
             glm::vec3(+0.0f, +2.0f, +0.0f),// 1
@@ -133,16 +89,7 @@ int main() {
             glm::vec3(+2.0f, -2.0f, +0.0f),// 8
     };
 
-    VAO vao;
-
-    VBO vbo(vertices);
-
-    vbo.Bind();
-    vao.SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
-    vao.SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, textureCoordinates));
-    vbo.Unbind();
-
-    EBO ebo(elements);
+    Cube cube;
 
     GLuint texture;
     glGenTextures(1, &texture);
@@ -209,13 +156,10 @@ int main() {
         camera.SetProjectionMatrix(shader, "u_Projection", glm::radians(45.0f), display_a, 0.1f, 100.0f);
 
         for (const auto position: positions) {
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-            model = glm::translate(model, position);
-            model = glm::rotate(model, static_cast<float>(glfwGetTime()) * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-            shader.SetFloat4x4("u_Model", model);
-
-            glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
+            cube.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
+            cube.Translate(position);
+            cube.Rotate(static_cast<float>(glfwGetTime()) * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
+            cube.Draw(shader);
         }
 
         ///////////////////////////////////////////////////////////////////////
@@ -234,9 +178,7 @@ int main() {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    vao.Delete();
-    vbo.Delete();
-    ebo.Delete();
+    cube.Delete();
     shader.Delete();
 
     ///////////////////////////////////////////////////////////////////////////
