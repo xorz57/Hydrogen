@@ -1,7 +1,6 @@
 #include "Camera.hpp"
 #include "Cube.hpp"
 #include "Shader.hpp"
-#include "Texture.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -88,8 +87,6 @@ int main() {
     };
 
     Cube cube;
-
-    Texture texture("assets/textures/texture.png");
 
     Shader shader = Shader::LoadFromFile("assets/shaders/shader_vert.glsl", "assets/shaders/shader_frag.glsl");
 

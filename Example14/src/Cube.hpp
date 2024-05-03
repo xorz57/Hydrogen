@@ -2,6 +2,7 @@
 
 #include "EBO.hpp"
 #include "Shader.hpp"
+#include "Texture.hpp"
 #include "VAO.hpp"
 #include "VBO.hpp"
 #include "Vertex.hpp"
@@ -66,6 +67,8 @@ private:
             16, 17, 18, 18, 19, 16,// 4
             20, 21, 22, 22, 23, 20,// 5
     };
+
+    Texture mTexture{"assets/textures/texture.png"};
 
     VAO mVAO;
     VBO mVBO{mVertices};
