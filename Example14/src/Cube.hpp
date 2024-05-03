@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EBO.hpp"
+#include "Shader.hpp"
 #include "VAO.hpp"
 #include "VBO.hpp"
 #include "Vertex.hpp"
@@ -9,42 +10,20 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include <vector>
 
 class Cube {
 public:
-    Cube() {
-        mVBO.Bind();
-        mVAO.SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
-        mVAO.SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, textureCoordinates));
-        mVBO.Unbind();
-    }
+    Cube();
 
-    void Draw(Shader &shader) {
-        shader.SetFloat4x4("u_Model", mModel);
-
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
-
-        mModel = glm::mat4(1.0f);
-    }
-
-    void Delete() {
-        mVAO.Delete();
-        mVBO.Delete();
-        mEBO.Delete();
-    }
-
-    void Scale(const glm::vec3 &v) {
-        mModel = glm::scale(mModel, v);
-    }
-
-    void Translate(const glm::vec3 &v) {
-        mModel = glm::translate(mModel, v);
-    }
-
-    void Rotate(float angle, const glm::vec3 &v) {
-        mModel = glm::rotate(mModel, angle, v);
-    }
+    void Draw(Shader &shader);
+    void Delete();
+    void Scale(const glm::vec3 &v);
+    void Translate(const glm::vec3 &v);
+    void Rotate(float angle, const glm::vec3 &v);
 
 private:
     const std::vector<Vertex> mVertices{
@@ -92,5 +71,5 @@ private:
     VBO mVBO{mVertices};
     EBO mEBO{mElements};
 
-    glm::mat4 mModel = glm::mat4(1.0f);
+    glm::mat4 mModel{1.0f};
 };

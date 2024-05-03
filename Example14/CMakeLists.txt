@@ -1,5 +1,6 @@
 add_executable(Example14 src/Main.cpp
                          src/Camera.cpp
+                         src/Cube.cpp
                          src/Shader.cpp
                          src/EBO.cpp
                          src/VAO.cpp
