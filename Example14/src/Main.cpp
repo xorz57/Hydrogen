@@ -205,7 +205,8 @@ int main() {
 
         shader.Use();
 
-        camera.Focus(shader, glm::radians(45.0f), display_a, 0.1f, 100.0f);
+        camera.SetViewMatrix(shader, "u_View");
+        camera.SetProjectionMatrix(shader, "u_Projection", glm::radians(45.0f), display_a, 0.1f, 100.0f);
 
         for (const auto position: positions) {
             glm::mat4 model = glm::mat4(1.0f);

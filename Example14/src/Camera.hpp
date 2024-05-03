@@ -11,13 +11,8 @@
 
 class Camera {
 public:
-    void Focus(const Shader &shader, float fovy, float aspect, float near, float far) {
-        const glm::mat4 view = glm::lookAt(mEye, mCenter, mUp);
-        const glm::mat4 projection = glm::perspective(fovy, aspect, near, far);
-
-        shader.SetFloat4x4("u_View", view);
-        shader.SetFloat4x4("u_Projection", projection);
-    }
+    void SetViewMatrix(const Shader &shader, const char *name) const;
+    void SetProjectionMatrix(const Shader &shader, const char *name, float fovy, float aspect, float near, float far) const;
 
 private:
     glm::vec3 mEye{0.0f, 0.0f, 8.0f};
