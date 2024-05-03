@@ -13,11 +13,11 @@ void Cube::Draw(Shader &shader) {
     shader.SetFloat4x4("u_Model", mModel);
     mModel = glm::mat4(1.0f);
 
-    mTexture.Bind();
     mVAO.Bind();
+    mTexture.Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
-    mVAO.Unbind();
     mTexture.Unbind();
+    mVAO.Unbind();
 }
 
 void Cube::Delete() {
