@@ -12,10 +12,11 @@
 class Camera {
 public:
     void SetViewMatrix(const Shader &shader, const char *name) const;
-    void SetProjectionMatrix(const Shader &shader, const char *name, float fovy, float aspect, float near, float far) const;
+    void SetProjectionMatrix(const Shader &shader, const char *name, float aspect, float near, float far) const;
 
 private:
     glm::vec3 mEye{0.0f, 8.0f, 8.0f};
     glm::vec3 mCenter{0.0f, 0.0f, 0.0f};
     glm::vec3 mUp{0.0f, 1.0f, 0.0f};
+    float mFOV = glm::radians(45.0f);
 };
