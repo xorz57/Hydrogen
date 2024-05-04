@@ -137,7 +137,7 @@ int main() {
         }
 
         camera.SetViewMatrix(shader, "u_View");
-        camera.SetProjectionMatrix(shader, "u_Projection", glm::radians(45.0f), display_a, 0.1f, 100.0f);
+        camera.SetProjectionMatrix(shader, "u_Projection", display_a, 0.1f, 100.0f);
 
         for (const auto position: positions) {
             plane.Scale(glm::vec3(8.0f, 8.0f, 8.0f));
