@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Shader.hpp"
-
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -13,8 +11,8 @@ public:
     Camera();
 
     void Move(float display_w, float display_h, double dt);
-    void SetViewMatrix(const Shader &shader, const char *name) const;
-    void SetProjectionMatrix(const Shader &shader, const char *name, float aspect, float near, float far) const;
+    glm::mat4 GetViewMatrix() const;
+    glm::mat4 GetProjectionMatrix(float aspect, float near, float far) const;
 
 private:
     glm::vec3 mPosition{+0.0f, +8.0f, +8.0f};

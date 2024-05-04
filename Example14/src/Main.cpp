@@ -130,8 +130,8 @@ int main() {
 
         shader.Use();
 
-        camera.SetViewMatrix(shader, "u_View");
-        camera.SetProjectionMatrix(shader, "u_Projection", glm::radians(45.0f), display_a, 0.1f, 100.0f);
+        shader.SetFloat4x4("u_View", camera.GetViewMatrix());
+        shader.SetFloat4x4("u_Projection", camera.GetProjectionMatrix(glm::radians(45.0f), display_a, 0.1f, 100.0f));
 
         for (const auto position: positions) {
             cube.Scale(glm::vec3(1.0f, 1.0f, 1.0f));

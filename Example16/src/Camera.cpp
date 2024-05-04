@@ -77,12 +77,10 @@ void Camera::Move(float display_w, float display_h, double dt) {
     }
 }
 
-void Camera::SetViewMatrix(const Shader &shader, const char *name) const {
-    const glm::mat4 view = glm::lookAt(mPosition, mPosition + mFront, mUp);
-    shader.SetFloat4x4(name, view);
+glm::mat4 Camera::GetViewMatrix() const {
+    return glm::lookAt(mPosition, mPosition + mFront, mUp);
 }
 
-void Camera::SetProjectionMatrix(const Shader &shader, const char *name, float aspect, float near, float far) const {
-    const glm::mat4 projection = glm::perspective(mFOV, aspect, near, far);
-    shader.SetFloat4x4(name, projection);
+glm::mat4 Camera::GetProjectionMatrix(float aspect, float near, float far) const {
+    return glm::perspective(mFOV, aspect, near, far);
 }
