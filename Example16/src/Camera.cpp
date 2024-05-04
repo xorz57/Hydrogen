@@ -45,7 +45,7 @@ void Camera::Move(float display_w, float display_h, double dt) {
     }
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         if (mFlag) {
             glfwSetCursorPos(window, 0.5f * display_w, 0.5f * display_h);
             mFlag = false;
