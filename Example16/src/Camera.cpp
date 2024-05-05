@@ -45,9 +45,12 @@ void Camera::Move(float display_w, float display_h, double dt) {
     }
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+        const double display_hw = 0.5f * display_w;
+        const double display_hh = 0.5f * display_h;
+
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         if (mFlag) {
-            glfwSetCursorPos(window, 0.5f * display_w, 0.5f * display_h);
+            glfwSetCursorPos(window, display_hw, display_hh);
             mFlag = false;
         }
 
@@ -55,8 +58,8 @@ void Camera::Move(float display_w, float display_h, double dt) {
         double ypos;
         glfwGetCursorPos(window, &xpos, &ypos);
 
-        mYaw += mSensitivity * static_cast<float>(xpos - 0.5f * display_w);
-        mPitch += mSensitivity * static_cast<float>(ypos - 0.5f * display_h);
+        mYaw += mSensitivity * static_cast<float>(xpos - display_hw);
+        mPitch += mSensitivity * static_cast<float>(ypos - display_hh);
 
         if (mPitch < -89.0f) mPitch = -89.0f;
         if (mPitch > +89.0f) mPitch = +89.0f;
@@ -68,7 +71,7 @@ void Camera::Move(float display_w, float display_h, double dt) {
 
         mFront = glm::normalize(front);
 
-        glfwSetCursorPos(window, 0.5f * display_w, 0.5f * display_h);
+        glfwSetCursorPos(window, display_hw, display_hh);
     } else {
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
         if (!mFlag) {
