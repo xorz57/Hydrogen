@@ -123,7 +123,7 @@ int main() {
         glfwGetFramebufferSize(window, &window_w, &window_h);
         glViewport(0, 0, window_w, window_h);
 
-        const float display_a = static_cast<float>(window_w) / static_cast<float>(window_h);
+        const float window_a = static_cast<float>(window_w) / static_cast<float>(window_h);
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -137,7 +137,7 @@ int main() {
         }
 
         shader.SetFloat4x4("u_View", camera.GetViewMatrix());
-        shader.SetFloat4x4("u_Projection", camera.GetProjectionMatrix(display_a, 0.1f, 100.0f));
+        shader.SetFloat4x4("u_Projection", camera.GetProjectionMatrix(window_a));
 
         for (const auto position: positions) {
             plane.Scale(glm::vec3(8.0f, 8.0f, 8.0f));
