@@ -61,8 +61,7 @@ void Camera::Move(float window_w, float window_h, double dt) {
         mYaw += mSensitivity * static_cast<float>(xpos - window_hw);
         mPitch += mSensitivity * static_cast<float>(ypos - window_hh);
 
-        if (mPitch < -89.0f) mPitch = -89.0f;
-        if (mPitch > +89.0f) mPitch = +89.0f;
+        mPitch = glm::clamp(mPitch, -89.0f, 89.0f);
 
         glm::vec3 front;
         front.x = cos(glm::radians(mYaw)) * cos(glm::radians(mPitch));
