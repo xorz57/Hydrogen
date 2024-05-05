@@ -10,7 +10,7 @@ class Camera {
 public:
     Camera();
 
-    void Move(float display_w, float display_h, double dt);
+    void Move(float window_w, float window_h, double dt);
     glm::mat4 GetViewMatrix() const;
     glm::mat4 GetProjectionMatrix(float aspect, float near, float far) const;
 

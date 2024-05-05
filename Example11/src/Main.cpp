@@ -156,10 +156,10 @@ int main() {
 
         ImGui::Render();
 
-        int display_w;
-        int display_h;
-        glfwGetFramebufferSize(window, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
+        int window_w;
+        int window_h;
+        glfwGetFramebufferSize(window, &window_w, &window_h);
+        glViewport(0, 0, window_w, window_h);
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -170,7 +170,7 @@ int main() {
 
         glm::mat4 model = glm::rotate(glm::mat4(1.0f), glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
         glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f));
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f), static_cast<float>(display_w) / static_cast<float>(display_h), 0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), static_cast<float>(window_w) / static_cast<float>(window_h), 0.1f, 100.0f);
 
         shader.SetFloat4x4("u_Model", model);
         shader.SetFloat4x4("u_View", view);

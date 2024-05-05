@@ -11,7 +11,7 @@ Camera::Camera() {
     mFront = glm::normalize(front);
 }
 
-void Camera::Move(float display_w, float display_h, double dt) {
+void Camera::Move(float window_w, float window_h, double dt) {
     auto window = glfwGetCurrentContext();
 
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
@@ -45,12 +45,12 @@ void Camera::Move(float display_w, float display_h, double dt) {
     }
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-        const double display_hw = 0.5f * display_w;
-        const double display_hh = 0.5f * display_h;
+        const double window_hw = 0.5f * window_w;
+        const double window_hh = 0.5f * window_h;
 
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         if (mFlag) {
-            glfwSetCursorPos(window, display_hw, display_hh);
+            glfwSetCursorPos(window, window_hw, window_hh);
             mFlag = false;
         }
 
@@ -58,8 +58,8 @@ void Camera::Move(float display_w, float display_h, double dt) {
         double ypos;
         glfwGetCursorPos(window, &xpos, &ypos);
 
-        mYaw += mSensitivity * static_cast<float>(xpos - display_hw);
-        mPitch += mSensitivity * static_cast<float>(ypos - display_hh);
+        mYaw += mSensitivity * static_cast<float>(xpos - window_hw);
+        mPitch += mSensitivity * static_cast<float>(ypos - window_hh);
 
         if (mPitch < -89.0f) mPitch = -89.0f;
         if (mPitch > +89.0f) mPitch = +89.0f;
@@ -71,7 +71,7 @@ void Camera::Move(float display_w, float display_h, double dt) {
 
         mFront = glm::normalize(front);
 
-        glfwSetCursorPos(window, display_hw, display_hh);
+        glfwSetCursorPos(window, window_hw, window_hh);
     } else {
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
         if (!mFlag) {

@@ -127,10 +127,10 @@ int main() {
 
         ImGui::Render();
 
-        int display_w;
-        int display_h;
-        glfwGetFramebufferSize(window, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
+        int window_w;
+        int window_h;
+        glfwGetFramebufferSize(window, &window_w, &window_h);
+        glViewport(0, 0, window_w, window_h);
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
