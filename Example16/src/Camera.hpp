@@ -19,6 +19,7 @@ private:
     glm::vec3 mPosition{+0.0f, +8.0f, +8.0f};
     glm::vec3 mFront{+0.0f, +0.0f, -1.0f};
     glm::vec3 mUp{+0.0f, +1.0f, +0.0f};
+    glm::vec3 mRight = glm::normalize(glm::cross(mFront, mUp));
     float mFOV = glm::radians(45.0f);
     float mNear = 0.1f;
     float mFar = 100.0f;

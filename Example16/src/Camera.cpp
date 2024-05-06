@@ -9,6 +9,7 @@ Camera::Camera() {
     front.z = sin(glm::radians(mYaw)) * cos(glm::radians(mPitch));
 
     mFront = glm::normalize(front);
+    mRight = glm::normalize(glm::cross(mFront, mUp));
 }
 
 void Camera::Move(float window_w, float window_h, double dt) {
@@ -37,11 +38,11 @@ void Camera::Move(float window_w, float window_h, double dt) {
     }
 
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        mPosition -= mSpeed * static_cast<float>(dt) * glm::normalize(glm::cross(mFront, mUp));
+        mPosition -= mSpeed * static_cast<float>(dt) * mRight;
     }
 
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        mPosition += mSpeed * static_cast<float>(dt) * glm::normalize(glm::cross(mFront, mUp));
+        mPosition += mSpeed * static_cast<float>(dt) * mRight;
     }
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
@@ -69,6 +70,7 @@ void Camera::Move(float window_w, float window_h, double dt) {
         front.z = sin(glm::radians(mYaw)) * cos(glm::radians(mPitch));
 
         mFront = glm::normalize(front);
+        mRight = glm::normalize(glm::cross(mFront, mUp));
 
         glfwSetCursorPos(window, window_hw, window_hh);
     } else {
