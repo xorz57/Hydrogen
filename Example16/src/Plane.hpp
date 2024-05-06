@@ -5,7 +5,6 @@
 #include "Texture.hpp"
 #include "VAO.hpp"
 #include "VBO.hpp"
-#include "Vertex.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -27,6 +26,11 @@ public:
     void Rotate(float angle, const glm::vec3 &v);
 
 private:
+    struct Vertex {
+        glm::vec3 position;
+        glm::vec2 textureCoordinates;
+    };
+
     const std::vector<Vertex> mVertices{
             {{-0.5f, +0.0f, -0.5f}, {+0.0f, +0.0f}},// 0
             {{+0.5f, +0.0f, -0.5f}, {+1.0f, +0.0f}},// 1
@@ -44,7 +48,7 @@ private:
     };
 
     VAO mVAO;
-    VBO mVBO{mVertices};
+    VBO<Vertex> mVBO{mVertices};
     EBO mEBO{mElements};
 
     Texture mTexture{"assets/textures/texture.png"};
