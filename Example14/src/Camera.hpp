@@ -9,8 +9,8 @@
 
 class Camera {
 public:
-    glm::mat4 GetViewMatrix() const;
-    glm::mat4 GetProjectionMatrix(float aspect) const;
+    glm::mat4 GetView() const;
+    glm::mat4 GetProjection(float aspect) const;
 
 private:
     glm::vec3 mEye{0.0f, 0.0f, 8.0f};

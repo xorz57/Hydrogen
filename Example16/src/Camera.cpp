@@ -79,10 +79,10 @@ void Camera::Move(float window_w, float window_h, double dt) {
     }
 }
 
-glm::mat4 Camera::GetViewMatrix() const {
+glm::mat4 Camera::GetView() const {
     return glm::lookAt(mPosition, mPosition + mFront, mUp);
 }
 
-glm::mat4 Camera::GetProjectionMatrix(float aspect) const {
+glm::mat4 Camera::GetProjection(float aspect) const {
     return glm::perspective(mFOV, aspect, mNear, mFar);
 }

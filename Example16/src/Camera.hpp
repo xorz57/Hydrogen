@@ -11,8 +11,8 @@ public:
     Camera();
 
     void Move(float window_w, float window_h, double dt);
-    glm::mat4 GetViewMatrix() const;
-    glm::mat4 GetProjectionMatrix(float aspect) const;
+    glm::mat4 GetView() const;
+    glm::mat4 GetProjection(float aspect) const;
 
 private:
     glm::vec3 mPosition{+0.0f, +8.0f, +8.0f};

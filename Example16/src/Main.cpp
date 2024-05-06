@@ -136,8 +136,8 @@ int main() {
             camera.Move(window_w, window_h, dt);
         }
 
-        shader.SetFloat4x4("u_View", camera.GetViewMatrix());
-        shader.SetFloat4x4("u_Projection", camera.GetProjectionMatrix(window_a));
+        shader.SetFloat4x4("u_View", camera.GetView());
+        shader.SetFloat4x4("u_Projection", camera.GetProjection(window_a));
 
         for (const auto position: positions) {
             plane.Scale(glm::vec3(8.0f, 8.0f, 8.0f));
