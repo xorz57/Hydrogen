@@ -54,12 +54,12 @@ void Camera::Move(float window_w, float window_h, double dt) {
             mFlag = false;
         }
 
-        double xpos;
-        double ypos;
-        glfwGetCursorPos(window, &xpos, &ypos);
+        double cursor_x;
+        double cursor_y;
+        glfwGetCursorPos(window, &cursor_x, &cursor_y);
 
-        mYaw += mSensitivity * static_cast<float>(xpos - window_hw);
-        mPitch += mSensitivity * static_cast<float>(ypos - window_hh);
+        mYaw += mSensitivity * static_cast<float>(cursor_x - window_hw);
+        mPitch += mSensitivity * static_cast<float>(cursor_y - window_hh);
 
         mPitch = glm::clamp(mPitch, -89.0f, +89.0f);
 
