@@ -130,7 +130,7 @@ int main() {
         stbi_image_free(pixels);
     }
 
-    Shader shader = Shader::LoadFromFile("assets/shaders/shader_vert.glsl", "assets/shaders/shader_frag.glsl");
+    Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
     ///////////////////////////////////////////////////////////////////////////
 
