@@ -84,6 +84,5 @@ glm::mat4 Camera::GetViewMatrix() const {
 }
 
 glm::mat4 Camera::GetProjectionMatrix(float aspect) const {
-    const float factor = 2.0f;
-    return glm::ortho(-factor, +factor, -factor / aspect, +factor / aspect, 0.1f, 100.0f);
+    return glm::perspective(mFOV, aspect, mNear, mFar);
 }
