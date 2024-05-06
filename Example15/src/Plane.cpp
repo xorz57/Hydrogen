@@ -10,7 +10,7 @@ Plane::Plane() {
 }
 
 void Plane::Draw(Shader &shader) {
-    shader.SetFloat4x4("u_Model", mModel);
+    shader.UploadFloat4x4("u_Model", mModel);
     mModel = glm::mat4(1.0f);
 
     mVAO.Bind();

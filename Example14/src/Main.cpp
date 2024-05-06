@@ -130,8 +130,8 @@ int main() {
 
         shader.Use();
 
-        shader.SetFloat4x4("u_View", camera.GetView());
-        shader.SetFloat4x4("u_Projection", camera.GetProjection(window_a));
+        shader.UploadFloat4x4("u_View", camera.GetView());
+        shader.UploadFloat4x4("u_Projection", camera.GetProjection(window_a));
 
         for (const auto position: positions) {
             cube.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
