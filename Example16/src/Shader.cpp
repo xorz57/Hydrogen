@@ -105,6 +105,10 @@ void Shader::UploadFloat4(const char *name, const glm::vec4 &v) const {
     glUniform4fv(glGetUniformLocation(mProgram, name), 1, glm::value_ptr(v));
 }
 
+void Shader::UploadFloat2x2(const char *name, const glm::mat2 &m) const {
+    glUniformMatrix2fv(glGetUniformLocation(mProgram, name), 1, GL_FALSE, glm::value_ptr(m));
+}
+
 void Shader::UploadFloat3x3(const char *name, const glm::mat3 &m) const {
     glUniformMatrix3fv(glGetUniformLocation(mProgram, name), 1, GL_FALSE, glm::value_ptr(m));
 }
