@@ -3,12 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 Camera::Camera() {
-    glm::vec3 front;
-    front.x = cos(glm::radians(mYaw)) * cos(glm::radians(mPitch));
-    front.y = sin(glm::radians(-mPitch));
-    front.z = sin(glm::radians(mYaw)) * cos(glm::radians(mPitch));
-
-    mFront = glm::normalize(front);
+    mFront = glm::normalize(glm::vec3(cos(glm::radians(mYaw)) * cos(glm::radians(mPitch)), sin(glm::radians(-mPitch)), sin(glm::radians(mYaw)) * cos(glm::radians(mPitch))));
     mRight = glm::normalize(glm::cross(mFront, mUp));
 }
 
@@ -64,12 +59,7 @@ void Camera::Move(float window_w, float window_h, double dt) {
 
         mPitch = glm::clamp(mPitch, -89.0f, +89.0f);
 
-        glm::vec3 front;
-        front.x = cos(glm::radians(mYaw)) * cos(glm::radians(mPitch));
-        front.y = sin(glm::radians(-mPitch));
-        front.z = sin(glm::radians(mYaw)) * cos(glm::radians(mPitch));
-
-        mFront = glm::normalize(front);
+        mFront = glm::normalize(glm::vec3(cos(glm::radians(mYaw)) * cos(glm::radians(mPitch)), sin(glm::radians(-mPitch)), sin(glm::radians(mYaw)) * cos(glm::radians(mPitch))));
         mRight = glm::normalize(glm::cross(mFront, mUp));
 
         glfwSetCursorPos(window, window_hw, window_hh);
