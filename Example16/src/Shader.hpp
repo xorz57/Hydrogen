@@ -14,6 +14,8 @@ public:
 
     void Use() const;
     void Delete() const;
+    void UploadFloat(const char *name, float s) const;
+    void UploadFloat2(const char *name, const glm::vec2 &v) const;
     void UploadFloat3(const char *name, const glm::vec3 &v) const;
     void UploadFloat4(const char *name, const glm::vec4 &v) const;
     void UploadFloat3x3(const char *name, const glm::mat3 &m) const;
