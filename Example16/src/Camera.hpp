@@ -11,6 +11,7 @@ public:
     Camera();
 
     void Move(float window_w, float window_h, double dt);
+    void SetSpeed(float speed);
     glm::mat4 GetView() const;
     glm::mat4 GetProjection(float aspect) const;
 

@@ -15,9 +15,9 @@ void Camera::Move(float window_w, float window_h, double dt) {
     auto window = glfwGetCurrentContext();
 
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-        mSpeed = 4.0f;
+        SetSpeed(4.0f);
     } else {
-        mSpeed = 2.0f;
+        SetSpeed(2.0f);
     }
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
@@ -77,6 +77,10 @@ void Camera::Move(float window_w, float window_h, double dt) {
             mFlag = true;
         }
     }
+}
+
+void Camera::SetSpeed(float speed) {
+    mSpeed = speed;
 }
 
 glm::mat4 Camera::GetView() const {
