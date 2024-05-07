@@ -128,15 +128,18 @@ int main() {
 
         ///////////////////////////////////////////////////////////////////////
 
-        shader.Use();
-        shader.UploadFloat4x4("u_View", camera.GetView());
-        shader.UploadFloat4x4("u_Projection", camera.GetProjection(window_a));
-
         for (const auto position: positions) {
-            cube.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
-            cube.Translate(position);
-            cube.Rotate(static_cast<float>(glfwGetTime()) * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-            cube.Draw(shader);
+            glm::mat4 model = glm::mat4(1.0f);
+            glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+            glm::translate(model, position);
+            glm::rotate(model, static_cast<float>(glfwGetTime()) * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+
+            shader.Use();
+            shader.UploadFloat4x4("u_View", camera.GetView());
+            shader.UploadFloat4x4("u_Projection", camera.GetProjection(window_a));
+            shader.UploadFloat4x4("u_Model", model);
+
+            cube.Draw();
         }
 
         ///////////////////////////////////////////////////////////////////////

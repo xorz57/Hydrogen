@@ -9,12 +9,7 @@ Cube::Cube() {
     mVAO.Unbind();
 }
 
-void Cube::Draw(Shader &shader) {
-    shader.Use();
-    shader.UploadFloat4x4("u_Model", mModel);
-
-    mModel = glm::mat4(1.0f);
-
+void Cube::Draw() {
     mTexture.Bind();
     mVAO.Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
@@ -26,16 +21,4 @@ void Cube::Delete() {
     mVAO.Delete();
     mVBO.Delete();
     mEBO.Delete();
-}
-
-void Cube::Scale(const glm::vec3 &v) {
-    mModel = glm::scale(mModel, v);
-}
-
-void Cube::Translate(const glm::vec3 &v) {
-    mModel = glm::translate(mModel, v);
-}
-
-void Cube::Rotate(float angle, const glm::vec3 &v) {
-    mModel = glm::rotate(mModel, angle, v);
 }

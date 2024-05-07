@@ -1,7 +1,6 @@
 #pragma once
 
 #include "EBO.hpp"
-#include "Shader.hpp"
 #include "Texture.hpp"
 #include "VAO.hpp"
 #include "VBO.hpp"
@@ -20,11 +19,8 @@ class Cube {
 public:
     Cube();
 
-    void Draw(Shader &shader);
+    void Draw();
     void Delete();
-    void Scale(const glm::vec3 &v);
-    void Translate(const glm::vec3 &v);
-    void Rotate(float angle, const glm::vec3 &v);
 
 private:
     const std::vector<Vertex> mVertices{
@@ -68,11 +64,8 @@ private:
             20, 21, 22, 22, 23, 20,// 5
     };
 
-    Texture mTexture{"assets/textures/texture.png"};
-
     VAO mVAO;
     VBO mVBO{mVertices};
     EBO mEBO{mElements};
-
-    glm::mat4 mModel{1.0f};
+    Texture mTexture{"assets/textures/texture.png"};
 };
