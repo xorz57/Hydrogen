@@ -139,10 +139,10 @@ int main() {
         shader.UploadFloat4x4("u_View", camera.GetView());
         shader.UploadFloat4x4("u_Projection", camera.GetProjection(window_a));
 
-        for (const auto position: positions) {
-            plane.Scale(glm::vec3(8.0f, 8.0f, 8.0f));
-            plane.Draw(shader);
+        plane.Scale(glm::vec3(8.0f, 8.0f, 8.0f));
+        plane.Draw(shader);
 
+        for (const auto position: positions) {
             cube.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
             cube.Translate(position);
             cube.Rotate(static_cast<float>(glfwGetTime()) * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
