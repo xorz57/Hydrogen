@@ -9,7 +9,7 @@ Cube::Cube() {
     mVAO.Unbind();
 }
 
-void Cube::Draw(Shader &shader) {
+void Cube::Draw() {
     mVAO.Bind();
     mTexture.Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);

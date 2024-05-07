@@ -9,7 +9,7 @@ Plane::Plane() {
     mVAO.Unbind();
 }
 
-void Plane::Draw(Shader &shader) {
+void Plane::Draw() {
     mVAO.Bind();
     mTexture.Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "EBO.hpp"
-#include "Shader.hpp"
 #include "Texture.hpp"
 #include "VAO.hpp"
 #include "VBO.hpp"
@@ -19,7 +18,7 @@ class Cube {
 public:
     Cube();
 
-    void Draw(Shader &shader);
+    void Draw();
     void Delete();
 
 private:

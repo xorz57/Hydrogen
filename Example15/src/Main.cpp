@@ -140,7 +140,7 @@ int main() {
         shader.UploadFloat4x4("u_Projection", camera.GetProjection(window_a));
         shader.UploadFloat4x4("u_Model", model);
 
-        plane.Draw(shader);
+        plane.Draw();
 
         for (const auto position: positions) {
             glm::mat4 model = glm::mat4(1.0f);
@@ -153,7 +153,7 @@ int main() {
             shader.UploadFloat4x4("u_Projection", camera.GetProjection(window_a));
             shader.UploadFloat4x4("u_Model", model);
 
-            cube.Draw(shader);
+            cube.Draw();
         }
 
         ///////////////////////////////////////////////////////////////////////
