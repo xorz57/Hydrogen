@@ -6,9 +6,10 @@
 
 #include <vector>
 
+template<typename T>
 class EBO {
 public:
-    EBO(const std::vector<GLuint> &elements);
+    EBO(const std::vector<T> &elements);
 
     void Bind() const;
     void Unbind() const;
@@ -17,3 +18,5 @@ public:
 private:
     GLuint mID = 0;
 };
+
+#include "EBO.inl"
