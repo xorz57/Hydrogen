@@ -2,6 +2,7 @@ add_executable(Example16 src/Main.cpp
                          src/Camera.cpp
                          src/Cube.cpp
                          src/Plane.cpp
+                         src/Quad.cpp
                          src/Shader.cpp
                          src/Texture.cpp
                          src/VAO.cpp)
