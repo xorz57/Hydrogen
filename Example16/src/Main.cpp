@@ -76,15 +76,15 @@ int main() {
     glEnable(GL_DEPTH_TEST);
 
     const std::vector<glm::vec3> positions = {
-            glm::vec3(-2.0f, +2.0f, -2.0f),// 0
-            glm::vec3(-2.0f, +2.0f, +0.0f),// 1
-            glm::vec3(-2.0f, +2.0f, +2.0f),// 2
-            glm::vec3(+0.0f, +2.0f, -2.0f),// 3
-            glm::vec3(+0.0f, +2.0f, +0.0f),// 4
-            glm::vec3(+0.0f, +2.0f, +2.0f),// 5
-            glm::vec3(+2.0f, +2.0f, -2.0f),// 6
-            glm::vec3(+2.0f, +2.0f, +0.0f),// 7
-            glm::vec3(+2.0f, +2.0f, +2.0f),// 8
+            glm::vec3(-4.0f, +4.0f, -4.0f),// 0
+            glm::vec3(-4.0f, +4.0f, +0.0f),// 1
+            glm::vec3(-4.0f, +4.0f, +4.0f),// 2
+            glm::vec3(+0.0f, +4.0f, -4.0f),// 3
+            glm::vec3(+0.0f, +4.0f, +0.0f),// 4
+            glm::vec3(+0.0f, +4.0f, +4.0f),// 5
+            glm::vec3(+4.0f, +4.0f, -4.0f),// 6
+            glm::vec3(+4.0f, +4.0f, +0.0f),// 7
+            glm::vec3(+4.0f, +4.0f, +4.0f),// 8
     };
 
     Plane plane;
