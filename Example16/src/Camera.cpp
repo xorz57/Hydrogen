@@ -25,20 +25,20 @@ void Camera::Move(float window_w, float window_h, double dt) {
             mPosition -= mSpeed * static_cast<float>(dt) * mFront;
         }
 
-        if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-            mPosition += mSpeed * static_cast<float>(dt) * mUp;
-        }
-
-        if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
-            mPosition -= mSpeed * static_cast<float>(dt) * mUp;
-        }
-
         if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
             mPosition -= mSpeed * static_cast<float>(dt) * mRight;
         }
 
         if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
             mPosition += mSpeed * static_cast<float>(dt) * mRight;
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+            mPosition += mSpeed * static_cast<float>(dt) * mUp;
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
+            mPosition -= mSpeed * static_cast<float>(dt) * mUp;
         }
 
         const double window_hw = 0.5f * window_w;
