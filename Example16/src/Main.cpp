@@ -13,6 +13,7 @@
 #include <imgui_impl_opengl3.h>
 
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <cinttypes>
 #include <cstdlib>
@@ -92,7 +93,12 @@ int main() {
 
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
-    Camera camera(glm::vec3(+0.0f, +8.0f, +8.0f), 45.0f, -90.0f);
+    CameraSettings settings;
+    settings.position = glm::vec3(+0.0f, +8.0f, +8.0f);
+    settings.pitch = 45.0f;
+    settings.yaw = -90.0f;
+
+    Camera camera(settings);
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -114,6 +120,17 @@ int main() {
         ImGui::Begin("Statistics");
         ImGui::Text("frame: %" PRIu64, frame);
         ImGui::Text("dt: %.5lf sec", dt);
+        ImGui::End();
+
+        ImGui::Begin("Camera");
+        ImGui::InputFloat3("Position", glm::value_ptr(settings.position));
+        ImGui::InputFloat("FOV", &settings.fov);
+        ImGui::InputFloat("Near", &settings.near);
+        ImGui::InputFloat("Far", &settings.far);
+        ImGui::InputFloat("Pitch", &settings.pitch);
+        ImGui::InputFloat("Yaw", &settings.yaw);
+        ImGui::InputFloat("Sensitivity", &settings.sensitivity);
+        ImGui::InputFloat("Speed", &settings.speed);
         ImGui::End();
 
         ImGui::Render();
