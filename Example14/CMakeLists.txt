@@ -3,9 +3,7 @@ add_executable(Example14 src/Main.cpp
                          src/Cube.cpp
                          src/Shader.cpp
                          src/Texture.cpp
-                         src/EBO.cpp
-                         src/VAO.cpp
-                         src/VBO.cpp)
+                         src/VAO.cpp)
 
 target_include_directories(Example14 PRIVATE ${Stb_INCLUDE_DIR})
 
