@@ -12,9 +12,9 @@ void Camera::Move(float window_w, float window_h, double dt) {
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
         if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            SetSpeed(4.0f);
+            mSettings.speed = 4.0f;
         } else {
-            SetSpeed(2.0f);
+            mSettings.speed = 2.0f;
         }
 
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
@@ -69,10 +69,6 @@ void Camera::Move(float window_w, float window_h, double dt) {
             mFlag = true;
         }
     }
-}
-
-void Camera::SetSpeed(float speed) {
-    mSettings.speed = speed;
 }
 
 glm::mat4 Camera::GetView() const {
