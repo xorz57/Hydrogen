@@ -80,5 +80,5 @@ glm::mat4 Camera::GetView() const {
 }
 
 glm::mat4 Camera::GetProjection(float aspect) const {
-    return glm::perspective(mFOV, aspect, mNear, mFar);
+    return glm::perspective(glm::radians(mFOV), aspect, mNear, mFar);
 }
