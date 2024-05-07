@@ -75,7 +75,7 @@ int main() {
             {{+0.0f, +0.5f, +0.0f}, {+0.0f, +0.0f, +1.0f}},// 2
     };
 
-    const std::vector<GLint> elements{
+    const std::vector<GLuint> elements{
             0,// 0
             1,// 1
             2,// 2
@@ -99,7 +99,7 @@ int main() {
     GLuint EBO = 0;
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(elements.size() * sizeof(GLfloat)), elements.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(elements.size() * sizeof(GLuint)), elements.data(), GL_STATIC_DRAW);
 
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
