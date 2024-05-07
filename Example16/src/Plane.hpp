@@ -21,9 +21,6 @@ public:
 
     void Draw(Shader &shader);
     void Delete();
-    void Scale(const glm::vec3 &v);
-    void Translate(const glm::vec3 &v);
-    void Rotate(float angle, const glm::vec3 &v);
 
 private:
     struct Vertex {
@@ -50,8 +47,5 @@ private:
     VAO mVAO;
     VBO<Vertex> mVBO{mVertices};
     EBO<GLuint> mEBO{mElements};
-
     Texture mTexture{"assets/textures/texture.png"};
-
-    glm::mat4 mModel{1.0f};
 };
