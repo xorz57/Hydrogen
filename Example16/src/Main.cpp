@@ -130,12 +130,11 @@ int main() {
 
         ///////////////////////////////////////////////////////////////////////
 
-        shader.Use();
-
         if (!ImGui::IsAnyItemActive()) {
             camera.Move(window_w, window_h, dt);
         }
 
+        shader.Use();
         shader.UploadFloat4x4("u_View", camera.GetView());
         shader.UploadFloat4x4("u_Projection", camera.GetProjection(window_a));
 
