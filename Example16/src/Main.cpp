@@ -92,7 +92,7 @@ int main() {
 
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
-    Camera camera(glm::vec3(+0.0f, +8.0f, +8.0f));
+    Camera camera(glm::vec3(+0.0f, +8.0f, +8.0f), 45.0f, -90.0f);
 
     ///////////////////////////////////////////////////////////////////////////
 

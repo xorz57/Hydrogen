@@ -8,7 +8,7 @@
 
 class Camera {
 public:
-    Camera(const glm::vec3 &position);
+    Camera(const glm::vec3 &position, float pitch, float yaw);
 
     void Move(float window_w, float window_h, double dt);
     void SetSpeed(float speed);
@@ -23,8 +23,8 @@ private:
     float mFOV = 45.0f;
     float mNear = 0.1f;
     float mFar = 100.0f;
-    float mPitch = 45.0f;
-    float mYaw = -90.0f;
+    float mPitch = 0.0f;
+    float mYaw = 0.0f;
     float mSensitivity = 0.1f;
     float mSpeed = 2.0f;
     bool mFlag = true;

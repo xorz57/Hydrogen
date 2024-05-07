@@ -2,7 +2,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-Camera::Camera(const glm::vec3 &position) : mPosition(position) {
+Camera::Camera(const glm::vec3 &position, float pitch, float yaw) : mPosition(position), mPitch(pitch), mYaw(yaw) {
     mFront = glm::normalize(glm::vec3(cos(glm::radians(mYaw)) * cos(glm::radians(mPitch)), sin(glm::radians(-mPitch)), sin(glm::radians(mYaw)) * cos(glm::radians(mPitch))));
     mRight = glm::normalize(glm::cross(mFront, mUp));
 }
