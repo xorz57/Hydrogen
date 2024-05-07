@@ -12,7 +12,7 @@ class Camera {
 public:
     Camera(CameraSettings &settings);
 
-    void Move(float window_w, float window_h, double dt);
+    void Update(float window_w, float window_h, double dt);
     glm::mat4 GetView() const;
     glm::mat4 GetProjection(float aspect) const;
 

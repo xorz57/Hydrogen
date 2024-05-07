@@ -10,7 +10,7 @@ Camera::Camera(CameraSettings &settings) : mSettings(settings) {
     mRight = glm::normalize(glm::cross(mFront, mUp));
 }
 
-void Camera::Move(float window_w, float window_h, double dt) {
+void Camera::Update(float window_w, float window_h, double dt) {
     auto window = glfwGetCurrentContext();
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {

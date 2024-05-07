@@ -148,7 +148,7 @@ int main() {
         ///////////////////////////////////////////////////////////////////////
 
         if (!ImGui::IsAnyItemActive()) {
-            camera.Move(window_w, window_h, dt);
+            camera.Update(window_w, window_h, dt);
         }
 
         glm::mat4 model = glm::mat4(1.0f);
