@@ -3,6 +3,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 Camera::Camera(CameraSettings &settings) : mSettings(settings) {
+    mSettings.yaw = glm::mod(mSettings.yaw, +360.0f);
+    mSettings.pitch = glm::clamp(mSettings.pitch, -89.0f, +89.0f);
+
     mFront = glm::normalize(glm::vec3(cos(glm::radians(mSettings.yaw)) * cos(glm::radians(mSettings.pitch)), sin(glm::radians(-mSettings.pitch)), sin(glm::radians(mSettings.yaw)) * cos(glm::radians(mSettings.pitch))));
     mRight = glm::normalize(glm::cross(mFront, mUp));
 }
@@ -57,11 +60,6 @@ void Camera::Move(float window_w, float window_h, double dt) {
         mSettings.yaw += mSettings.sensitivity * static_cast<float>(cursor_x - window_hw);
         mSettings.pitch += mSettings.sensitivity * static_cast<float>(cursor_y - window_hh);
 
-        mSettings.pitch = glm::clamp(mSettings.pitch, -89.0f, +89.0f);
-
-        mFront = glm::normalize(glm::vec3(cos(glm::radians(mSettings.yaw)) * cos(glm::radians(mSettings.pitch)), sin(glm::radians(-mSettings.pitch)), sin(glm::radians(mSettings.yaw)) * cos(glm::radians(mSettings.pitch))));
-        mRight = glm::normalize(glm::cross(mFront, mUp));
-
         glfwSetCursorPos(window, window_hw, window_hh);
     } else {
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -69,6 +67,12 @@ void Camera::Move(float window_w, float window_h, double dt) {
             mFlag = true;
         }
     }
+
+    mSettings.yaw = glm::mod(mSettings.yaw, +360.0f);
+    mSettings.pitch = glm::clamp(mSettings.pitch, -89.0f, +89.0f);
+
+    mFront = glm::normalize(glm::vec3(cos(glm::radians(mSettings.yaw)) * cos(glm::radians(mSettings.pitch)), sin(glm::radians(-mSettings.pitch)), sin(glm::radians(mSettings.yaw)) * cos(glm::radians(mSettings.pitch))));
+    mRight = glm::normalize(glm::cross(mFront, mUp));
 }
 
 glm::mat4 Camera::GetView() const {

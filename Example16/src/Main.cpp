@@ -94,7 +94,7 @@ int main() {
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
     CameraSettings settings;
-    settings.position = glm::vec3(+0.0f, +8.0f, +8.0f);
+    settings.position = glm::vec3(+0.0f, +16.0f, +16.0f);
     settings.pitch = 45.0f;
     settings.yaw = -90.0f;
 
