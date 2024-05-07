@@ -4,7 +4,6 @@ add_executable(Example16 src/Main.cpp
                          src/Plane.cpp
                          src/Shader.cpp
                          src/Texture.cpp
-                         src/EBO.cpp
                          src/VAO.cpp)
 
 target_include_directories(Example16 PRIVATE ${Stb_INCLUDE_DIR})

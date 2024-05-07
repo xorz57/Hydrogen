@@ -49,7 +49,7 @@ private:
 
     VAO mVAO;
     VBO<Vertex> mVBO{mVertices};
-    EBO mEBO{mElements};
+    EBO<GLuint> mEBO{mElements};
 
     Texture mTexture{"assets/textures/texture.png"};
 

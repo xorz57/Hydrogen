@@ -76,7 +76,7 @@ private:
 
     VAO mVAO;
     VBO<Vertex> mVBO{mVertices};
-    EBO mEBO{mElements};
+    EBO<GLuint> mEBO{mElements};
 
     glm::mat4 mModel{1.0f};
 };
