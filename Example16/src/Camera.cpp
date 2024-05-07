@@ -10,37 +10,37 @@ Camera::Camera() {
 void Camera::Move(float window_w, float window_h, double dt) {
     auto window = glfwGetCurrentContext();
 
-    if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-        SetSpeed(4.0f);
-    } else {
-        SetSpeed(2.0f);
-    }
+    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
+        if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+            SetSpeed(4.0f);
+        } else {
+            SetSpeed(2.0f);
+        }
 
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        mPosition += mSpeed * static_cast<float>(dt) * mFront;
-    }
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+            mPosition += mSpeed * static_cast<float>(dt) * mFront;
+        }
 
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-        mPosition -= mSpeed * static_cast<float>(dt) * mFront;
-    }
+        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+            mPosition -= mSpeed * static_cast<float>(dt) * mFront;
+        }
 
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-        mPosition += mSpeed * static_cast<float>(dt) * mUp;
-    }
+        if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+            mPosition += mSpeed * static_cast<float>(dt) * mUp;
+        }
 
-    if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
-        mPosition -= mSpeed * static_cast<float>(dt) * mUp;
-    }
+        if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
+            mPosition -= mSpeed * static_cast<float>(dt) * mUp;
+        }
 
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        mPosition -= mSpeed * static_cast<float>(dt) * mRight;
-    }
+        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+            mPosition -= mSpeed * static_cast<float>(dt) * mRight;
+        }
 
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        mPosition += mSpeed * static_cast<float>(dt) * mRight;
-    }
+        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+            mPosition += mSpeed * static_cast<float>(dt) * mRight;
+        }
 
-    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
         const double window_hw = 0.5f * window_w;
         const double window_hh = 0.5f * window_h;
 
