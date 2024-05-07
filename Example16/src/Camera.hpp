@@ -8,7 +8,7 @@
 
 class Camera {
 public:
-    Camera();
+    Camera(const glm::vec3 &position);
 
     void Move(float window_w, float window_h, double dt);
     void SetSpeed(float speed);
@@ -16,7 +16,7 @@ public:
     glm::mat4 GetProjection(float aspect) const;
 
 private:
-    glm::vec3 mPosition{+0.0f, +8.0f, +8.0f};
+    glm::vec3 mPosition{+0.0f, +0.0f, +0.0f};
     glm::vec3 mFront{+0.0f, +0.0f, -1.0f};
     glm::vec3 mUp{+0.0f, +1.0f, +0.0f};
     glm::vec3 mRight = glm::normalize(glm::cross(mFront, mUp));
