@@ -1,9 +1,9 @@
 #include "EBO.hpp"
 
-EBO::EBO(const std::vector<GLint> &elements) {
+EBO::EBO(const std::vector<GLuint> &elements) {
     glGenBuffers(1, &mID);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mID);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(elements.size() * sizeof(GLfloat)), elements.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(elements.size() * sizeof(GLuint)), elements.data(), GL_STATIC_DRAW);
 }
 
 void EBO::Bind() const {
