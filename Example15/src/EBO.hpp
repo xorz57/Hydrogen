@@ -8,7 +8,7 @@
 
 class EBO {
 public:
-    EBO(const std::vector<GLint> &elements);
+    EBO(const std::vector<GLuint> &elements);
 
     void Bind() const;
     void Unbind() const;

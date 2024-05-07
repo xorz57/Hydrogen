@@ -34,7 +34,7 @@ private:
             {{+0.5f, +0.0f, +0.5f}, {+1.0f, +1.0f}},// 3
     };
 
-    const std::vector<GLint> mElements{
+    const std::vector<GLuint> mElements{
             0,// 0
             1,// 1
             2,// 2
