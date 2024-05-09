@@ -57,8 +57,6 @@ void Camera::ProcessInput(float window_w, float window_h, double dt) {
         yaw += sensitivity * static_cast<float>(cursor_x - window_hw);
         pitch += sensitivity * static_cast<float>(cursor_y - window_hh);
 
-        Update();
-
         glfwSetCursorPos(window, window_hw, window_hh);
     } else {
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);

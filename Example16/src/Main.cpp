@@ -122,11 +122,11 @@ int main() {
 
         ImGui::Begin("Camera");
         ImGui::InputFloat3("Position", glm::value_ptr(camera.position));
-        ImGui::SliderFloat("FOV", &camera.fov, 45.0f, 90.0f);
+        ImGui::DragFloat("FOV", &camera.fov, 1.0f, 45.0f, 120.0f);
         ImGui::InputFloat("Near", &camera.near);
         ImGui::InputFloat("Far", &camera.far);
-        ImGui::SliderFloat("Pitch", &camera.pitch, -90.0f, +90.0f);
-        ImGui::SliderFloat("Yaw", &camera.yaw, 0.0f, +360.0f);
+        ImGui::DragFloat("Pitch", &camera.pitch, 0.1f,-89.0f, +89.0f);
+        ImGui::DragFloat("Yaw", &camera.yaw, 0.1f, 0.0f, +360.0f);
         ImGui::InputFloat("Sensitivity", &camera.sensitivity);
         ImGui::InputFloat("Speed", &camera.speed);
         ImGui::End();
@@ -145,11 +145,11 @@ int main() {
 
         ///////////////////////////////////////////////////////////////////////
 
-        if (ImGui::IsAnyItemActive()) {
-            camera.Update();
-        } else {
+        if (!ImGui::IsAnyItemActive()) {
             camera.ProcessInput(window_w, window_h, dt);
         }
+
+        camera.Update();
 
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::scale(model, glm::vec3(8.0f, 8.0f, 8.0f));
