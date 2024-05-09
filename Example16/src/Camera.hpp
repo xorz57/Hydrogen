@@ -11,7 +11,8 @@ public:
     Camera();
 
     void ProcessInput(float window_w, float window_h, double dt);
-    glm::mat4 GetView();
+    void Update();
+    glm::mat4 GetView() const;
     glm::mat4 GetProjection(float aspect) const;
 
     glm::vec3 position{+0.0f, +0.0f, +0.0f};

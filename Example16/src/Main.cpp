@@ -145,7 +145,9 @@ int main() {
 
         ///////////////////////////////////////////////////////////////////////
 
-        if (!ImGui::IsAnyItemActive()) {
+        if (ImGui::IsAnyItemActive()) {
+            camera.Update();
+        } else {
             camera.ProcessInput(window_w, window_h, dt);
         }
 

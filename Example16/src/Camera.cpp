@@ -3,11 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 Camera::Camera() {
-    yaw = glm::mod(yaw, +360.0f);
-    pitch = glm::clamp(pitch, -89.0f, +89.0f);
-
-    mFront = glm::normalize(glm::vec3(cos(glm::radians(yaw)) * cos(glm::radians(pitch)), sin(glm::radians(-pitch)), sin(glm::radians(yaw)) * cos(glm::radians(pitch))));
-    mRight = glm::normalize(glm::cross(mFront, mUp));
+    Update();
 }
 
 void Camera::ProcessInput(float window_w, float window_h, double dt) {
@@ -61,6 +57,8 @@ void Camera::ProcessInput(float window_w, float window_h, double dt) {
         yaw += sensitivity * static_cast<float>(cursor_x - window_hw);
         pitch += sensitivity * static_cast<float>(cursor_y - window_hh);
 
+        Update();
+
         glfwSetCursorPos(window, window_hw, window_hh);
     } else {
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -70,13 +68,15 @@ void Camera::ProcessInput(float window_w, float window_h, double dt) {
     }
 }
 
-glm::mat4 Camera::GetView() {
+void Camera::Update() {
     yaw = glm::mod(yaw, +360.0f);
     pitch = glm::clamp(pitch, -89.0f, +89.0f);
 
     mFront = glm::normalize(glm::vec3(cos(glm::radians(yaw)) * cos(glm::radians(pitch)), sin(glm::radians(-pitch)), sin(glm::radians(yaw)) * cos(glm::radians(pitch))));
     mRight = glm::normalize(glm::cross(mFront, mUp));
+}
 
+glm::mat4 Camera::GetView() const {
     return glm::lookAt(position, position + mFront, mUp);
 }
 
