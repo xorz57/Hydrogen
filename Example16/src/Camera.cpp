@@ -10,7 +10,7 @@ Camera::Camera() {
     mRight = glm::normalize(glm::cross(mFront, mUp));
 }
 
-void Camera::Update(float window_w, float window_h, double dt) {
+void Camera::ProcessInput(float window_w, float window_h, double dt) {
     auto window = glfwGetCurrentContext();
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
@@ -68,15 +68,15 @@ void Camera::Update(float window_w, float window_h, double dt) {
             mFlag = true;
         }
     }
+}
 
+glm::mat4 Camera::GetView() {
     yaw = glm::mod(yaw, +360.0f);
     pitch = glm::clamp(pitch, -89.0f, +89.0f);
 
     mFront = glm::normalize(glm::vec3(cos(glm::radians(yaw)) * cos(glm::radians(pitch)), sin(glm::radians(-pitch)), sin(glm::radians(yaw)) * cos(glm::radians(pitch))));
     mRight = glm::normalize(glm::cross(mFront, mUp));
-}
 
-glm::mat4 Camera::GetView() const {
     return glm::lookAt(position, position + mFront, mUp);
 }
 
