@@ -14,35 +14,35 @@ void Camera::Update(float window_w, float window_h, double dt) {
     auto window = glfwGetCurrentContext();
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
-        float speed_factor = 0.0f;
+        float speed_multiplier;
         if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            speed_factor = 2.0f;
+            speed_multiplier = 2.0f;
         } else {
-            speed_factor = 1.0f;
+            speed_multiplier = 1.0f;
         }
 
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-            position += speed_factor * speed * static_cast<float>(dt) * mFront;
+            position += speed_multiplier * speed * static_cast<float>(dt) * mFront;
         }
 
         if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-            position -= speed_factor * speed * static_cast<float>(dt) * mFront;
+            position -= speed_multiplier * speed * static_cast<float>(dt) * mFront;
         }
 
         if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-            position -= speed_factor * speed * static_cast<float>(dt) * mRight;
+            position -= speed_multiplier * speed * static_cast<float>(dt) * mRight;
         }
 
         if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-            position += speed_factor * speed * static_cast<float>(dt) * mRight;
+            position += speed_multiplier * speed * static_cast<float>(dt) * mRight;
         }
 
         if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-            position += speed_factor * speed * static_cast<float>(dt) * mUp;
+            position += speed_multiplier * speed * static_cast<float>(dt) * mUp;
         }
 
         if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
-            position -= speed_factor * speed * static_cast<float>(dt) * mUp;
+            position -= speed_multiplier * speed * static_cast<float>(dt) * mUp;
         }
 
         const double window_hw = 0.5f * window_w;
