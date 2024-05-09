@@ -93,12 +93,10 @@ int main() {
 
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
-    CameraSettings settings;
-    settings.position = glm::vec3(+0.0f, +16.0f, +16.0f);
-    settings.pitch = 45.0f;
-    settings.yaw = -90.0f;
-
-    Camera camera(settings);
+    Camera camera;
+    camera.position = glm::vec3(+0.0f, +16.0f, +16.0f);
+    camera.pitch = 45.0f;
+    camera.yaw = -90.0f;
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -123,14 +121,14 @@ int main() {
         ImGui::End();
 
         ImGui::Begin("Camera");
-        ImGui::InputFloat3("Position", glm::value_ptr(settings.position));
-        ImGui::SliderFloat("FOV", &settings.fov, 45.0f, 90.0f);
-        ImGui::InputFloat("Near", &settings.near);
-        ImGui::InputFloat("Far", &settings.far);
-        ImGui::InputFloat("Pitch", &settings.pitch);
-        ImGui::InputFloat("Yaw", &settings.yaw);
-        ImGui::InputFloat("Sensitivity", &settings.sensitivity);
-        ImGui::InputFloat("Speed", &settings.speed);
+        ImGui::InputFloat3("Position", glm::value_ptr(camera.position));
+        ImGui::SliderFloat("FOV", &camera.fov, 45.0f, 90.0f);
+        ImGui::InputFloat("Near", &camera.near);
+        ImGui::InputFloat("Far", &camera.far);
+        ImGui::InputFloat("Pitch", &camera.pitch);
+        ImGui::InputFloat("Yaw", &camera.yaw);
+        ImGui::InputFloat("Sensitivity", &camera.sensitivity);
+        ImGui::InputFloat("Speed", &camera.speed);
         ImGui::End();
 
         ImGui::Render();
