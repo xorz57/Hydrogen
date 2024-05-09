@@ -124,7 +124,7 @@ int main() {
 
         ImGui::Begin("Camera");
         ImGui::InputFloat3("Position", glm::value_ptr(settings.position));
-        ImGui::InputFloat("FOV", &settings.fov);
+        ImGui::SliderFloat("FOV", &settings.fov, 45.0f, 90.0f);
         ImGui::InputFloat("Near", &settings.near);
         ImGui::InputFloat("Far", &settings.far);
         ImGui::InputFloat("Pitch", &settings.pitch);
