@@ -22,7 +22,7 @@ public:
     float pitch = 0.0f;
     float yaw = 0.0f;
     float sensitivity = 0.1f;
-    float speed = 1.0f;
+    float speed = 2.0f;
 
 private:
     glm::vec3 mFront{+0.0f, +0.0f, -1.0f};
