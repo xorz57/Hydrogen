@@ -12,8 +12,8 @@ public:
 
     void ProcessInput(float window_w, float window_h, double dt);
     void Update();
-    glm::mat4 GetView() const;
-    glm::mat4 GetProjection(float aspect) const;
+    [[nodiscard]] glm::mat4 GetView() const;
+    [[nodiscard]] glm::mat4 GetProjection(float aspect) const;
 
     glm::vec3 position{+0.0f, +0.0f, +0.0f};
     float fov = 45.0f;
