@@ -94,10 +94,10 @@ int main() {
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
     Camera camera;
-    camera.GetPosition() = glm::vec3(+0.0f, +16.0f, +16.0f);
-    camera.GetPitch() = 45.0f;
-    camera.GetYaw() = -90.0f;
-    camera.GetSpeed() = 4.0f;
+    camera.SetPosition(glm::vec3(+0.0f, +16.0f, +16.0f));
+    camera.SetPitch(45.0f);
+    camera.SetYaw(-90.0f);
+    camera.SetSpeed(4.0f);
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -121,16 +121,30 @@ int main() {
         ImGui::Text("dt: %.5lf sec", dt);
         ImGui::End();
 
-        ImGui::Begin("Camera");
-        ImGui::InputFloat3("Position", glm::value_ptr(camera.GetPosition()));
-        ImGui::DragFloat("FOV", &camera.GetFOV(), 1.0f, 45.0f, 120.0f);
-        ImGui::InputFloat("Near", &camera.GetNear());
-        ImGui::InputFloat("Far", &camera.GetFar());
-        ImGui::DragFloat("Pitch", &camera.GetPitch(), 0.1f, -89.0f, +89.0f);
-        ImGui::DragFloat("Yaw", &camera.GetYaw(), 0.1f, 0.0f, +360.0f);
-        ImGui::InputFloat("Sensitivity", &camera.GetSensitivity());
-        ImGui::InputFloat("Speed", &camera.GetSpeed());
-        ImGui::End();
+        {
+            auto position = camera.GetPosition();
+            float fov = camera.GetFOV();
+            float near = camera.GetNear();
+            float far = camera.GetFar();
+            float pitch = camera.GetPitch();
+            float yaw = camera.GetYaw();
+            float sensitivity = camera.GetSensitivity();
+            float speed = camera.GetSpeed();
+
+            ImGui::Begin("Camera");
+            ImGui::InputFloat3("Position", glm::value_ptr(position));
+            ImGui::DragFloat("FOV", &fov, 1.0f, 45.0f, 120.0f);
+            ImGui::InputFloat("Near", &near);
+            ImGui::InputFloat("Far", &far);
+            ImGui::DragFloat("Pitch", &pitch, 0.1f, -89.0f, +89.0f);
+            ImGui::DragFloat("Yaw", &yaw, 0.1f, 0.0f, +360.0f);
+            ImGui::InputFloat("Sensitivity", &sensitivity);
+            ImGui::InputFloat("Speed", &speed);
+            ImGui::End();
+
+            camera.SetPosition(position);
+            camera.SetFOV(fov);
+        }
 
         ImGui::Render();
 

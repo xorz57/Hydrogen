@@ -82,34 +82,66 @@ glm::mat4 Camera::GetProjection(float aspect) const {
     return glm::perspective(glm::radians(mFOV), aspect, mNear, mFar);
 }
 
-glm::vec3 &Camera::GetPosition() {
+void Camera::SetPosition(const glm::vec3 &position) {
+    mPosition = position;
+}
+
+void Camera::SetFOV(float fov) {
+    mFOV = fov;
+}
+
+void Camera::SetNear(float near) {
+    mNear = near;
+}
+
+void Camera::SetFar(float far) {
+    mFar = far;
+}
+
+void Camera::SetPitch(float pitch) {
+    mPitch = pitch;
+}
+
+void Camera::SetYaw(float yaw) {
+    mYaw = yaw;
+}
+
+void Camera::SetSensitivity(float sensitivity) {
+    mSensitivity = sensitivity;
+}
+
+void Camera::SetSpeed(float speed) {
+    mSpeed = speed;
+}
+
+glm::vec3 Camera::GetPosition() const {
     return mPosition;
 }
 
-float &Camera::GetFOV() {
+float Camera::GetFOV() const {
     return mFOV;
 }
 
-float &Camera::GetNear() {
+float Camera::GetNear() const {
     return mNear;
 }
 
-float &Camera::GetFar() {
+float Camera::GetFar() const {
     return mFar;
 }
 
-float &Camera::GetPitch() {
+float Camera::GetPitch() const {
     return mPitch;
 }
 
-float &Camera::GetYaw() {
+float Camera::GetYaw() const {
     return mYaw;
 }
 
-float &Camera::GetSensitivity() {
+float Camera::GetSensitivity() const {
     return mSensitivity;
 }
 
-float &Camera::GetSpeed() {
+float Camera::GetSpeed() const {
     return mSpeed;
 }

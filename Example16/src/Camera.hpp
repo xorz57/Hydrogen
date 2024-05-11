@@ -12,16 +12,27 @@ public:
 
     void ProcessInput(float window_w, float window_h, double dt);
     void Update();
+
     [[nodiscard]] glm::mat4 GetView() const;
     [[nodiscard]] glm::mat4 GetProjection(float aspect) const;
-    [[nodiscard]] glm::vec3 &GetPosition();
-    [[nodiscard]] float &GetFOV();
-    [[nodiscard]] float &GetNear();
-    [[nodiscard]] float &GetFar();
-    [[nodiscard]] float &GetPitch();
-    [[nodiscard]] float &GetYaw();
-    [[nodiscard]] float &GetSensitivity();
-    [[nodiscard]] float &GetSpeed();
+
+    void SetPosition(const glm::vec3 &position);
+    void SetFOV(float fov);
+    void SetNear(float near);
+    void SetFar(float far);
+    void SetPitch(float pitch);
+    void SetYaw(float yaw);
+    void SetSensitivity(float sensitivity);
+    void SetSpeed(float speed);
+
+    [[nodiscard]] glm::vec3 GetPosition() const;
+    [[nodiscard]] float GetFOV() const;
+    [[nodiscard]] float GetNear() const;
+    [[nodiscard]] float GetFar() const;
+    [[nodiscard]] float GetPitch() const;
+    [[nodiscard]] float GetYaw() const;
+    [[nodiscard]] float GetSensitivity() const;
+    [[nodiscard]] float GetSpeed() const;
 
 private:
     glm::vec3 mFront{+0.0f, +0.0f, -1.0f};
