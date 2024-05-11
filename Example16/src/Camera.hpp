@@ -42,8 +42,8 @@ private:
     float mFOV = 45.0f;
     float mNear = 0.1f;
     float mFar = 100.0f;
-    float mPitch = 0.0f;
-    float mYaw = 0.0f;
+    float mPitch = 45.0f;
+    float mYaw = -90.0f;
     float mSensitivity = 0.1f;
     float mSpeed = 1.0f;
     bool mFlag = true;

@@ -95,8 +95,12 @@ int main() {
 
     Camera camera;
     camera.SetPosition(glm::vec3(+0.0f, +16.0f, +16.0f));
+    camera.SetFOV(45.0f);
+    camera.SetNear(0.1f);
+    camera.SetFar(100.0f);
     camera.SetPitch(45.0f);
     camera.SetYaw(-90.0f);
+    camera.SetSensitivity(0.1f);
     camera.SetSpeed(4.0f);
 
     ///////////////////////////////////////////////////////////////////////////
