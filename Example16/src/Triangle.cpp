@@ -15,7 +15,7 @@ void Triangle::Draw() {
     mVAO.Unbind();
 }
 
-void Triangle::Delete() {
+void Triangle::Delete() const {
     mVAO.Delete();
     mVBO.Delete();
     mEBO.Delete();

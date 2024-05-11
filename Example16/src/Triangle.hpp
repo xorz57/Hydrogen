@@ -19,7 +19,7 @@ public:
     Triangle();
 
     void Draw();
-    void Delete();
+    void Delete() const;
 
 private:
     struct Vertex {

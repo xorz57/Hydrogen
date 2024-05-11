@@ -9,7 +9,7 @@
 template<typename T>
 class EBO {
 public:
-    EBO(const std::vector<T> &elements);
+    explicit EBO(const std::vector<T> &elements);
 
     void Bind() const;
     void Unbind() const;

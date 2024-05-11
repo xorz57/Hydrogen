@@ -17,7 +17,7 @@ void Cube::Draw() {
     mVAO.Unbind();
 }
 
-void Cube::Delete() {
+void Cube::Delete() const {
     mVAO.Delete();
     mVBO.Delete();
     mEBO.Delete();

@@ -19,7 +19,7 @@ public:
     Cube();
 
     void Draw();
-    void Delete();
+    void Delete() const;
 
 private:
     struct Vertex {

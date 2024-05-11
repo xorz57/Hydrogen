@@ -9,7 +9,7 @@
 template<typename T>
 class VBO {
 public:
-    VBO(const std::vector<T> &vertices);
+    explicit VBO(const std::vector<T> &vertices);
 
     void Bind() const;
     void Unbind() const;
