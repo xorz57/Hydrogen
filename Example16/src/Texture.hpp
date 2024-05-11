@@ -9,7 +9,7 @@ public:
     explicit Texture(const char *texturePath);
 
     void Bind() const;
-    void Unbind() const;
+    static void Unbind();
     void Delete() const;
 
 private:

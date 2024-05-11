@@ -12,7 +12,7 @@ public:
     explicit EBO(const std::vector<T> &elements);
 
     void Bind() const;
-    void Unbind() const;
+    static void Unbind();
     void Delete() const;
 
 private:

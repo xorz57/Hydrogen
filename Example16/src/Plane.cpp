@@ -3,18 +3,18 @@
 Plane::Plane() {
     mVAO.Bind();
     mVBO.Bind();
-    mVAO.SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
-    mVAO.SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, textureCoordinates));
+    VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
+    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, textureCoordinates));
     mVBO.Unbind();
-    mVAO.Unbind();
+    VAO::Unbind();
 }
 
 void Plane::Draw() const {
     mVAO.Bind();
     mTexture.Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
-    mTexture.Unbind();
-    mVAO.Unbind();
+    Texture::Unbind();
+    VAO::Unbind();
 }
 
 void Plane::Delete() const {

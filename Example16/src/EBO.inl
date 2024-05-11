@@ -13,7 +13,7 @@ void EBO<T>::Bind() const {
 }
 
 template<typename T>
-void EBO<T>::Unbind() const {
+void EBO<T>::Unbind() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
