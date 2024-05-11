@@ -8,10 +8,10 @@ class Texture {
 public:
     explicit Texture(const char *texturePath);
 
-    static void Unbind();
-
     void Bind() const;
     void Delete() const;
+
+    static void Unbind();
 
 private:
     GLuint mID = 0;

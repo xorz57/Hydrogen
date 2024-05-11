@@ -12,8 +12,9 @@ public:
     explicit EBO(const std::vector<T> &elements);
 
     void Bind() const;
-    static void Unbind();
     void Delete() const;
+
+    static void Unbind();
 
 private:
     GLuint mID = 0;

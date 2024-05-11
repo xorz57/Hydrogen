@@ -12,8 +12,9 @@ public:
     explicit VBO(const std::vector<T> &vertices);
 
     void Bind() const;
-    static void Unbind();
     void Delete() const;
+
+    static void Unbind();
 
 private:
     GLuint mID = 0;

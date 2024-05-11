@@ -56,31 +56,6 @@ Shader::Shader(const GLchar *vShaderSource, const GLchar *fShaderSource) {
     glDeleteShader(fShader);
 }
 
-Shader Shader::LoadFromFile(const char *vShaderPath, const char *fShaderPath) {
-    std::ifstream vShaderFile;
-    std::ifstream fShaderFile;
-
-    vShaderFile.open(vShaderPath);
-    fShaderFile.open(fShaderPath);
-
-    std::stringstream vShaderStream;
-    std::stringstream fShaderStream;
-
-    vShaderStream << vShaderFile.rdbuf();
-    fShaderStream << fShaderFile.rdbuf();
-
-    vShaderFile.close();
-    fShaderFile.close();
-
-    const std::string vShaderText = vShaderStream.str();
-    const std::string fShaderText = fShaderStream.str();
-
-    const GLchar *vShaderSource = vShaderText.c_str();
-    const GLchar *fShaderSource = fShaderText.c_str();
-
-    return {vShaderSource, fShaderSource};
-}
-
 void Shader::Use() const {
     glUseProgram(mProgram);
 }
@@ -115,4 +90,29 @@ void Shader::UploadFloat3x3(const char *name, const glm::mat3 &m) const {
 
 void Shader::UploadFloat4x4(const char *name, const glm::mat4 &m) const {
     glUniformMatrix4fv(glGetUniformLocation(mProgram, name), 1, GL_FALSE, glm::value_ptr(m));
+}
+
+Shader Shader::LoadFromFile(const char *vShaderPath, const char *fShaderPath) {
+    std::ifstream vShaderFile;
+    std::ifstream fShaderFile;
+
+    vShaderFile.open(vShaderPath);
+    fShaderFile.open(fShaderPath);
+
+    std::stringstream vShaderStream;
+    std::stringstream fShaderStream;
+
+    vShaderStream << vShaderFile.rdbuf();
+    fShaderStream << fShaderFile.rdbuf();
+
+    vShaderFile.close();
+    fShaderFile.close();
+
+    const std::string vShaderText = vShaderStream.str();
+    const std::string fShaderText = fShaderStream.str();
+
+    const GLchar *vShaderSource = vShaderText.c_str();
+    const GLchar *fShaderSource = fShaderText.c_str();
+
+    return {vShaderSource, fShaderSource};
 }

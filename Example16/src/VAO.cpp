@@ -9,12 +9,12 @@ void VAO::Bind() const {
     glBindVertexArray(mID);
 }
 
-void VAO::Unbind() {
-    glBindVertexArray(0);
-}
-
 void VAO::Delete() const {
     glDeleteVertexArrays(1, &mID);
+}
+
+void VAO::Unbind() {
+    glBindVertexArray(0);
 }
 
 void VAO::SetFloat(GLuint index, GLsizei stride, void *pointer) {

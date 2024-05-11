@@ -10,8 +10,6 @@ class Shader {
 public:
     Shader(const GLchar *vShaderSource, const GLchar *fShaderSource);
 
-    static Shader LoadFromFile(const char *vShaderPath, const char *fShaderPath);
-
     void Use() const;
     void Delete() const;
     void UploadFloat(const char *name, float s) const;
@@ -21,6 +19,8 @@ public:
     void UploadFloat2x2(const char *name, const glm::mat2 &m) const;
     void UploadFloat3x3(const char *name, const glm::mat3 &m) const;
     void UploadFloat4x4(const char *name, const glm::mat4 &m) const;
+
+    static Shader LoadFromFile(const char *vShaderPath, const char *fShaderPath);
 
 private:
     GLint mProgram = 0;
