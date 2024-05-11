@@ -18,7 +18,7 @@ class Plane {
 public:
     Plane();
 
-    void Draw();
+    void Draw() const;
     void Delete() const;
 
 private:
