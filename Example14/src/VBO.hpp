@@ -9,11 +9,12 @@
 template<typename T>
 class VBO {
 public:
-    VBO(const std::vector<T> &vertices);
+    explicit VBO(const std::vector<T> &vertices);
 
     void Bind() const;
-    void Unbind() const;
     void Delete() const;
+
+    static void Unbind();
 
 private:
     GLuint mID = 0;

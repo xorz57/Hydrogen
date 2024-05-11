@@ -129,10 +129,10 @@ int main() {
         ///////////////////////////////////////////////////////////////////////
 
         for (const auto position: positions) {
-            glm::mat4 model = glm::mat4(1.0f);
-            glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-            glm::translate(model, position);
-            glm::rotate(model, static_cast<float>(glfwGetTime()) * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            auto model = glm::mat4(1.0f);
+            model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+            model = glm::translate(model, position);
+            model = glm::rotate(model, static_cast<float>(glfwGetTime()) * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
             shader.Use();
             shader.UploadFloat4x4("u_View", camera.GetView());

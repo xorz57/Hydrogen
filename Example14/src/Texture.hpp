@@ -6,11 +6,12 @@
 
 class Texture {
 public:
-    Texture(const char *texturePath);
+    explicit Texture(const char *texturePath);
 
-    void Bind();
-    void Unbind();
-    void Delete();
+    void Bind() const;
+    void Delete() const;
+
+    static void Unbind();
 
 private:
     GLuint mID = 0;

@@ -9,11 +9,12 @@
 template<typename T>
 class EBO {
 public:
-    EBO(const std::vector<T> &elements);
+    explicit EBO(const std::vector<T> &elements);
 
     void Bind() const;
-    void Unbind() const;
     void Delete() const;
+
+    static void Unbind();
 
 private:
     GLuint mID = 0;

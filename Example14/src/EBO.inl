@@ -13,11 +13,11 @@ void EBO<T>::Bind() const {
 }
 
 template<typename T>
-void EBO<T>::Unbind() const {
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+void EBO<T>::Delete() const {
+    glDeleteBuffers(1, &mID);
 }
 
 template<typename T>
-void EBO<T>::Delete() const {
-    glDeleteBuffers(1, &mID);
+void EBO<T>::Unbind() {
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }

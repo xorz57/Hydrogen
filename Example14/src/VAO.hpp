@@ -9,11 +9,12 @@ public:
     VAO();
 
     void Bind() const;
-    void Unbind() const;
     void Delete() const;
-    void SetFloat(GLuint index, GLsizei stride, void *pointer) const;
-    void SetFloat2(GLuint index, GLsizei stride, void *pointer) const;
-    void SetFloat3(GLuint index, GLsizei stride, void *pointer) const;
+
+    static void Unbind();
+    static void SetFloat(GLuint index, GLsizei stride, void *pointer);
+    static void SetFloat2(GLuint index, GLsizei stride, void *pointer);
+    static void SetFloat3(GLuint index, GLsizei stride, void *pointer);
 
 private:
     GLuint mID = 0;

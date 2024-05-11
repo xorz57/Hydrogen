@@ -3,21 +3,21 @@
 Cube::Cube() {
     mVAO.Bind();
     mVBO.Bind();
-    mVAO.SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
-    mVAO.SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, textureCoordinates));
-    mVBO.Unbind();
-    mVAO.Unbind();
+    VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
+    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, textureCoordinates));
+    VBO<GLuint>::Unbind();
+    VAO::Unbind();
 }
 
-void Cube::Draw() {
+void Cube::Draw() const {
     mTexture.Bind();
     mVAO.Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
-    mVAO.Unbind();
-    mTexture.Unbind();
+    VAO::Unbind();
+    Texture::Unbind();
 }
 
-void Cube::Delete() {
+void Cube::Delete() const {
     mVAO.Delete();
     mVBO.Delete();
     mEBO.Delete();
