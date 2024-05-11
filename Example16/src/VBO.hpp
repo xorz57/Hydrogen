@@ -12,7 +12,7 @@ public:
     explicit VBO(const std::vector<T> &vertices);
 
     void Bind() const;
-    void Unbind() const;
+    static void Unbind();
     void Delete() const;
 
 private:

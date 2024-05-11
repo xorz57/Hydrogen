@@ -8,8 +8,9 @@ class Texture {
 public:
     explicit Texture(const char *texturePath);
 
-    void Bind() const;
     static void Unbind();
+
+    void Bind() const;
     void Delete() const;
 
 private:
