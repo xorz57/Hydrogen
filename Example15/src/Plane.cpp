@@ -9,7 +9,7 @@ Plane::Plane() {
     mVAO.Unbind();
 }
 
-void Plane::Draw() {
+void Plane::Draw() const {
     mVAO.Bind();
     mTexture.Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
@@ -17,7 +17,7 @@ void Plane::Draw() {
     mVAO.Unbind();
 }
 
-void Plane::Delete() {
+void Plane::Delete() const {
     mVAO.Delete();
     mVBO.Delete();
     mEBO.Delete();

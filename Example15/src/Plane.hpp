@@ -18,8 +18,8 @@ class Plane {
 public:
     Plane();
 
-    void Draw();
-    void Delete();
+    void Draw() const;
+    void Delete() const;
 
 private:
     struct Vertex {

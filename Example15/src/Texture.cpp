@@ -23,14 +23,14 @@ Texture::Texture(const char *texturePath) {
     }
 }
 
-void Texture::Bind() {
+void Texture::Bind() const {
     glBindTexture(GL_TEXTURE_2D, mID);
 }
 
-void Texture::Unbind() {
+void Texture::Unbind() const {
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Texture::Delete() {
+void Texture::Delete() const {
     glDeleteTextures(1, &mID);
 }

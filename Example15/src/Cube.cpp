@@ -9,7 +9,7 @@ Cube::Cube() {
     mVAO.Unbind();
 }
 
-void Cube::Draw() {
+void Cube::Draw() const {
     mVAO.Bind();
     mTexture.Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
@@ -17,7 +17,7 @@ void Cube::Draw() {
     mVAO.Unbind();
 }
 
-void Cube::Delete() {
+void Cube::Delete() const {
     mVAO.Delete();
     mVBO.Delete();
     mEBO.Delete();
