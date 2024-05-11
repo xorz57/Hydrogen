@@ -9,8 +9,9 @@ public:
     explicit Texture(const char *texturePath);
 
     void Bind() const;
-    void Unbind() const;
     void Delete() const;
+
+    static void Unbind();
 
 private:
     GLuint mID = 0;

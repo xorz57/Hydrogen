@@ -13,11 +13,11 @@ void VBO<T>::Bind() const {
 }
 
 template<typename T>
-void VBO<T>::Unbind() const {
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+void VBO<T>::Delete() const {
+    glDeleteBuffers(1, &mID);
 }
 
 template<typename T>
-void VBO<T>::Delete() const {
-    glDeleteBuffers(1, &mID);
+void VBO<T>::Unbind() {
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
