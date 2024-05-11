@@ -18,7 +18,7 @@ class Triangle {
 public:
     Triangle();
 
-    void Draw();
+    void Draw() const;
     void Delete() const;
 
 private:
@@ -42,4 +42,5 @@ private:
     VAO mVAO;
     VBO<Vertex> mVBO{mVertices};
     EBO<GLuint> mEBO{mElements};
+    Texture mTexture{"assets/textures/texture.png"};
 };

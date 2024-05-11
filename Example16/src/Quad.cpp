@@ -9,7 +9,7 @@ Quad::Quad() {
     mVAO.Unbind();
 }
 
-void Quad::Draw() {
+void Quad::Draw() const {
     mVAO.Bind();
     mTexture.Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
@@ -17,7 +17,7 @@ void Quad::Draw() {
     mVAO.Unbind();
 }
 
-void Quad::Delete() {
+void Quad::Delete() const {
     mVAO.Delete();
     mVBO.Delete();
     mEBO.Delete();

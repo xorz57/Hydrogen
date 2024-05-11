@@ -18,8 +18,8 @@ class Quad {
 public:
     Quad();
 
-    void Draw();
-    void Delete();
+    void Draw() const;
+    void Delete() const;
 
 private:
     struct Vertex {

@@ -17,7 +17,7 @@ void Plane::Draw() {
     mVAO.Unbind();
 }
 
-void Plane::Delete() {
+void Plane::Delete() const {
     mVAO.Delete();
     mVBO.Delete();
     mEBO.Delete();

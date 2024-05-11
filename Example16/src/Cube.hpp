@@ -18,7 +18,7 @@ class Cube {
 public:
     Cube();
 
-    void Draw();
+    void Draw() const;
     void Delete() const;
 
 private:
