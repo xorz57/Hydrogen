@@ -94,9 +94,10 @@ int main() {
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
     Camera camera;
-    camera.position = glm::vec3(+0.0f, +16.0f, +16.0f);
-    camera.pitch = 45.0f;
-    camera.yaw = -90.0f;
+    camera.GetPosition() = glm::vec3(+0.0f, +16.0f, +16.0f);
+    camera.GetPitch() = 45.0f;
+    camera.GetYaw() = -90.0f;
+    camera.GetSpeed() = 4.0f;
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -121,14 +122,14 @@ int main() {
         ImGui::End();
 
         ImGui::Begin("Camera");
-        ImGui::InputFloat3("Position", glm::value_ptr(camera.position));
-        ImGui::DragFloat("FOV", &camera.fov, 1.0f, 45.0f, 120.0f);
-        ImGui::InputFloat("Near", &camera.near);
-        ImGui::InputFloat("Far", &camera.far);
-        ImGui::DragFloat("Pitch", &camera.pitch, 0.1f,-89.0f, +89.0f);
-        ImGui::DragFloat("Yaw", &camera.yaw, 0.1f, 0.0f, +360.0f);
-        ImGui::InputFloat("Sensitivity", &camera.sensitivity);
-        ImGui::InputFloat("Speed", &camera.speed);
+        ImGui::InputFloat3("Position", glm::value_ptr(camera.GetPosition()));
+        ImGui::DragFloat("FOV", &camera.GetFOV(), 1.0f, 45.0f, 120.0f);
+        ImGui::InputFloat("Near", &camera.GetNear());
+        ImGui::InputFloat("Far", &camera.GetFar());
+        ImGui::DragFloat("Pitch", &camera.GetPitch(), 0.1f, -89.0f, +89.0f);
+        ImGui::DragFloat("Yaw", &camera.GetYaw(), 0.1f, 0.0f, +360.0f);
+        ImGui::InputFloat("Sensitivity", &camera.GetSensitivity());
+        ImGui::InputFloat("Speed", &camera.GetSpeed());
         ImGui::End();
 
         ImGui::Render();

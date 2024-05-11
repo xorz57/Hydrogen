@@ -18,27 +18,27 @@ void Camera::ProcessInput(float window_w, float window_h, double dt) {
         }
 
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-            position += speed_multiplier * speed * static_cast<float>(dt) * mFront;
+            mPosition += speed_multiplier * mSpeed * static_cast<float>(dt) * mFront;
         }
 
         if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-            position -= speed_multiplier * speed * static_cast<float>(dt) * mFront;
+            mPosition -= speed_multiplier * mSpeed * static_cast<float>(dt) * mFront;
         }
 
         if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-            position -= speed_multiplier * speed * static_cast<float>(dt) * mRight;
+            mPosition -= speed_multiplier * mSpeed * static_cast<float>(dt) * mRight;
         }
 
         if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-            position += speed_multiplier * speed * static_cast<float>(dt) * mRight;
+            mPosition += speed_multiplier * mSpeed * static_cast<float>(dt) * mRight;
         }
 
         if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-            position += speed_multiplier * speed * static_cast<float>(dt) * mUp;
+            mPosition += speed_multiplier * mSpeed * static_cast<float>(dt) * mUp;
         }
 
         if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
-            position -= speed_multiplier * speed * static_cast<float>(dt) * mUp;
+            mPosition -= speed_multiplier * mSpeed * static_cast<float>(dt) * mUp;
         }
 
         const double window_hw = 0.5f * window_w;
@@ -54,8 +54,8 @@ void Camera::ProcessInput(float window_w, float window_h, double dt) {
         double cursor_y;
         glfwGetCursorPos(window, &cursor_x, &cursor_y);
 
-        yaw += sensitivity * static_cast<float>(cursor_x - window_hw);
-        pitch += sensitivity * static_cast<float>(cursor_y - window_hh);
+        mYaw += mSensitivity * static_cast<float>(cursor_x - window_hw);
+        mPitch += mSensitivity * static_cast<float>(cursor_y - window_hh);
 
         glfwSetCursorPos(window, window_hw, window_hh);
     } else {
@@ -67,17 +67,49 @@ void Camera::ProcessInput(float window_w, float window_h, double dt) {
 }
 
 void Camera::Update() {
-    yaw = glm::mod(yaw, +360.0f);
-    pitch = glm::clamp(pitch, -89.0f, +89.0f);
+    mYaw = glm::mod(mYaw, +360.0f);
+    mPitch = glm::clamp(mPitch, -89.0f, +89.0f);
 
-    mFront = glm::normalize(glm::vec3(cos(glm::radians(yaw)) * cos(glm::radians(pitch)), sin(glm::radians(-pitch)), sin(glm::radians(yaw)) * cos(glm::radians(pitch))));
+    mFront = glm::normalize(glm::vec3(cos(glm::radians(mYaw)) * cos(glm::radians(mPitch)), sin(glm::radians(-mPitch)), sin(glm::radians(mYaw)) * cos(glm::radians(mPitch))));
     mRight = glm::normalize(glm::cross(mFront, mUp));
 }
 
 glm::mat4 Camera::GetView() const {
-    return glm::lookAt(position, position + mFront, mUp);
+    return glm::lookAt(mPosition, mPosition + mFront, mUp);
 }
 
 glm::mat4 Camera::GetProjection(float aspect) const {
-    return glm::perspective(glm::radians(fov), aspect, near, far);
+    return glm::perspective(glm::radians(mFOV), aspect, mNear, mFar);
+}
+
+glm::vec3 &Camera::GetPosition() {
+    return mPosition;
+}
+
+float &Camera::GetFOV() {
+    return mFOV;
+}
+
+float &Camera::GetNear() {
+    return mNear;
+}
+
+float &Camera::GetFar() {
+    return mFar;
+}
+
+float &Camera::GetPitch() {
+    return mPitch;
+}
+
+float &Camera::GetYaw() {
+    return mYaw;
+}
+
+float &Camera::GetSensitivity() {
+    return mSensitivity;
+}
+
+float &Camera::GetSpeed() {
+    return mSpeed;
 }
