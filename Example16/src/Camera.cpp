@@ -74,14 +74,6 @@ void Camera::Update() {
     mRight = glm::normalize(glm::cross(mFront, mUp));
 }
 
-glm::mat4 Camera::GetView() const {
-    return glm::lookAt(mPosition, mPosition + mFront, mUp);
-}
-
-glm::mat4 Camera::GetProjection(float aspect) const {
-    return glm::perspective(glm::radians(mFOV), aspect, mNear, mFar);
-}
-
 void Camera::SetPosition(const glm::vec3 &position) {
     mPosition = position;
 }
@@ -144,4 +136,12 @@ float Camera::GetSensitivity() const {
 
 float Camera::GetSpeed() const {
     return mSpeed;
+}
+
+glm::mat4 Camera::GetView() const {
+    return glm::lookAt(mPosition, mPosition + mFront, mUp);
+}
+
+glm::mat4 Camera::GetProjection(float aspect) const {
+    return glm::perspective(glm::radians(mFOV), aspect, mNear, mFar);
 }
