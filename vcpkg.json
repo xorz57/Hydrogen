@@ -2,6 +2,7 @@
   "name": "opengl-sandbox",
   "version-string": "0.1.0",
   "dependencies": [
+    "assimp",
     "glad",
     "glfw3",
     "glm",
