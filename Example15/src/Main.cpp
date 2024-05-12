@@ -135,22 +135,22 @@ int main() {
         shader.UploadFloat4x4("u_view", camera.GetView());
         shader.UploadFloat4x4("u_projection", camera.GetProjection(window_a));
 
-        auto model = glm::mat4(1.0f);
-        model = glm::scale(model, glm::vec3(8.0f, 8.0f, 8.0f));
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-        model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        auto plane_model = glm::mat4(1.0f);
+        plane_model = glm::scale(plane_model, glm::vec3(8.0f, 8.0f, 8.0f));
+        plane_model = glm::translate(plane_model, glm::vec3(0.0f, 0.0f, 0.0f));
+        plane_model = glm::rotate(plane_model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
-        shader.UploadFloat4x4("u_model", model);
+        shader.UploadFloat4x4("u_model", plane_model);
 
         plane.Draw();
 
         for (const auto position: positions) {
-            auto model = glm::mat4(1.0f);
-            model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-            model = glm::translate(model, position);
-            model = glm::rotate(model, static_cast<float>(glfwGetTime()) * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            auto cube_model = glm::mat4(1.0f);
+            cube_model = glm::scale(cube_model, glm::vec3(1.0f, 1.0f, 1.0f));
+            cube_model = glm::translate(cube_model, position);
+            cube_model = glm::rotate(cube_model, static_cast<float>(glfwGetTime()) * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
-            shader.UploadFloat4x4("u_model", model);
+            shader.UploadFloat4x4("u_model", cube_model);
 
             cube.Draw();
         }
