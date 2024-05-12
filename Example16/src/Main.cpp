@@ -120,10 +120,12 @@ int main() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        ImGui::Begin("Statistics");
-        ImGui::Text("frame: %" PRIu64, frame);
-        ImGui::Text("dt: %.5lf sec", dt);
-        ImGui::End();
+        {
+            ImGui::Begin("Statistics");
+            ImGui::Text("frame: %" PRIu64, frame);
+            ImGui::Text("dt: %.5lf sec", dt);
+            ImGui::End();
+        }
 
         {
             auto position = camera.GetPosition();
@@ -142,12 +144,18 @@ int main() {
             ImGui::InputFloat("Far", &far);
             ImGui::DragFloat("Pitch", &pitch, 0.1f, -89.0f, +89.0f);
             ImGui::DragFloat("Yaw", &yaw, 0.1f, 0.0f, +360.0f);
-            ImGui::InputFloat("Sensitivity", &sensitivity);
-            ImGui::InputFloat("Speed", &speed);
+            ImGui::DragFloat("Sensitivity", &sensitivity, 0.1f, 0.1f, 1.0f);
+            ImGui::DragFloat("Speed", &speed, 1.0f, 1.0f, 10.0f);
             ImGui::End();
 
             camera.SetPosition(position);
             camera.SetFOV(fov);
+            camera.SetNear(near);
+            camera.SetFar(far);
+            camera.SetPitch(pitch);
+            camera.SetYaw(yaw);
+            camera.SetSensitivity(sensitivity);
+            camera.SetSpeed(speed);
         }
 
         ImGui::Render();
