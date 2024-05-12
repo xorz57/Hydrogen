@@ -4,5 +4,5 @@
 
 struct Vertex {
     glm::vec3 position;
-    glm::vec2 textureCoordinates;
+    glm::vec2 texture_coordinates;
 };

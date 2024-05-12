@@ -4,7 +4,7 @@ Plane::Plane() {
     mVAO.Bind();
     mVBO.Bind();
     VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
-    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, textureCoordinates));
+    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
