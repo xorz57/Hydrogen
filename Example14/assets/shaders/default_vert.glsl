@@ -1,7 +1,7 @@
 #version 330 core
 
 layout (location = 0) in vec3 position;
-layout (location = 1) in vec2 textureCoordinates;
+layout (location = 1) in vec2 texture_coordinates;
 
 out vec2 v_TextureCoordinates;
 
@@ -11,5 +11,5 @@ uniform mat4 u_Projection;
 
 void main() {
     gl_Position = u_Projection * u_View * u_Model * vec4(position, 1.0);
-    v_TextureCoordinates = textureCoordinates;
+    v_TextureCoordinates = texture_coordinates;
 }
