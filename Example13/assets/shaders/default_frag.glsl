@@ -1,10 +1,10 @@
 #version 330 core
 
-out vec4 f_Color;
-in vec2 v_TextureCoordinates;
+out vec4 f_color;
+in vec2 v_texture_coordinates;
 
 uniform sampler2D u_Texture;
 
 void main() {
-    f_Color = texture(u_Texture, v_TextureCoordinates);
+    f_color = texture(u_Texture, v_texture_coordinates);
 }

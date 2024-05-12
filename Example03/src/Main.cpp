@@ -110,12 +110,12 @@ void main() {
     const GLchar *fShaderSource = R"(
 #version 330 core
 
-out vec4 f_Color;
+out vec4 f_color;
 
 uniform vec4 u_Color;
 
 void main() {
-    f_Color = u_Color;
+    f_color = u_Color;
 }
         )";
 
