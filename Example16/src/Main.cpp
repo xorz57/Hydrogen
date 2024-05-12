@@ -75,6 +75,7 @@ int main() {
     ///////////////////////////////////////////////////////////////////////////
 
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_MULTISAMPLE);
 
     const std::vector<glm::vec3> positions = {
             glm::vec3(-4.0f, +4.0f, -4.0f),// 0
