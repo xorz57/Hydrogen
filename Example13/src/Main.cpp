@@ -148,7 +148,8 @@ int main() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    int texture_w, texture_h;
+    int texture_w;
+    int texture_h;
     stbi_set_flip_vertically_on_load(true);
     stbi_uc *pixels = stbi_load("assets/textures/texture.png", &texture_w, &texture_h, nullptr, STBI_rgb_alpha);
     if (pixels) {
@@ -193,7 +194,7 @@ int main() {
 
         ///////////////////////////////////////////////////////////////////////
 
-        glm::mat4 model = glm::mat4(1.0f);
+        auto model = glm::mat4(1.0f);
         model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
         model = glm::rotate(model, (float) glfwGetTime() * glm::radians(-55.0f), glm::vec3(1.0f, 1.0f, 0.0f));

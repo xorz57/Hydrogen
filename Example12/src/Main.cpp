@@ -160,7 +160,8 @@ int main() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    int texture_w, texture_h;
+    int texture_w;
+    int texture_h;
     stbi_set_flip_vertically_on_load(true);
     stbi_uc *pixels = stbi_load("assets/textures/texture.png", &texture_w, &texture_h, nullptr, STBI_rgb_alpha);
     if (pixels) {
