@@ -22,3 +22,23 @@ void Plane::Delete() const {
     mVBO.Delete();
     mEBO.Delete();
 }
+
+void Plane::Scale(const glm::vec3 &v) {
+    mModel = glm::scale(mModel, v);
+}
+
+void Plane::Translate(const glm::vec3 &v) {
+    mModel = glm::translate(mModel, v);
+}
+
+void Plane::Rotate(float angle, const glm::vec3 &v) {
+    mModel = glm::rotate(mModel, angle, v);
+}
+
+void Plane::Reset() {
+    mModel = glm::mat4(1.0f);
+}
+
+glm::mat4 Plane::GetModel() const {
+    return mModel;
+}

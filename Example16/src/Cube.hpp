@@ -21,6 +21,13 @@ public:
     void Draw() const;
     void Delete() const;
 
+    [[nodiscard]] glm::mat4 GetModel() const;
+
+    void Scale(const glm::vec3 &v);
+    void Translate(const glm::vec3 &v);
+    void Rotate(float angle, const glm::vec3 &v);
+    void Reset();
+
 private:
     struct Vertex {
         glm::vec3 position;
@@ -67,6 +74,8 @@ private:
             16, 17, 18, 18, 19, 16,// 4
             20, 21, 22, 22, 23, 20,// 5
     };
+
+    glm::mat4 mModel{1.0f};
 
     VAO mVAO;
     VBO<Vertex> mVBO{mVertices};

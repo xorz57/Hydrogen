@@ -22,3 +22,23 @@ void Cube::Delete() const {
     mVBO.Delete();
     mEBO.Delete();
 }
+
+void Cube::Scale(const glm::vec3 &v) {
+    mModel = glm::scale(mModel, v);
+}
+
+void Cube::Translate(const glm::vec3 &v) {
+    mModel = glm::translate(mModel, v);
+}
+
+void Cube::Rotate(float angle, const glm::vec3 &v) {
+    mModel = glm::rotate(mModel, angle, v);
+}
+
+void Cube::Reset() {
+    mModel = glm::mat4(1.0f);
+}
+
+glm::mat4 Cube::GetModel() const {
+    return mModel;
+}
