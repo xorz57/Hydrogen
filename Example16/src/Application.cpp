@@ -195,11 +195,13 @@ void Application::Run() {
 
         plane.Draw();
 
+        const float angle = static_cast<float>(glfwGetTime()) * glm::radians(-45.0f);
+
         for (const auto position: positions) {
             cube.Reset();
             cube.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
             cube.Translate(position);
-            cube.Rotate(static_cast<float>(glfwGetTime()) * glm::radians(-45.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            cube.Rotate(angle, glm::vec3(1.0f, 1.0f, 1.0f));
 
             shader.UploadFloat4x4("u_model", cube.GetModel());
 
