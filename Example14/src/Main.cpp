@@ -42,7 +42,7 @@ int main() {
 
     glfwMakeContextCurrent(window);
 
-    glfwSwapInterval(1);
+    glfwSwapInterval(0);
 
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
         glfwDestroyWindow(window);
@@ -86,11 +86,11 @@ int main() {
             glm::vec3(+2.0f, -2.0f, +0.0f),// 8
     };
 
+    Camera camera;
+
     Cube cube;
 
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
-
-    Camera camera;
 
     ///////////////////////////////////////////////////////////////////////////
 

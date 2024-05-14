@@ -46,7 +46,7 @@ void Application::Run() {
 
     glfwMakeContextCurrent(window);
 
-    glfwSwapInterval(1);
+    glfwSwapInterval(0);
 
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
         glfwDestroyWindow(window);
@@ -91,11 +91,6 @@ void Application::Run() {
             glm::vec3(+4.0f, +4.0f, +4.0f),// 8
     };
 
-    Plane plane;
-    Cube cube;
-
-    Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
-
     Camera camera;
     camera.SetPosition(glm::vec3(+0.0f, +16.0f, +16.0f));
     camera.SetFOV(45.0f);
@@ -105,6 +100,11 @@ void Application::Run() {
     camera.SetYaw(-90.0f);
     camera.SetSensitivity(0.1f);
     camera.SetSpeed(4.0f);
+
+    Plane plane;
+    Cube cube;
+
+    Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
     ///////////////////////////////////////////////////////////////////////////
 
