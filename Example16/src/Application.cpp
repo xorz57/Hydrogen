@@ -197,7 +197,7 @@ void Application::Run() {
 
         const float angle = static_cast<float>(glfwGetTime()) * glm::radians(-45.0f);
 
-        for (const auto &position: positions) {
+        for (const glm::vec3 &position: positions) {
             cube.Reset();
             cube.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
             cube.Translate(position);
