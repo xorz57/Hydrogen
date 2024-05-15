@@ -79,18 +79,6 @@ void Application::Run() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE);
 
-    const std::vector<glm::vec3> positions = {
-            glm::vec3(-4.0f, +4.0f, -4.0f),// 0
-            glm::vec3(-4.0f, +4.0f, +0.0f),// 1
-            glm::vec3(-4.0f, +4.0f, +4.0f),// 2
-            glm::vec3(+0.0f, +4.0f, -4.0f),// 3
-            glm::vec3(+0.0f, +4.0f, +0.0f),// 4
-            glm::vec3(+0.0f, +4.0f, +4.0f),// 5
-            glm::vec3(+4.0f, +4.0f, -4.0f),// 6
-            glm::vec3(+4.0f, +4.0f, +0.0f),// 7
-            glm::vec3(+4.0f, +4.0f, +4.0f),// 8
-    };
-
     Camera camera;
     camera.SetPosition(glm::vec3(+0.0f, +16.0f, +16.0f));
     camera.SetFOV(45.0f);
@@ -103,7 +91,6 @@ void Application::Run() {
 
     Plane plane;
     Cube cube;
-
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
     ///////////////////////////////////////////////////////////////////////////
@@ -194,6 +181,18 @@ void Application::Run() {
         shader.UploadFloat4x4("u_model", plane.GetModel());
 
         plane.Draw();
+
+        const std::vector<glm::vec3> positions = {
+                glm::vec3(-4.0f, +4.0f, -4.0f),// 0
+                glm::vec3(-4.0f, +4.0f, +0.0f),// 1
+                glm::vec3(-4.0f, +4.0f, +4.0f),// 2
+                glm::vec3(+0.0f, +4.0f, -4.0f),// 3
+                glm::vec3(+0.0f, +4.0f, +0.0f),// 4
+                glm::vec3(+0.0f, +4.0f, +4.0f),// 5
+                glm::vec3(+4.0f, +4.0f, -4.0f),// 6
+                glm::vec3(+4.0f, +4.0f, +0.0f),// 7
+                glm::vec3(+4.0f, +4.0f, +4.0f),// 8
+        };
 
         const float angle = static_cast<float>(glfwGetTime()) * glm::radians(-45.0f);
 
