@@ -90,9 +90,7 @@ void Application::Run() {
     camera.SetSpeed(4.0f);
 
     Plane plane;
-
     Cube cube;
-
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
     ///////////////////////////////////////////////////////////////////////////
