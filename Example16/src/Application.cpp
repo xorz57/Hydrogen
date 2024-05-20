@@ -90,7 +90,9 @@ void Application::Run() {
     camera.SetSpeed(4.0f);
 
     Plane plane;
+
     Cube cube;
+
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
     ///////////////////////////////////////////////////////////////////////////
@@ -117,37 +119,6 @@ void Application::Run() {
             ImGui::End();
         }
 
-        {
-            auto position = camera.GetPosition();
-            float fov = camera.GetFOV();
-            float near = camera.GetNear();
-            float far = camera.GetFar();
-            float pitch = camera.GetPitch();
-            float yaw = camera.GetYaw();
-            float sensitivity = camera.GetSensitivity();
-            float speed = camera.GetSpeed();
-
-            ImGui::Begin("Camera");
-            ImGui::InputFloat3("Position", glm::value_ptr(position));
-            ImGui::DragFloat("FOV", &fov, 1.0f, 45.0f, 120.0f);
-            ImGui::InputFloat("Near", &near);
-            ImGui::InputFloat("Far", &far);
-            ImGui::DragFloat("Pitch", &pitch, 0.1f, -89.0f, +89.0f);
-            ImGui::DragFloat("Yaw", &yaw, 0.1f, 0.0f, +360.0f);
-            ImGui::DragFloat("Sensitivity", &sensitivity, 0.1f, 0.1f, 1.0f);
-            ImGui::DragFloat("Speed", &speed, 1.0f, 1.0f, 10.0f);
-            ImGui::End();
-
-            camera.SetPosition(position);
-            camera.SetFOV(fov);
-            camera.SetNear(near);
-            camera.SetFar(far);
-            camera.SetPitch(pitch);
-            camera.SetYaw(yaw);
-            camera.SetSensitivity(sensitivity);
-            camera.SetSpeed(speed);
-        }
-
         ImGui::Render();
 
         int window_w;
@@ -162,9 +133,7 @@ void Application::Run() {
 
         ///////////////////////////////////////////////////////////////////////
 
-        if (!ImGui::IsAnyItemActive()) {
-            camera.ProcessInput(static_cast<float>(window_w), static_cast<float>(window_h), dt);
-        }
+        camera.ProcessInput(static_cast<float>(window_w), static_cast<float>(window_h), dt);
 
         camera.Update();
 
