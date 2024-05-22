@@ -137,15 +137,15 @@ void Application::Run() {
 
         shader.Use();
 
-        shader.UploadFloat4x4("u_view", camera.GetView());
-        shader.UploadFloat4x4("u_projection", camera.GetProjection(window_a));
+        shader.SetFloat4x4("u_view", camera.GetView());
+        shader.SetFloat4x4("u_projection", camera.GetProjection(window_a));
 
         plane.Reset();
         plane.Scale(glm::vec3(8.0f, 8.0f, 8.0f));
         plane.Translate(glm::vec3(0.0f, 0.0f, 0.0f));
         plane.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
-        shader.UploadFloat4x4("u_model", plane.GetModel());
+        shader.SetFloat4x4("u_model", plane.GetModel());
 
         plane.Draw();
 
@@ -169,7 +169,7 @@ void Application::Run() {
             cube.Translate(position);
             cube.Rotate(angle, glm::vec3(1.0f, 1.0f, 1.0f));
 
-            shader.UploadFloat4x4("u_model", cube.GetModel());
+            shader.SetFloat4x4("u_model", cube.GetModel());
 
             cube.Draw();
         }

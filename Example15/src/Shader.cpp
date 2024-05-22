@@ -89,18 +89,18 @@ void Shader::Delete() const {
     glDeleteProgram(mProgram);
 }
 
-void Shader::UploadFloat3(const char *name, const glm::vec3 &v) const {
+void Shader::SetFloat3(const char *name, const glm::vec3 &v) const {
     glUniform3fv(glGetUniformLocation(mProgram, name), 1, glm::value_ptr(v));
 }
 
-void Shader::UploadFloat4(const char *name, const glm::vec4 &v) const {
+void Shader::SetFloat4(const char *name, const glm::vec4 &v) const {
     glUniform4fv(glGetUniformLocation(mProgram, name), 1, glm::value_ptr(v));
 }
 
-void Shader::UploadFloat3x3(const char *name, const glm::mat3 &m) const {
+void Shader::SetFloat3x3(const char *name, const glm::mat3 &m) const {
     glUniformMatrix3fv(glGetUniformLocation(mProgram, name), 1, GL_FALSE, glm::value_ptr(m));
 }
 
-void Shader::UploadFloat4x4(const char *name, const glm::mat4 &m) const {
+void Shader::SetFloat4x4(const char *name, const glm::mat4 &m) const {
     glUniformMatrix4fv(glGetUniformLocation(mProgram, name), 1, GL_FALSE, glm::value_ptr(m));
 }
