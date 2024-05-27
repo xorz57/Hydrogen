@@ -18,6 +18,11 @@ void VBO<T>::Delete() const {
 }
 
 template<typename T>
+std::shared_ptr<VBO<T>> VBO<T>::Create(const std::vector<T> &vertices) {
+    return std::make_shared<VBO<T>>(vertices);
+}
+
+template<typename T>
 void VBO<T>::Unbind() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

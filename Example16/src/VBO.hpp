@@ -5,6 +5,7 @@
 #include <glad/glad.h>
 
 #include <vector>
+#include <memory>
 
 template<typename T>
 class VBO {
@@ -14,6 +15,7 @@ public:
     void Bind() const;
     void Delete() const;
 
+    static std::shared_ptr<VBO<T>> Create(const std::vector<T> &vertices);
     static void Unbind();
 
 private:

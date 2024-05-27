@@ -18,6 +18,11 @@ void EBO<T>::Delete() const {
 }
 
 template<typename T>
+std::shared_ptr<EBO<T>> EBO<T>::Create(const std::vector<T> &elements) {
+    return std::make_shared<EBO<T>>(elements);
+}
+
+template<typename T>
 void EBO<T>::Unbind() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }

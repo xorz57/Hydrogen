@@ -5,6 +5,10 @@ VAO::VAO() {
     glBindVertexArray(mID);
 }
 
+std::shared_ptr<VAO> VAO::Create() {
+    return std::make_shared<VAO>();
+}
+
 void VAO::Bind() const {
     glBindVertexArray(mID);
 }

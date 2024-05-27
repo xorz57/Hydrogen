@@ -1,8 +1,12 @@
 #include "Plane.hpp"
 
 Plane::Plane() {
-    mVAO.Bind();
-    mVBO.Bind();
+    mVAO = VAO::Create();
+    mVBO = VBO<Vertex>::Create(mVertices);
+    mEBO = EBO<GLuint>::Create(mElements);
+
+    mVAO->Bind();
+    mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
     VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
     VBO<GLuint>::Unbind();
@@ -10,7 +14,7 @@ Plane::Plane() {
 }
 
 void Plane::Draw() const {
-    mVAO.Bind();
+    mVAO->Bind();
     mTexture.Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
     Texture::Unbind();
@@ -18,9 +22,9 @@ void Plane::Draw() const {
 }
 
 void Plane::Delete() const {
-    mVAO.Delete();
-    mVBO.Delete();
-    mEBO.Delete();
+    mVAO->Delete();
+    mVBO->Delete();
+    mEBO->Delete();
 }
 
 void Plane::Scale(const glm::vec3 &v) {
