@@ -79,6 +79,8 @@ void Application::Run() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE);
 
+    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+
     Camera camera;
     camera.SetPosition(glm::vec3(+0.0f, +16.0f, +16.0f));
     camera.SetFOV(45.0f);
