@@ -1,6 +1,31 @@
 #include "Plane.hpp"
 
-Plane::Plane() {
+Plane::Plane(std::uint32_t grid_x, std::uint32_t grid_z) {
+    const float step_x = 1.0f / static_cast<float>(grid_x);
+    const float step_z = 1.0f / static_cast<float>(grid_z);
+
+    for (std::uint32_t i = 0; i <= grid_z; ++i) {
+        for (std::uint32_t j = 0; j <= grid_x; ++j) {
+            const float x = static_cast<float>(j) * step_x - 0.5f;
+            const float z = static_cast<float>(i) * step_z - 0.5f;
+            const float u = static_cast<float>(j) * step_x;
+            const float v = static_cast<float>(i) * step_z;
+            mVertices.emplace_back(glm::vec3(x, 0.0f, z), glm::vec2(u, v));
+        }
+    }
+
+    for (std::uint32_t i = 0; i < grid_z; ++i) {
+        for (std::uint32_t j = 0; j < grid_x; ++j) {
+            const GLuint start = i * (grid_x + 1) + j;
+            mElements.push_back(start);
+            mElements.push_back(start + 1);
+            mElements.push_back(start + grid_x + 1);
+            mElements.push_back(start + grid_x + 1);
+            mElements.push_back(start + 1);
+            mElements.push_back(start + grid_x + 2);
+        }
+    }
+
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
     mEBO = EBO<GLuint>::Create(mElements);
