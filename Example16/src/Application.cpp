@@ -119,7 +119,6 @@ void Application::Run() {
             ImGui::Begin("Statistics");
             ImGui::Text("frame: %" PRIu64, frame);
             ImGui::Text("dt: %.5lf sec", dt);
-            ImGui::Checkbox("Wireframe", &mWireframe);
             ImGui::End();
         }
 
