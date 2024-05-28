@@ -12,6 +12,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <memory>
 #include <vector>
 
 class Cube {
@@ -77,8 +78,8 @@ private:
 
     glm::mat4 mModel{1.0f};
 
-    VAO mVAO;
-    VBO<Vertex> mVBO{mVertices};
-    EBO<GLuint> mEBO{mElements};
+    std::shared_ptr<VAO> mVAO;
+    std::shared_ptr<VBO<Vertex>> mVBO;
+    std::shared_ptr<EBO<GLuint>> mEBO;
     Texture mTexture{"assets/textures/texture.png"};
 };

@@ -1,8 +1,12 @@
 #include "Quad.hpp"
 
 Quad::Quad() {
-    mVAO.Bind();
-    mVBO.Bind();
+    mVAO = std::make_shared<VAO>();
+    mVBO = std::make_shared<VBO<Vertex>>(mVertices);
+    mEBO = std::make_shared<EBO<GLuint>>(mElements);
+
+    mVAO->Bind();
+    mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
     VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
     VBO<GLuint>::Unbind();
@@ -10,7 +14,7 @@ Quad::Quad() {
 }
 
 void Quad::Draw() const {
-    mVAO.Bind();
+    mVAO->Bind();
     mTexture.Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
     Texture::Unbind();
@@ -18,9 +22,9 @@ void Quad::Draw() const {
 }
 
 void Quad::Delete() const {
-    mVAO.Delete();
-    mVBO.Delete();
-    mEBO.Delete();
+    mVAO->Delete();
+    mVBO->Delete();
+    mEBO->Delete();
 }
 
 void Quad::Scale(const glm::vec3 &v) {
