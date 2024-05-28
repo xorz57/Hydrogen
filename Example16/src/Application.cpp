@@ -91,7 +91,7 @@ void Application::Run() {
     camera.SetSensitivity(0.1f);
     camera.SetSpeed(4.0f);
 
-    Plane plane(10, 10);
+    Plane plane(8, 8);
     Cube cube;
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
@@ -143,15 +143,15 @@ void Application::Run() {
         shader.SetFloat4x4("u_projection", camera.GetProjection(window_a));
 
         plane.Reset();
-        plane.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
         plane.Translate(glm::vec3(0.0f, 0.0f, 0.0f));
         plane.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        plane.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
 
         shader.SetFloat4x4("u_model", plane.GetModel());
 
         plane.Draw();
 
-        const std::vector<glm::vec3> positions = {
+        const std::vector<glm::vec3> translations = {
                 glm::vec3(-4.0f, +2.0f, -4.0f),// 0
                 glm::vec3(-4.0f, +2.0f, +0.0f),// 1
                 glm::vec3(-4.0f, +2.0f, +4.0f),// 2
@@ -165,11 +165,11 @@ void Application::Run() {
 
         const float angle = static_cast<float>(glfwGetTime()) * glm::radians(-45.0f);
 
-        for (const glm::vec3 &position: positions) {
+        for (const glm::vec3 &translation: translations) {
             cube.Reset();
-            cube.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
-            cube.Translate(position);
+            cube.Translate(translation);
             cube.Rotate(angle, glm::vec3(1.0f, 1.0f, 1.0f));
+            cube.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 
             shader.SetFloat4x4("u_model", cube.GetModel());
 
