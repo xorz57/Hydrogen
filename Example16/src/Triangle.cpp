@@ -4,7 +4,7 @@ Triangle::Triangle() {
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
     mEBO = EBO<GLuint>::Create(mElements);
-    mTexture = Texture::Create("assets/textures/texture_blue.png");
+    mTexture = Texture::Create("assets/textures/triangle.png");
 
     mVAO->Bind();
     mVBO->Bind();
