@@ -4,7 +4,7 @@ Quad::Quad() {
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
     mEBO = EBO<GLuint>::Create(mElements);
-    mTexture = Texture::Create("assets/textures/texture.png");
+    mTexture = Texture::Create("assets/textures/texture_green.png");
 
     mVAO->Bind();
     mVBO->Bind();

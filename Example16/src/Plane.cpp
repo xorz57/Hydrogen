@@ -31,7 +31,7 @@ Plane::Plane(std::uint32_t grid_x, std::uint32_t grid_z) {
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
     mEBO = EBO<GLuint>::Create(mElements);
-    mTexture = Texture::Create("assets/textures/texture.png");
+    mTexture = Texture::Create("assets/textures/texture_gray.png");
 
     mVAO->Bind();
     mVBO->Bind();
