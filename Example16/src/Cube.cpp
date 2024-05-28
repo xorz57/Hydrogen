@@ -1,9 +1,10 @@
 #include "Cube.hpp"
 
 Cube::Cube() {
-    mVAO = std::make_shared<VAO>();
-    mVBO = std::make_shared<VBO<Vertex>>(mVertices);
-    mEBO = std::make_shared<EBO<GLuint>>(mElements);
+    mVAO = VAO::Create();
+    mVBO = VBO<Vertex>::Create(mVertices);
+    mEBO = EBO<GLuint>::Create(mElements);
+    mTexture = Texture::Create("assets/textures/texture.png");
 
     mVAO->Bind();
     mVBO->Bind();
@@ -15,7 +16,7 @@ Cube::Cube() {
 
 void Cube::Draw() const {
     mVAO->Bind();
-    mTexture.Bind();
+    mTexture->Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
     Texture::Unbind();
     VAO::Unbind();

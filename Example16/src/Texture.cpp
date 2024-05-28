@@ -32,6 +32,10 @@ void Texture::Delete() const {
     glDeleteTextures(1, &mID);
 }
 
+std::shared_ptr<Texture> Texture::Create(const char *texturePath) {
+    return std::make_shared<Texture>(texturePath);
+}
+
 void Texture::Unbind() {
     glBindTexture(GL_TEXTURE_2D, 0);
 }

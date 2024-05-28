@@ -31,6 +31,7 @@ Plane::Plane(std::uint32_t grid_x, std::uint32_t grid_z) {
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
     mEBO = EBO<GLuint>::Create(mElements);
+    mTexture = Texture::Create("assets/textures/texture.png");
 
     mVAO->Bind();
     mVBO->Bind();
@@ -42,7 +43,7 @@ Plane::Plane(std::uint32_t grid_x, std::uint32_t grid_z) {
 
 void Plane::Draw() const {
     mVAO->Bind();
-    mTexture.Bind();
+    mTexture->Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
     Texture::Unbind();
     VAO::Unbind();

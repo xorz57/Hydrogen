@@ -81,5 +81,5 @@ private:
     std::shared_ptr<VAO> mVAO;
     std::shared_ptr<VBO<Vertex>> mVBO;
     std::shared_ptr<EBO<GLuint>> mEBO;
-    Texture mTexture{"assets/textures/texture.png"};
+    std::shared_ptr<Texture> mTexture;
 };
