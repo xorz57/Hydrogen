@@ -11,7 +11,7 @@ Plane::Plane(std::uint32_t grid_x, std::uint32_t grid_z) {
             const float z = static_cast<float>(i) * step_z - 0.5f;
             const float u = static_cast<float>(j) * step_x;
             const float v = static_cast<float>(i) * step_z;
-            mVertices.emplace_back(glm::vec3(x, 0.0f, z), glm::vec2(u, v));
+            mVertices.push_back(Vertex(glm::vec3(x, 0.0f, z), glm::vec2(u, v)));
         }
     }
 
