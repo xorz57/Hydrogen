@@ -123,6 +123,12 @@ void Application::Run() {
             ImGui::End();
         }
 
+        {
+            ImGui::Begin("Settings");
+            ImGui::Checkbox("Wireframe", &mWireframe);
+            ImGui::End();
+        }
+
         ImGui::Render();
 
         int window_w;
