@@ -3,6 +3,8 @@
 #include "Camera.hpp"
 #include "Cube.hpp"
 #include "Plane.hpp"
+#include "Quad.hpp"
+#include "Triangle.hpp"
 #include "Shader.hpp"
 
 #define GLFW_INCLUDE_NONE
@@ -93,6 +95,8 @@ void Application::Run() {
 
     Plane plane(10, 10);
     Cube cube;
+    Quad quad;
+    Triangle triangle;
 
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
@@ -151,6 +155,24 @@ void Application::Run() {
         shader.SetFloat4x4("u_model", plane.GetModel());
 
         plane.Draw();
+
+        quad.Reset();
+        quad.Translate(glm::vec3(32.0f, 0.0f, 0.0f));
+        quad.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        quad.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
+
+        shader.SetFloat4x4("u_model", quad.GetModel());
+
+        quad.Draw();
+
+        triangle.Reset();
+        triangle.Translate(glm::vec3(-32.0f, 0.0f, 0.0f));
+        triangle.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        triangle.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
+
+        shader.SetFloat4x4("u_model", triangle.GetModel());
+
+        triangle.Draw();
 
         const std::vector<glm::vec3> translations = {
                 glm::vec3(-4.0f, +2.0f, -4.0f),// 0
