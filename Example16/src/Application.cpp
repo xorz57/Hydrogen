@@ -4,8 +4,8 @@
 #include "Cube.hpp"
 #include "Plane.hpp"
 #include "Quad.hpp"
-#include "Triangle.hpp"
 #include "Shader.hpp"
+#include "Triangle.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -81,8 +81,6 @@ void Application::Run() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE);
 
-    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
     Camera camera;
     camera.SetPosition(glm::vec3(+0.0f, +16.0f, +16.0f));
     camera.SetFOV(45.0f);
@@ -121,6 +119,7 @@ void Application::Run() {
             ImGui::Begin("Statistics");
             ImGui::Text("frame: %" PRIu64, frame);
             ImGui::Text("dt: %.5lf sec", dt);
+            ImGui::Checkbox("Wireframe", &mWireframe);
             ImGui::End();
         }
 
@@ -137,6 +136,12 @@ void Application::Run() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         ///////////////////////////////////////////////////////////////////////
+
+        if (mWireframe) {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        } else {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
 
         camera.ProcessInput(static_cast<float>(window_w), static_cast<float>(window_h), dt);
 
