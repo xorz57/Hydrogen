@@ -16,13 +16,13 @@ Plane::Plane(std::uint32_t grid_x, std::uint32_t grid_z) {
 
     for (std::uint32_t i = 0; i < grid_z; ++i) {
         for (std::uint32_t j = 0; j < grid_x; ++j) {
-            const GLuint start = i * (grid_x + 1) + j;
-            mElements.push_back(start);
-            mElements.push_back(start + 1);
-            mElements.push_back(start + grid_x + 1);
-            mElements.push_back(start + grid_x + 1);
-            mElements.push_back(start + 1);
-            mElements.push_back(start + grid_x + 2);
+            const GLuint base = i * (grid_x + 1) + j;
+            mElements.push_back(base);
+            mElements.push_back(base + 1);
+            mElements.push_back(base + grid_x + 1);
+            mElements.push_back(base + grid_x + 1);
+            mElements.push_back(base + 1);
+            mElements.push_back(base + grid_x + 2);
         }
     }
 
