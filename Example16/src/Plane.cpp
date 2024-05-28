@@ -4,6 +4,7 @@ Plane::Plane(std::uint32_t grid_x, std::uint32_t grid_z) {
     const float step_x = 1.0f / static_cast<float>(grid_x);
     const float step_z = 1.0f / static_cast<float>(grid_z);
 
+    mVertices.reserve((grid_x + 1) * (grid_z + 1));
     for (std::uint32_t i = 0; i <= grid_z; ++i) {
         for (std::uint32_t j = 0; j <= grid_x; ++j) {
             const float x = static_cast<float>(j) * step_x - 0.5f;
@@ -14,6 +15,7 @@ Plane::Plane(std::uint32_t grid_x, std::uint32_t grid_z) {
         }
     }
 
+    mElements.reserve(grid_x * grid_z * 6);
     for (std::uint32_t i = 0; i < grid_z; ++i) {
         for (std::uint32_t j = 0; j < grid_x; ++j) {
             const GLuint base = i * (grid_x + 1) + j;
