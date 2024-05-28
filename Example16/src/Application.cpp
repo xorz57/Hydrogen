@@ -93,6 +93,7 @@ void Application::Run() {
 
     Plane plane(8, 8);
     Cube cube;
+
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
     ///////////////////////////////////////////////////////////////////////////
@@ -194,6 +195,7 @@ void Application::Run() {
 
     plane.Delete();
     cube.Delete();
+
     shader.Delete();
 
     ///////////////////////////////////////////////////////////////////////////
