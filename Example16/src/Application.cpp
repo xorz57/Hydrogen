@@ -227,6 +227,8 @@ void Application::Run() {
 
     plane.Delete();
     cube.Delete();
+    quad.Delete();
+    triangle.Delete();
 
     shader.Delete();
 
