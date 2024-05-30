@@ -18,14 +18,14 @@
 class Circle {
 public:
     Circle();
-    explicit Circle(std::uint32_t count);
+    explicit Circle(std::uint32_t sectors);
 
     void Draw() const;
     void Delete() const;
 
     [[nodiscard]] glm::mat4 GetModel() const;
 
-    void Build(std::uint32_t count);
+    void Build(std::uint32_t sectors);
     void Scale(const glm::vec3 &v);
     void Translate(const glm::vec3 &v);
     void Rotate(float angle, const glm::vec3 &v);
