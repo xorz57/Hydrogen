@@ -1,12 +1,13 @@
 #include "Application.hpp"
 
 #include "Camera.hpp"
-#include "Cube.hpp"
-#include "Plane.hpp"
-#include "Quad.hpp"
 #include "Shader.hpp"
-#include "Triangle.hpp"
-#include "Circle.hpp"
+
+#include "Shapes/Circle.hpp"
+#include "Shapes/Cube.hpp"
+#include "Shapes/Plane.hpp"
+#include "Shapes/Quad.hpp"
+#include "Shapes/Triangle.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>

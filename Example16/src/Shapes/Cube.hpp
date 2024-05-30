@@ -1,9 +1,9 @@
 #pragma once
 
-#include "EBO.hpp"
-#include "Texture.hpp"
-#include "VAO.hpp"
-#include "VBO.hpp"
+#include "../EBO.hpp"
+#include "../Texture.hpp"
+#include "../VAO.hpp"
+#include "../VBO.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>

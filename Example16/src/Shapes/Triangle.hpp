@@ -1,9 +1,9 @@
 #pragma once
 
-#include "EBO.hpp"
-#include "Texture.hpp"
-#include "VAO.hpp"
-#include "VBO.hpp"
+#include "../EBO.hpp"
+#include "../Texture.hpp"
+#include "../VAO.hpp"
+#include "../VBO.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -15,9 +15,9 @@
 #include <memory>
 #include <vector>
 
-class Plane {
+class Triangle {
 public:
-    Plane(std::uint32_t grid_x, std::uint32_t grid_z);
+    Triangle();
 
     void Draw() const;
     void Delete() const;
@@ -35,9 +35,17 @@ private:
         glm::vec2 texture_coordinates;
     };
 
-    std::vector<Vertex> mVertices;
+    const std::vector<Vertex> mVertices{
+            {{-0.5f, -0.5f, +0.0f}, {+0.0f, +0.0f}},// 0
+            {{+0.5f, -0.5f, +0.0f}, {+1.0f, +0.0f}},// 1
+            {{+0.0f, +0.5f, +0.0f}, {+0.5f, +1.0f}},// 2
+    };
 
-    std::vector<GLuint> mElements;
+    const std::vector<GLuint> mElements{
+            0,// 0
+            1,// 1
+            2,// 2
+    };
 
     glm::mat4 mModel{1.0f};
 

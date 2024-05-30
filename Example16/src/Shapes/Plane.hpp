@@ -1,9 +1,9 @@
 #pragma once
 
-#include "EBO.hpp"
-#include "Texture.hpp"
-#include "VAO.hpp"
-#include "VBO.hpp"
+#include "../EBO.hpp"
+#include "../Texture.hpp"
+#include "../VAO.hpp"
+#include "../VBO.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -15,9 +15,9 @@
 #include <memory>
 #include <vector>
 
-class Quad {
+class Plane {
 public:
-    Quad();
+    Plane(std::uint32_t grid_x, std::uint32_t grid_z);
 
     void Draw() const;
     void Delete() const;
@@ -35,21 +35,9 @@ private:
         glm::vec2 texture_coordinates;
     };
 
-    const std::vector<Vertex> mVertices{
-            {{-0.5f, -0.5f, +0.0f}, {+0.0f, +0.0f}},// 0
-            {{+0.5f, -0.5f, +0.0f}, {+1.0f, +0.0f}},// 1
-            {{-0.5f, +0.5f, +0.0f}, {+0.0f, +1.0f}},// 2
-            {{+0.5f, +0.5f, +0.0f}, {+1.0f, +1.0f}},// 3
-    };
+    std::vector<Vertex> mVertices;
 
-    const std::vector<GLuint> mElements{
-            0,// 0
-            1,// 1
-            2,// 2
-            2,// 3
-            1,// 4
-            3,// 5
-    };
+    std::vector<GLuint> mElements;
 
     glm::mat4 mModel{1.0f};
 

@@ -1,13 +1,13 @@
 add_executable(Example16 src/Main.cpp
                          src/Application.cpp
                          src/Camera.cpp
-                         src/Cube.cpp
-                         src/Plane.cpp
-                         src/Quad.cpp
+                         src/Shapes/Circle.cpp
+                         src/Shapes/Cube.cpp
+                         src/Shapes/Plane.cpp
+                         src/Shapes/Quad.cpp
+                         src/Shapes/Triangle.cpp
                          src/Shader.cpp
                          src/Texture.cpp
-                         src/Triangle.cpp
-                         src/Circle.cpp
                          src/VAO.cpp)
 
 target_include_directories(Example16 PRIVATE ${Stb_INCLUDE_DIR})
