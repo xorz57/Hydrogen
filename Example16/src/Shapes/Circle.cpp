@@ -11,11 +11,11 @@ Circle::Circle(std::uint32_t count) {
     mElements.push_back(0);
 
     for (std::uint32_t i = 0; i <= count; ++i) {
-        float angle = static_cast<float>(i) / static_cast<float>(count) * 2.0f * glm::pi<float>();
-        float x = 0.5f * glm::cos(angle);
-        float y = 0.5f * glm::sin(angle);
-        float u = 0.5f + 0.5f * glm::cos(angle);
-        float v = 0.5f + 0.5f * glm::sin(angle);
+        const float angle = static_cast<float>(i) / static_cast<float>(count) * 2.0f * glm::pi<float>();
+        const float x = 0.5f * glm::cos(angle);
+        const float y = 0.5f * glm::sin(angle);
+        const float u = 0.5f + 0.5f * glm::cos(angle);
+        const float v = 0.5f + 0.5f * glm::sin(angle);
         mVertices.push_back({{x, y, 0.0f}, {u, v}});
         mElements.push_back(i + 1);
     }
