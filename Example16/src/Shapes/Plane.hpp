@@ -18,20 +18,21 @@
 class Plane {
 public:
     Plane();
-    Plane(std::uint32_t count_x, std::uint32_t count_z);
+    Plane(std::uint32_t segmentsX, std::uint32_t segmentsZ);
 
     void Draw() const;
     void Delete() const;
 
     [[nodiscard]] glm::mat4 GetModel() const;
 
-    void Build(std::uint32_t count_x, std::uint32_t count_z);
     void Scale(const glm::vec3 &v);
     void Translate(const glm::vec3 &v);
     void Rotate(float angle, const glm::vec3 &v);
     void Reset();
 
 private:
+    void Build(std::uint32_t segmentsX, std::uint32_t segmentsZ);
+
     struct Vertex {
         glm::vec3 position;
         glm::vec2 texture_coordinates;
