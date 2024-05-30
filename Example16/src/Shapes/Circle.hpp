@@ -25,13 +25,14 @@ public:
 
     [[nodiscard]] glm::mat4 GetModel() const;
 
-    void Build(std::uint32_t sectors);
     void Scale(const glm::vec3 &v);
     void Translate(const glm::vec3 &v);
     void Rotate(float angle, const glm::vec3 &v);
     void Reset();
 
 private:
+    void Build(std::uint32_t sectors);
+
     struct Vertex {
         glm::vec3 position;
         glm::vec2 texture_coordinates;
