@@ -1,9 +1,38 @@
 #include "Circle.hpp"
 
-Circle::Circle(std::uint32_t count) {
-    mVertices.clear();
-    mElements.clear();
+Circle::Circle() {
+    Build(32);
 
+    mVAO = VAO::Create();
+    mVBO = VBO<Vertex>::Create(mVertices);
+    mEBO = EBO<GLuint>::Create(mElements);
+    mTexture = Texture::Create("assets/textures/purple.png");
+
+    mVAO->Bind();
+    mVBO->Bind();
+    VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
+    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
+    VBO<GLuint>::Unbind();
+    VAO::Unbind();
+}
+
+Circle::Circle(std::uint32_t count) {
+    Build(count);
+
+    mVAO = VAO::Create();
+    mVBO = VBO<Vertex>::Create(mVertices);
+    mEBO = EBO<GLuint>::Create(mElements);
+    mTexture = Texture::Create("assets/textures/purple.png");
+
+    mVAO->Bind();
+    mVBO->Bind();
+    VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
+    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
+    VBO<GLuint>::Unbind();
+    VAO::Unbind();
+}
+
+void Circle::Build(std::uint32_t count) {
     mVertices.reserve(count + 2);
     mElements.reserve(count + 2);
 
@@ -19,18 +48,6 @@ Circle::Circle(std::uint32_t count) {
         mVertices.push_back({{x, y, 0.0f}, {u, v}});
         mElements.push_back(i + 1);
     }
-
-    mVAO = VAO::Create();
-    mVBO = VBO<Vertex>::Create(mVertices);
-    mEBO = EBO<GLuint>::Create(mElements);
-    mTexture = Texture::Create("assets/textures/purple.png");
-
-    mVAO->Bind();
-    mVBO->Bind();
-    VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
-    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
-    VBO<GLuint>::Unbind();
-    VAO::Unbind();
 }
 
 void Circle::Draw() const {

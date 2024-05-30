@@ -17,13 +17,15 @@
 
 class Plane {
 public:
-    Plane(std::uint32_t grid_x, std::uint32_t grid_z);
+    Plane();
+    Plane(std::uint32_t count_x, std::uint32_t count_z);
 
     void Draw() const;
     void Delete() const;
 
     [[nodiscard]] glm::mat4 GetModel() const;
 
+    void Build(std::uint32_t count_x, std::uint32_t count_z);
     void Scale(const glm::vec3 &v);
     void Translate(const glm::vec3 &v);
     void Rotate(float angle, const glm::vec3 &v);

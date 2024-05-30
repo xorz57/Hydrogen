@@ -93,7 +93,7 @@ void Application::Run() {
     camera.SetSensitivity(0.1f);
     camera.SetSpeed(4.0f);
 
-    Plane plane(10, 10);
+    Plane plane;
     Cube cube;
     Quad quad;
     Triangle triangle;
