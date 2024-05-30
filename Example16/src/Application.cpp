@@ -164,36 +164,28 @@ void Application::Run() {
         plane.Translate(glm::vec3(0.0f, 0.0f, 0.0f));
         plane.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
         plane.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-
         shader.SetFloat4x4("u_model", plane.GetModel());
-
         plane.Draw();
 
         quad.Reset();
         quad.Translate(glm::vec3(32.0f, 0.0f, 0.0f));
         quad.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
         quad.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-
         shader.SetFloat4x4("u_model", quad.GetModel());
-
         quad.Draw();
 
         triangle.Reset();
         triangle.Translate(glm::vec3(-32.0f, 0.0f, 0.0f));
         triangle.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
         triangle.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-
         shader.SetFloat4x4("u_model", triangle.GetModel());
-
         triangle.Draw();
 
         circle.Reset();
         circle.Translate(glm::vec3(0.0f, 0.0f, -32.0f));
         circle.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
         circle.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-
         shader.SetFloat4x4("u_model", circle.GetModel());
-
         circle.Draw();
 
         const std::vector<glm::vec3> translations = {
@@ -215,9 +207,7 @@ void Application::Run() {
             cube.Translate(translation);
             cube.Rotate(angle, glm::vec3(1.0f, 1.0f, 1.0f));
             cube.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
-
             shader.SetFloat4x4("u_model", cube.GetModel());
-
             cube.Draw();
         }
 
