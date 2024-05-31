@@ -18,7 +18,7 @@
 class Circle {
 public:
     Circle();
-    explicit Circle(std::uint32_t segments);
+    explicit Circle(std::uint32_t sectors);
 
     void Draw() const;
     void Delete() const;
@@ -31,7 +31,7 @@ public:
     void Reset();
 
 private:
-    void Build(std::uint32_t segments);
+    void Build(std::uint32_t sectors);
 
     struct Vertex {
         glm::vec3 position;
