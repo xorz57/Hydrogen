@@ -1,6 +1,7 @@
 #include "Application.hpp"
 
 #include "Camera.hpp"
+#include "Logging.hpp"
 #include "Shader.hpp"
 
 #include "Shapes/Circle.hpp"
@@ -23,7 +24,6 @@
 
 #include <cinttypes>
 #include <cstdlib>
-#include <iostream>
 #include <vector>
 
 static void glfw_error_callback(int error, const char *description) {
@@ -31,6 +31,8 @@ static void glfw_error_callback(int error, const char *description) {
 }
 
 void Application::Run() {
+    Logging::Init();
+
     glfwSetErrorCallback(glfw_error_callback);
 
     if (!glfwInit()) {
@@ -60,10 +62,10 @@ void Application::Run() {
         std::exit(EXIT_FAILURE);
     }
 
-    std::clog << "OpenGL Vendor: " << (const GLchar *) glGetString(GL_VENDOR) << std::endl;
-    std::clog << "OpenGL Renderer: " << (const GLchar *) glGetString(GL_RENDERER) << std::endl;
-    std::clog << "OpenGL Version: " << (const GLchar *) glGetString(GL_VERSION) << std::endl;
-    std::clog << "OpenGL Shading Language Version: " << (const GLchar *) glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+    SERVER_ERROR("OpenGL Vendor: {}", (const GLchar *) glGetString(GL_VENDOR));
+    SERVER_ERROR("OpenGL Renderer: {}", (const GLchar *) glGetString(GL_RENDERER));
+    SERVER_ERROR("OpenGL Version: {}", (const GLchar *) glGetString(GL_VERSION));
+    SERVER_ERROR("OpenGL Shading Language Version: {}", (const GLchar *) glGetString(GL_SHADING_LANGUAGE_VERSION));
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();

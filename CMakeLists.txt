@@ -19,6 +19,7 @@ find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 find_package(imgui REQUIRED)
 find_package(Stb REQUIRED)
+find_package(spdlog REQUIRED)
 
 add_subdirectory(Example01)
 add_subdirectory(Example02)

@@ -6,6 +6,7 @@ add_executable(Example16 src/Main.cpp
                          src/Shapes/Plane.cpp
                          src/Shapes/Quad.cpp
                          src/Shapes/Triangle.cpp
+                         src/Logging.cpp
                          src/Shader.cpp
                          src/Texture.cpp
                          src/VAO.cpp)
@@ -16,6 +17,7 @@ target_link_libraries(Example16 PRIVATE glad::glad)
 target_link_libraries(Example16 PRIVATE glfw)
 target_link_libraries(Example16 PRIVATE glm::glm)
 target_link_libraries(Example16 PRIVATE imgui::imgui)
+target_link_libraries(Example16 PRIVATE spdlog::spdlog)
 
 add_custom_target(Example16Assets COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/assets)
 add_dependencies(Example16 Example16Assets)
