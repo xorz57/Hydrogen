@@ -16,8 +16,8 @@ Circle::Circle() {
     VAO::Unbind();
 }
 
-Circle::Circle(std::uint32_t sectors) {
-    Build(sectors);
+Circle::Circle(std::uint32_t segments) {
+    Build(segments);
 
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
@@ -32,15 +32,15 @@ Circle::Circle(std::uint32_t sectors) {
     VAO::Unbind();
 }
 
-void Circle::Build(std::uint32_t sectors) {
-    mVertices.reserve(sectors + 2);
-    mElements.reserve(sectors + 2);
+void Circle::Build(std::uint32_t segments) {
+    mVertices.reserve(segments + 2);
+    mElements.reserve(segments + 2);
 
     mVertices.push_back({{0.0f, 0.0f, 0.0f}, {0.5f, 0.5f}});
     mElements.push_back(0);
 
-    for (std::uint32_t i = 0; i <= sectors; ++i) {
-        const float step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
+    for (std::uint32_t i = 0; i <= segments; ++i) {
+        const float step = 2.0f * glm::pi<float>() / static_cast<float>(segments);
         const float angle = static_cast<float>(i) * step;
         const float x = 0.5f * glm::cos(angle);
         const float y = 0.5f * glm::sin(angle);
