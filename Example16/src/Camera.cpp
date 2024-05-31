@@ -12,9 +12,17 @@ void Camera::ProcessInput(float window_w, float window_h, double dt) {
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
         float speed_multiplier;
         if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            speed_multiplier = 2.0f;
+            speed_multiplier = 10.0f;
         } else {
-            speed_multiplier = 1.0f;
+            speed_multiplier = 5.0f;
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+            if (mFOV < 120.0f) mFOV += 5.0f * dt;
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
+            if (mFOV > 90.0f) mFOV -=5.0f * dt;
         }
 
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {

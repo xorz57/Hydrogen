@@ -85,7 +85,7 @@ void Application::Run() {
 
     Camera camera;
     camera.SetPosition(glm::vec3(+0.0f, +16.0f, +16.0f));
-    camera.SetFOV(45.0f);
+    camera.SetFOV(100.0f);
     camera.SetNear(0.1f);
     camera.SetFar(100.0f);
     camera.SetPitch(45.0f);
