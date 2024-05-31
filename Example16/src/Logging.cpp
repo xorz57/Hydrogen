@@ -7,7 +7,7 @@ std::shared_ptr<spdlog::logger> Logging::sClientLogger;
 
 void Logging::Init() {
     spdlog::set_pattern("[%H:%M:%S %z] [%n] [%^---%L---%$] [thread %t] %v");
-    sServerLogger = spdlog::stdout_color_mt("Engine");
+    sServerLogger = spdlog::stdout_color_mt("Server");
     sClientLogger = spdlog::stdout_color_mt("Client");
     sServerLogger->set_level(spdlog::level::trace);
     sClientLogger->set_level(spdlog::level::trace);
