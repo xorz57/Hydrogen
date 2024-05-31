@@ -17,14 +17,6 @@ void Camera::ProcessInput(float window_w, float window_h, double dt) {
             speed_multiplier = 5.0f;
         }
 
-        if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
-            if (mFOV < 120.0f) mFOV += 5.0f * dt;
-        }
-
-        if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
-            if (mFOV > 90.0f) mFOV -=5.0f * dt;
-        }
-
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
             mPosition += speed_multiplier * mSpeed * static_cast<float>(dt) * mFront;
         }
