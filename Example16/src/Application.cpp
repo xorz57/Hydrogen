@@ -62,10 +62,10 @@ void Application::Run() {
         std::exit(EXIT_FAILURE);
     }
 
-    SERVER_ERROR("OpenGL Vendor: {}", (const GLchar *) glGetString(GL_VENDOR));
-    SERVER_ERROR("OpenGL Renderer: {}", (const GLchar *) glGetString(GL_RENDERER));
-    SERVER_ERROR("OpenGL Version: {}", (const GLchar *) glGetString(GL_VERSION));
-    SERVER_ERROR("OpenGL Shading Language Version: {}", (const GLchar *) glGetString(GL_SHADING_LANGUAGE_VERSION));
+    SERVER_INFO("OpenGL Vendor: {}", (const GLchar *) glGetString(GL_VENDOR));
+    SERVER_INFO("OpenGL Renderer: {}", (const GLchar *) glGetString(GL_RENDERER));
+    SERVER_INFO("OpenGL Version: {}", (const GLchar *) glGetString(GL_VERSION));
+    SERVER_INFO("OpenGL Shading Language Version: {}", (const GLchar *) glGetString(GL_SHADING_LANGUAGE_VERSION));
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();

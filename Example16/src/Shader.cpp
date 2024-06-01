@@ -1,7 +1,7 @@
 #include "Shader.hpp"
+#include "Logging.hpp"
 
 #include <fstream>
-#include <iostream>
 #include <sstream>
 #include <vector>
 
@@ -19,7 +19,7 @@ Shader::Shader(const GLchar *vShaderSource, const GLchar *fShaderSource) {
         glGetShaderiv(vShader, GL_INFO_LOG_LENGTH, &maxLength);
         std::vector<GLchar> infoLog(maxLength);
         glGetShaderInfoLog(vShader, static_cast<GLsizei>(infoLog.size()), nullptr, infoLog.data());
-        std::cerr << infoLog.data() << std::endl;
+        SERVER_ERROR("{}", infoLog.data());
         std::exit(EXIT_FAILURE);
     }
 
@@ -32,7 +32,7 @@ Shader::Shader(const GLchar *vShaderSource, const GLchar *fShaderSource) {
         glGetShaderiv(fShader, GL_INFO_LOG_LENGTH, &maxLength);
         std::vector<GLchar> infoLog(maxLength);
         glGetShaderInfoLog(fShader, static_cast<GLsizei>(infoLog.size()), nullptr, infoLog.data());
-        std::cerr << infoLog.data() << std::endl;
+        SERVER_ERROR("{}", infoLog.data());
         std::exit(EXIT_FAILURE);
     }
 
@@ -46,7 +46,7 @@ Shader::Shader(const GLchar *vShaderSource, const GLchar *fShaderSource) {
         glGetShaderiv(mProgram, GL_INFO_LOG_LENGTH, &maxLength);
         std::vector<GLchar> infoLog(maxLength);
         glGetProgramInfoLog(mProgram, static_cast<GLsizei>(infoLog.size()), nullptr, infoLog.data());
-        std::cerr << infoLog.data() << std::endl;
+        SERVER_ERROR("{}", infoLog.data());
         std::exit(EXIT_FAILURE);
     }
 
