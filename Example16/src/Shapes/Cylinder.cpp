@@ -5,9 +5,9 @@ Cylinder::Cylinder() {
 
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
-    mTopCircleEBO = EBO<GLuint>::Create(mTopCircleElements);
-    mBottomCircleEBO = EBO<GLuint>::Create(mBottomCircleElements);
-    mSideEBO = EBO<GLuint>::Create(mSideElements);
+    mEBO1 = EBO<GLuint>::Create(mElements1);
+    mEBO2 = EBO<GLuint>::Create(mElements2);
+    mEBO3 = EBO<GLuint>::Create(mElements3);
     mTexture = Texture::Create("assets/textures/cylinder.png");
 
     mVAO->Bind();
@@ -23,9 +23,9 @@ Cylinder::Cylinder(std::uint32_t sectors) {
 
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
-    mTopCircleEBO = EBO<GLuint>::Create(mTopCircleElements);
-    mBottomCircleEBO = EBO<GLuint>::Create(mBottomCircleElements);
-    mSideEBO = EBO<GLuint>::Create(mSideElements);
+    mEBO1 = EBO<GLuint>::Create(mElements1);
+    mEBO2 = EBO<GLuint>::Create(mElements2);
+    mEBO3 = EBO<GLuint>::Create(mElements3);
     mTexture = Texture::Create("assets/textures/cylinder.png");
 
     mVAO->Bind();
@@ -38,9 +38,9 @@ Cylinder::Cylinder(std::uint32_t sectors) {
 
 void Cylinder::Build(std::uint32_t sectors) {
     mVertices.clear();
-    mTopCircleElements.clear();
-    mBottomCircleElements.clear();
-    mSideElements.clear();
+    mElements1.clear();
+    mElements2.clear();
+    mElements3.clear();
 
     mVertices.push_back({{0.0f, 0.5f, 0.0f}, {0.5f, 0.5f}});
     for (std::uint32_t i = 0; i <= sectors; ++i) {
@@ -52,9 +52,9 @@ void Cylinder::Build(std::uint32_t sectors) {
         mVertices.push_back({{x, 0.5f, z}, {u, v}});
     }
     for (std::uint32_t i = 1; i <= sectors; ++i) {
-        mTopCircleElements.push_back(0);
-        mTopCircleElements.push_back(i);
-        mTopCircleElements.push_back(i + 1);
+        mElements1.push_back(0);
+        mElements1.push_back(i);
+        mElements1.push_back(i + 1);
     }
 
     size_t offset = mVertices.size();
@@ -69,9 +69,9 @@ void Cylinder::Build(std::uint32_t sectors) {
         mVertices.push_back({{x, -0.5f, z}, {u, v}});
     }
     for (std::uint32_t i = 1; i <= sectors; ++i) {
-        mBottomCircleElements.push_back(static_cast<GLuint>(offset));
-        mBottomCircleElements.push_back(static_cast<GLuint>(offset + i + 1));
-        mBottomCircleElements.push_back(static_cast<GLuint>(offset + i));
+        mElements2.push_back(static_cast<GLuint>(offset));
+        mElements2.push_back(static_cast<GLuint>(offset + i + 1));
+        mElements2.push_back(static_cast<GLuint>(offset + i));
     }
 
     for (std::uint32_t i = 1; i <= sectors; ++i) {
@@ -80,13 +80,13 @@ void Cylinder::Build(std::uint32_t sectors) {
         std::uint32_t bottom1 = static_cast<std::uint32_t>(offset) + i;
         std::uint32_t bottom2 = static_cast<std::uint32_t>(offset) + i + 1;
 
-        mSideElements.push_back(top1);
-        mSideElements.push_back(bottom1);
-        mSideElements.push_back(top2);
+        mElements3.push_back(top1);
+        mElements3.push_back(bottom1);
+        mElements3.push_back(top2);
 
-        mSideElements.push_back(top2);
-        mSideElements.push_back(bottom1);
-        mSideElements.push_back(bottom2);
+        mElements3.push_back(top2);
+        mElements3.push_back(bottom1);
+        mElements3.push_back(bottom2);
     }
 }
 
@@ -94,14 +94,14 @@ void Cylinder::Draw() const {
     mVAO->Bind();
     mTexture->Bind();
 
-    mTopCircleEBO->Bind();
-    glDrawElements(GL_TRIANGLE_FAN, static_cast<GLsizei>(mTopCircleElements.size()), GL_UNSIGNED_INT, nullptr);
+    mEBO1->Bind();
+    glDrawElements(GL_TRIANGLE_FAN, static_cast<GLsizei>(mElements1.size()), GL_UNSIGNED_INT, nullptr);
 
-    mBottomCircleEBO->Bind();
-    glDrawElements(GL_TRIANGLE_FAN, static_cast<GLsizei>(mBottomCircleElements.size()), GL_UNSIGNED_INT, nullptr);
+    mEBO2->Bind();
+    glDrawElements(GL_TRIANGLE_FAN, static_cast<GLsizei>(mElements2.size()), GL_UNSIGNED_INT, nullptr);
 
-    mSideEBO->Bind();
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mSideElements.size()), GL_UNSIGNED_INT, nullptr);
+    mEBO3->Bind();
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements3.size()), GL_UNSIGNED_INT, nullptr);
 
     Texture::Unbind();
     VAO::Unbind();
@@ -110,9 +110,9 @@ void Cylinder::Draw() const {
 void Cylinder::Delete() const {
     mVAO->Delete();
     mVBO->Delete();
-    mTopCircleEBO->Delete();
-    mBottomCircleEBO->Delete();
-    mSideEBO->Delete();
+    mEBO1->Delete();
+    mEBO2->Delete();
+    mEBO3->Delete();
 }
 
 void Cylinder::Scale(const glm::vec3 &v) {
