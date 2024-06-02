@@ -6,7 +6,7 @@ Cylinder::Cylinder() {
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
     mEBO = EBO<GLuint>::Create(mElements);
-    mTexture = Texture::Create("assets/textures/green.png");
+    mTexture = Texture::Create("assets/textures/cylinder.png");
 
     mVAO->Bind();
     mVBO->Bind();
@@ -22,7 +22,7 @@ Cylinder::Cylinder(std::uint32_t sectors) {
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
     mEBO = EBO<GLuint>::Create(mElements);
-    mTexture = Texture::Create("assets/textures/green.png");
+    mTexture = Texture::Create("assets/textures/cylinder.png");
 
     mVAO->Bind();
     mVBO->Bind();
