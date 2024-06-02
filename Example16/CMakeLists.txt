@@ -6,6 +6,7 @@ add_executable(Example16 src/Main.cpp
                          src/Shapes/Cylinder.cpp
                          src/Shapes/Plane.cpp
                          src/Shapes/Quad.cpp
+                         src/Shapes/Sphere.cpp
                          src/Shapes/Triangle.cpp
                          src/Logging.cpp
                          src/Shader.cpp

@@ -9,6 +9,7 @@
 #include "Shapes/Cylinder.hpp"
 #include "Shapes/Plane.hpp"
 #include "Shapes/Quad.hpp"
+#include "Shapes/Sphere.hpp"
 #include "Shapes/Triangle.hpp"
 
 #define GLFW_INCLUDE_NONE
@@ -98,6 +99,7 @@ void Application::Run() {
     camera.SetSensitivity(0.1f);
     camera.SetSpeed(4.0f);
 
+    Sphere sphere;
     Cylinder cylinder;
     Plane plane;
     Cube cube;
@@ -179,6 +181,13 @@ void Application::Run() {
         cylinder.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
         shader.SetFloat4x4("u_model", cylinder.GetModel());
         cylinder.Draw();
+
+        sphere.Reset();
+        sphere.Translate(glm::vec3(0.0f, 32.0f, 0.0f));
+        sphere.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        sphere.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
+        shader.SetFloat4x4("u_model", sphere.GetModel());
+        sphere.Draw();
 
         quad.Reset();
         quad.Translate(glm::vec3(32.0f, 0.0f, 0.0f));
