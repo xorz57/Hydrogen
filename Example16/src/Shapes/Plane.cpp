@@ -51,9 +51,11 @@ void Plane::Build(std::uint32_t segmentsX, std::uint32_t segmentsZ) {
     for (std::uint32_t i = 0; i < segmentsZ; ++i) {
         for (std::uint32_t j = 0; j < segmentsX; ++j) {
             const GLuint base = i * (segmentsX + 1) + j;
+
             mElements.push_back(base);
             mElements.push_back(base + 1);
             mElements.push_back(base + segmentsX + 1);
+
             mElements.push_back(base + segmentsX + 1);
             mElements.push_back(base + 1);
             mElements.push_back(base + segmentsX + 2);
