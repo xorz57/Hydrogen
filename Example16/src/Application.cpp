@@ -6,6 +6,7 @@
 
 #include "Shapes/Circle.hpp"
 #include "Shapes/Cube.hpp"
+#include "Shapes/Cylinder.hpp"
 #include "Shapes/Plane.hpp"
 #include "Shapes/Quad.hpp"
 #include "Shapes/Triangle.hpp"
@@ -97,6 +98,7 @@ void Application::Run() {
     camera.SetSensitivity(0.1f);
     camera.SetSpeed(4.0f);
 
+    Cylinder cylinder;
     Plane plane;
     Cube cube;
     Quad quad;
@@ -170,6 +172,13 @@ void Application::Run() {
         plane.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
         shader.SetFloat4x4("u_model", plane.GetModel());
         plane.Draw();
+
+        cylinder.Reset();
+        cylinder.Translate(glm::vec3(0.0f, -32.0f, 0.0f));
+        cylinder.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        cylinder.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
+        shader.SetFloat4x4("u_model", cylinder.GetModel());
+        cylinder.Draw();
 
         quad.Reset();
         quad.Translate(glm::vec3(32.0f, 0.0f, 0.0f));

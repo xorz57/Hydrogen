@@ -3,6 +3,7 @@ add_executable(Example16 src/Main.cpp
                          src/Camera.cpp
                          src/Shapes/Circle.cpp
                          src/Shapes/Cube.cpp
+                         src/Shapes/Cylinder.cpp
                          src/Shapes/Plane.cpp
                          src/Shapes/Quad.cpp
                          src/Shapes/Triangle.cpp
