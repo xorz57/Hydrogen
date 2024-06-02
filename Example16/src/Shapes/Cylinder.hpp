@@ -39,12 +39,16 @@ private:
     };
 
     std::vector<Vertex> mVertices;
-    std::vector<GLuint> mElements;
+    std::vector<GLuint> mTopCircleElements;
+    std::vector<GLuint> mBottomCircleElements;
+    std::vector<GLuint> mSideElements;
 
     glm::mat4 mModel{1.0f};
 
     std::shared_ptr<VAO> mVAO;
     std::shared_ptr<VBO<Vertex>> mVBO;
-    std::shared_ptr<EBO<GLuint>> mEBO;
+    std::shared_ptr<EBO<GLuint>> mTopCircleEBO;
+    std::shared_ptr<EBO<GLuint>> mBottomCircleEBO;
+    std::shared_ptr<EBO<GLuint>> mSideEBO;
     std::shared_ptr<Texture> mTexture;
 };
