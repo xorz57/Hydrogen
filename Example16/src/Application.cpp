@@ -101,13 +101,13 @@ void Application::Run() {
     camera.SetSpeed(4.0f);
 
     Capsule capsule;
-    Sphere sphere;
+    Circle circle;
+    Cube cube;
     Cylinder cylinder;
     Plane plane;
-    Cube cube;
     Quad quad;
+    Sphere sphere;
     Triangle triangle;
-    Circle circle;
 
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
@@ -242,9 +242,13 @@ void Application::Run() {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    plane.Delete();
+    capsule.Delete();
+    circle.Delete();
     cube.Delete();
+    cylinder.Delete();
+    plane.Delete();
     quad.Delete();
+    sphere.Delete();
     triangle.Delete();
 
     shader.Delete();
