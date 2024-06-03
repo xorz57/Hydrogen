@@ -1,0 +1,191 @@
+#include "Capsule.hpp"
+
+Capsule::Capsule() {
+    Build(32, 16);
+
+    mVAO = VAO::Create();
+    mVBO = VBO<Vertex>::Create(mVertices);
+    mEBO1 = EBO<GLuint>::Create(mElements1);
+    mEBO2 = EBO<GLuint>::Create(mElements2);
+    mEBO3 = EBO<GLuint>::Create(mElements3);
+    mTexture = Texture::Create("assets/textures/capsule.png");
+
+    mVAO->Bind();
+    mVBO->Bind();
+    VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
+    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
+    VBO<GLuint>::Unbind();
+    VAO::Unbind();
+}
+
+Capsule::Capsule(std::uint32_t sectors, std::uint32_t stacks) {
+    Build(sectors, stacks);
+
+    mVAO = VAO::Create();
+    mVBO = VBO<Vertex>::Create(mVertices);
+    mEBO1 = EBO<GLuint>::Create(mElements1);
+    mEBO2 = EBO<GLuint>::Create(mElements2);
+    mEBO3 = EBO<GLuint>::Create(mElements3);
+    mTexture = Texture::Create("assets/textures/capsule.png");
+
+    mVAO->Bind();
+    mVBO->Bind();
+    VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
+    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
+    VBO<GLuint>::Unbind();
+    VAO::Unbind();
+}
+
+void Capsule::Build(std::uint32_t sectors, std::uint32_t stacks) {
+    const float height = 0.5f;
+
+    for (std::uint32_t i = 0; i <= stacks; ++i) {
+        const float stack_angle = glm::half_pi<float>() * static_cast<float>(i) / static_cast<float>(stacks);
+
+        const float y = 0.5f * glm::cos(stack_angle) + height;
+
+        for (std::uint32_t j = 0; j <= sectors; ++j) {
+            const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
+            const float sector_angle = static_cast<float>(j) * sector_step;
+
+            const float x = 0.5f * glm::sin(stack_angle) * glm::cos(sector_angle);
+            const float z = 0.5f * glm::sin(stack_angle) * glm::sin(sector_angle);
+
+            const float u = static_cast<float>(j) / static_cast<float>(sectors);
+            const float v = static_cast<float>(i) / static_cast<float>(stacks * 2);
+
+            mVertices.push_back({{x, y, z}, {u, v}});
+        }
+    }
+
+    for (std::uint32_t i = 0; i <= stacks; ++i) {
+        const float stack_step = glm::half_pi<float>() / static_cast<float>(stacks);
+        const float stack_angle = glm::half_pi<float>() + static_cast<float>(i) * stack_step;
+
+        const float y = 0.5f * glm::cos(stack_angle) - height;
+
+        for (std::uint32_t j = 0; j <= sectors; ++j) {
+            const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
+            const float sector_angle = static_cast<float>(j) * sector_step;
+
+            const float x = 0.5f * glm::sin(stack_angle) * glm::cos(sector_angle);
+            const float z = 0.5f * glm::sin(stack_angle) * glm::sin(sector_angle);
+
+            const float u = static_cast<float>(j) / static_cast<float>(sectors);
+            const float v = static_cast<float>(i + stacks) / static_cast<float>(stacks * 2);
+
+            mVertices.push_back({{x, y, z}, {u, v}});
+        }
+    }
+
+    for (std::uint32_t j = 0; j <= sectors; ++j) {
+        const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
+        const float sector_angle = static_cast<float>(j) * sector_step;
+
+        const float x = 0.5f * glm::cos(sector_angle);
+        const float z = 0.5f * glm::sin(sector_angle);
+
+        const float u = static_cast<float>(j) / static_cast<float>(sectors);
+
+        mVertices.push_back({{x, height, z}, {u, 1.0f}});
+        mVertices.push_back({{x, -height, z}, {u, 0.0f}});
+    }
+
+    for (std::uint32_t i = 0; i < stacks; ++i) {
+        std::uint32_t k1 = i * (sectors + 1);
+        std::uint32_t k2 = k1 + sectors + 1;
+
+        for (std::uint32_t j = 0; j < sectors; ++j) {
+            mElements1.push_back(k1);
+            mElements1.push_back(k2);
+            mElements1.push_back(k1 + 1);
+
+            mElements1.push_back(k1 + 1);
+            mElements1.push_back(k2);
+            mElements1.push_back(k2 + 1);
+
+            ++k1;
+            ++k2;
+        }
+    }
+
+    const std::uint32_t offset1 = (stacks + 1) * (sectors + 1);
+    for (std::uint32_t i = 0; i < stacks; ++i) {
+        std::uint32_t k1 = offset1 + i * (sectors + 1);
+        std::uint32_t k2 = k1 + sectors + 1;
+
+        for (std::uint32_t j = 0; j < sectors; ++j) {
+            mElements2.push_back(k1);
+            mElements2.push_back(k1 + 1);
+            mElements2.push_back(k2);
+
+            mElements2.push_back(k2);
+            mElements2.push_back(k1 + 1);
+            mElements2.push_back(k2 + 1);
+
+            ++k1;
+            ++k2;
+        }
+    }
+
+    const std::uint32_t offset2 = offset1 + (stacks + 1) * (sectors + 1);
+    for (std::uint32_t i = 0; i < sectors; ++i) {
+        const std::uint32_t top1 = offset2 + i * 2;
+        const std::uint32_t top2 = top1 + 1;
+        const std::uint32_t bottom1 = top1 + 2;
+        const std::uint32_t bottom2 = bottom1 + 1;
+
+        mElements3.push_back(top1);
+        mElements3.push_back(bottom1);
+        mElements3.push_back(top2);
+
+        mElements3.push_back(top2);
+        mElements3.push_back(bottom1);
+        mElements3.push_back(bottom2);
+    }
+}
+
+void Capsule::Draw() const {
+    mVAO->Bind();
+    mTexture->Bind();
+
+    mEBO1->Bind();
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements1.size()), GL_UNSIGNED_INT, nullptr);
+
+    mEBO2->Bind();
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements2.size()), GL_UNSIGNED_INT, nullptr);
+
+    mEBO3->Bind();
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements3.size()), GL_UNSIGNED_INT, nullptr);
+
+    Texture::Unbind();
+    VAO::Unbind();
+}
+
+void Capsule::Delete() const {
+    mVAO->Delete();
+    mVBO->Delete();
+    mEBO1->Delete();
+    mEBO2->Delete();
+    mEBO3->Delete();
+}
+
+void Capsule::Scale(const glm::vec3 &v) {
+    mModel = glm::scale(mModel, v);
+}
+
+void Capsule::Translate(const glm::vec3 &v) {
+    mModel = glm::translate(mModel, v);
+}
+
+void Capsule::Rotate(float angle, const glm::vec3 &v) {
+    mModel = glm::rotate(mModel, angle, v);
+}
+
+void Capsule::Reset() {
+    mModel = glm::mat4(1.0f);
+}
+
+glm::mat4 Capsule::GetModel() const {
+    return mModel;
+}

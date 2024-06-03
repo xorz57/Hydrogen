@@ -4,6 +4,7 @@
 #include "Logging.hpp"
 #include "Shader.hpp"
 
+#include "Shapes/Capsule.hpp"
 #include "Shapes/Circle.hpp"
 #include "Shapes/Cube.hpp"
 #include "Shapes/Cylinder.hpp"
@@ -99,6 +100,7 @@ void Application::Run() {
     camera.SetSensitivity(0.1f);
     camera.SetSpeed(4.0f);
 
+    Capsule capsule;
     Sphere sphere;
     Cylinder cylinder;
     Plane plane;
@@ -209,6 +211,13 @@ void Application::Run() {
         circle.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
         shader.SetFloat4x4("u_model", circle.GetModel());
         circle.Draw();
+
+        capsule.Reset();
+        capsule.Translate(glm::vec3(0.0f, 0.0f, 32.0f));
+        capsule.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        capsule.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
+        shader.SetFloat4x4("u_model", capsule.GetModel());
+        capsule.Draw();
 
         const std::vector<glm::vec3> translations = {
                 glm::vec3(-4.0f, +2.0f, -4.0f),// 0

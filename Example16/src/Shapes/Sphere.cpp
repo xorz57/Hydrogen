@@ -1,7 +1,7 @@
 #include "Sphere.hpp"
 
 Sphere::Sphere() {
-    Build(32, 32);
+    Build(32, 16);
 
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
