@@ -94,7 +94,7 @@ void Application::Run() {
     camera.SetPosition(glm::vec3(+0.0f, +16.0f, +16.0f));
     camera.SetFOV(90.0f);
     camera.SetNear(0.1f);
-    camera.SetFar(100.0f);
+    camera.SetFar(256.0f);
     camera.SetPitch(45.0f);
     camera.SetYaw(-90.0f);
     camera.SetSensitivity(0.1f);
@@ -170,26 +170,12 @@ void Application::Run() {
         shader.SetFloat4x4("u_view", camera.GetView());
         shader.SetFloat4x4("u_projection", camera.GetProjection(window_a));
 
-        plane.Reset();
-        plane.Translate(glm::vec3(0.0f, 0.0f, 0.0f));
-        plane.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        plane.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-        shader.SetFloat4x4("u_model", plane.GetModel());
-        plane.Draw();
-
-        cylinder.Reset();
-        cylinder.Translate(glm::vec3(0.0f, -32.0f, 0.0f));
-        cylinder.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        cylinder.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-        shader.SetFloat4x4("u_model", cylinder.GetModel());
-        cylinder.Draw();
-
-        sphere.Reset();
-        sphere.Translate(glm::vec3(0.0f, 32.0f, 0.0f));
-        sphere.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        sphere.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-        shader.SetFloat4x4("u_model", sphere.GetModel());
-        sphere.Draw();
+        triangle.Reset();
+        triangle.Translate(glm::vec3(0.0f, 0.0f, 0.0f));
+        triangle.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        triangle.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
+        shader.SetFloat4x4("u_model", triangle.GetModel());
+        triangle.Draw();
 
         quad.Reset();
         quad.Translate(glm::vec3(32.0f, 0.0f, 0.0f));
@@ -198,49 +184,47 @@ void Application::Run() {
         shader.SetFloat4x4("u_model", quad.GetModel());
         quad.Draw();
 
-        triangle.Reset();
-        triangle.Translate(glm::vec3(-32.0f, 0.0f, 0.0f));
-        triangle.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        triangle.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-        shader.SetFloat4x4("u_model", triangle.GetModel());
-        triangle.Draw();
+        cube.Reset();
+        cube.Translate(glm::vec3(64.0f, 0.0f, 0.0f));
+        cube.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        cube.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
+        shader.SetFloat4x4("u_model", cube.GetModel());
+        cube.Draw();
+
+        plane.Reset();
+        plane.Translate(glm::vec3(0.0f, 0.0f, 32.0f));
+        plane.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        plane.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
+        shader.SetFloat4x4("u_model", plane.GetModel());
+        plane.Draw();
 
         circle.Reset();
-        circle.Translate(glm::vec3(0.0f, 0.0f, -32.0f));
+        circle.Translate(glm::vec3(32.0f, 0.0f, 32.0f));
         circle.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
         circle.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
         shader.SetFloat4x4("u_model", circle.GetModel());
         circle.Draw();
 
+        sphere.Reset();
+        sphere.Translate(glm::vec3(64.0f, 0.0f, 32.0f));
+        sphere.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        sphere.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
+        shader.SetFloat4x4("u_model", sphere.GetModel());
+        sphere.Draw();
+
+        cylinder.Reset();
+        cylinder.Translate(glm::vec3(0.0f, 0.0f, 64.0f));
+        cylinder.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        cylinder.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
+        shader.SetFloat4x4("u_model", cylinder.GetModel());
+        cylinder.Draw();
+
         capsule.Reset();
-        capsule.Translate(glm::vec3(0.0f, 0.0f, 32.0f));
+        capsule.Translate(glm::vec3(32.0f, 0.0f, 64.0f));
         capsule.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
         capsule.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
         shader.SetFloat4x4("u_model", capsule.GetModel());
         capsule.Draw();
-
-        const std::vector<glm::vec3> translations = {
-                glm::vec3(-4.0f, +2.0f, -4.0f),// 0
-                glm::vec3(-4.0f, +2.0f, +0.0f),// 1
-                glm::vec3(-4.0f, +2.0f, +4.0f),// 2
-                glm::vec3(+0.0f, +2.0f, -4.0f),// 3
-                glm::vec3(+0.0f, +2.0f, +0.0f),// 4
-                glm::vec3(+0.0f, +2.0f, +4.0f),// 5
-                glm::vec3(+4.0f, +2.0f, -4.0f),// 6
-                glm::vec3(+4.0f, +2.0f, +0.0f),// 7
-                glm::vec3(+4.0f, +2.0f, +4.0f),// 8
-        };
-
-        const float angle = static_cast<float>(glfwGetTime()) * glm::radians(-45.0f);
-
-        for (const glm::vec3 &translation: translations) {
-            cube.Reset();
-            cube.Translate(translation);
-            cube.Rotate(angle, glm::vec3(1.0f, 1.0f, 1.0f));
-            cube.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
-            shader.SetFloat4x4("u_model", cube.GetModel());
-            cube.Draw();
-        }
 
         ///////////////////////////////////////////////////////////////////////
 
