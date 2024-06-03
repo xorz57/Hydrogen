@@ -43,42 +43,42 @@ void Cylinder::Build(std::uint32_t sectors) {
     mElements3.clear();
 
     mVertices.push_back({{0.0f, 0.5f, 0.0f}, {0.5f, 0.5f}});
-    for (std::uint32_t i = 0; i <= sectors; ++i) {
-        float angle = 2.0f * glm::pi<float>() * static_cast<float>(i) / static_cast<float>(sectors);
+    for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
+        float angle = 2.0f * glm::pi<float>() * static_cast<float>(sector) / static_cast<float>(sectors);
         float x = 0.5f * glm::cos(angle);
         float z = 0.5f * glm::sin(angle);
         float u = 0.5f + 0.5f * glm::cos(angle);
         float v = 0.5f + 0.5f * glm::sin(angle);
         mVertices.push_back({{x, 0.5f, z}, {u, v}});
     }
-    for (std::uint32_t i = 1; i <= sectors; ++i) {
+    for (std::uint32_t sector = 1; sector <= sectors; ++sector) {
         mElements1.push_back(0);
-        mElements1.push_back(i);
-        mElements1.push_back(i + 1);
+        mElements1.push_back(sector);
+        mElements1.push_back(sector + 1);
     }
 
     size_t offset = mVertices.size();
 
     mVertices.push_back({{0.0f, -0.5f, 0.0f}, {0.5f, 0.5f}});
-    for (std::uint32_t i = 0; i <= sectors; ++i) {
-        float angle = 2.0f * glm::pi<float>() * static_cast<float>(i) / static_cast<float>(sectors);
+    for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
+        float angle = 2.0f * glm::pi<float>() * static_cast<float>(sector) / static_cast<float>(sectors);
         float x = 0.5f * glm::cos(angle);
         float z = 0.5f * glm::sin(angle);
         float u = 0.5f + 0.5f * glm::cos(angle);
         float v = 0.5f + 0.5f * glm::sin(angle);
         mVertices.push_back({{x, -0.5f, z}, {u, v}});
     }
-    for (std::uint32_t i = 1; i <= sectors; ++i) {
+    for (std::uint32_t sector = 1; sector <= sectors; ++sector) {
         mElements2.push_back(static_cast<GLuint>(offset));
-        mElements2.push_back(static_cast<GLuint>(offset + i + 1));
-        mElements2.push_back(static_cast<GLuint>(offset + i));
+        mElements2.push_back(static_cast<GLuint>(offset + sector + 1));
+        mElements2.push_back(static_cast<GLuint>(offset + sector));
     }
 
-    for (std::uint32_t i = 1; i <= sectors; ++i) {
-        std::uint32_t top1 = i;
-        std::uint32_t top2 = i + 1;
-        std::uint32_t bottom1 = static_cast<std::uint32_t>(offset) + i;
-        std::uint32_t bottom2 = static_cast<std::uint32_t>(offset) + i + 1;
+    for (std::uint32_t sector = 1; sector <= sectors; ++sector) {
+        std::uint32_t top1 = sector;
+        std::uint32_t top2 = sector + 1;
+        std::uint32_t bottom1 = static_cast<std::uint32_t>(offset) + sector;
+        std::uint32_t bottom2 = static_cast<std::uint32_t>(offset) + sector + 1;
 
         mElements3.push_back(top1);
         mElements3.push_back(bottom1);

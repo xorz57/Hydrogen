@@ -39,15 +39,15 @@ void Circle::Build(std::uint32_t sectors) {
     mVertices.push_back({{0.0f, 0.0f, 0.0f}, {0.5f, 0.5f}});
     mElements.push_back(0);
 
-    for (std::uint32_t i = 0; i <= sectors; ++i) {
+    for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
         const float step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
-        const float angle = static_cast<float>(i) * step;
+        const float angle = static_cast<float>(sector) * step;
         const float x = 0.5f * glm::cos(angle);
         const float y = 0.5f * glm::sin(angle);
         const float u = 0.5f + 0.5f * glm::cos(angle);
         const float v = 0.5f + 0.5f * glm::sin(angle);
         mVertices.push_back({{x, y, 0.0f}, {u, v}});
-        mElements.push_back(i + 1);
+        mElements.push_back(sector + 1);
     }
 }
 

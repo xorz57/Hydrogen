@@ -39,63 +39,63 @@ Capsule::Capsule(std::uint32_t sectors, std::uint32_t stacks) {
 void Capsule::Build(std::uint32_t sectors, std::uint32_t stacks) {
     const float height = 0.5f;
 
-    for (std::uint32_t i = 0; i <= stacks; ++i) {
-        const float stack_angle = glm::half_pi<float>() * static_cast<float>(i) / static_cast<float>(stacks);
+    for (std::uint32_t stack = 0; stack <= stacks; ++stack) {
+        const float stack_angle = glm::half_pi<float>() * static_cast<float>(stack) / static_cast<float>(stacks);
 
         const float y = 0.5f * glm::cos(stack_angle) + height;
 
-        for (std::uint32_t j = 0; j <= sectors; ++j) {
+        for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
             const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
-            const float sector_angle = static_cast<float>(j) * sector_step;
+            const float sector_angle = static_cast<float>(sector) * sector_step;
 
             const float x = 0.5f * glm::sin(stack_angle) * glm::cos(sector_angle);
             const float z = 0.5f * glm::sin(stack_angle) * glm::sin(sector_angle);
 
-            const float u = static_cast<float>(j) / static_cast<float>(sectors);
-            const float v = static_cast<float>(i) / static_cast<float>(stacks * 2);
+            const float u = static_cast<float>(sector) / static_cast<float>(sectors);
+            const float v = static_cast<float>(stack) / static_cast<float>(stacks * 2);
 
             mVertices.push_back({{x, y, z}, {u, v}});
         }
     }
 
-    for (std::uint32_t i = 0; i <= stacks; ++i) {
+    for (std::uint32_t stack = 0; stack <= stacks; ++stack) {
         const float stack_step = glm::half_pi<float>() / static_cast<float>(stacks);
-        const float stack_angle = glm::half_pi<float>() + static_cast<float>(i) * stack_step;
+        const float stack_angle = glm::half_pi<float>() + static_cast<float>(stack) * stack_step;
 
         const float y = 0.5f * glm::cos(stack_angle) - height;
 
-        for (std::uint32_t j = 0; j <= sectors; ++j) {
+        for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
             const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
-            const float sector_angle = static_cast<float>(j) * sector_step;
+            const float sector_angle = static_cast<float>(sector) * sector_step;
 
             const float x = 0.5f * glm::sin(stack_angle) * glm::cos(sector_angle);
             const float z = 0.5f * glm::sin(stack_angle) * glm::sin(sector_angle);
 
-            const float u = static_cast<float>(j) / static_cast<float>(sectors);
-            const float v = static_cast<float>(i + stacks) / static_cast<float>(stacks * 2);
+            const float u = static_cast<float>(sector) / static_cast<float>(sectors);
+            const float v = static_cast<float>(stack + stacks) / static_cast<float>(stacks * 2);
 
             mVertices.push_back({{x, y, z}, {u, v}});
         }
     }
 
-    for (std::uint32_t j = 0; j <= sectors; ++j) {
+    for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
         const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
-        const float sector_angle = static_cast<float>(j) * sector_step;
+        const float sector_angle = static_cast<float>(sector) * sector_step;
 
         const float x = 0.5f * glm::cos(sector_angle);
         const float z = 0.5f * glm::sin(sector_angle);
 
-        const float u = static_cast<float>(j) / static_cast<float>(sectors);
+        const float u = static_cast<float>(sector) / static_cast<float>(sectors);
 
         mVertices.push_back({{x, height, z}, {u, 1.0f}});
         mVertices.push_back({{x, -height, z}, {u, 0.0f}});
     }
 
-    for (std::uint32_t i = 0; i < stacks; ++i) {
-        std::uint32_t k1 = i * (sectors + 1);
+    for (std::uint32_t stack = 0; stack < stacks; ++stack) {
+        std::uint32_t k1 = stack * (sectors + 1);
         std::uint32_t k2 = k1 + sectors + 1;
 
-        for (std::uint32_t j = 0; j < sectors; ++j) {
+        for (std::uint32_t sector = 0; sector < sectors; ++sector) {
             mElements1.push_back(k1);
             mElements1.push_back(k2);
             mElements1.push_back(k1 + 1);
@@ -110,11 +110,11 @@ void Capsule::Build(std::uint32_t sectors, std::uint32_t stacks) {
     }
 
     const std::uint32_t offset1 = (stacks + 1) * (sectors + 1);
-    for (std::uint32_t i = 0; i < stacks; ++i) {
-        std::uint32_t k1 = offset1 + i * (sectors + 1);
+    for (std::uint32_t stack = 0; stack < stacks; ++stack) {
+        std::uint32_t k1 = offset1 + stack * (sectors + 1);
         std::uint32_t k2 = k1 + sectors + 1;
 
-        for (std::uint32_t j = 0; j < sectors; ++j) {
+        for (std::uint32_t sector = 0; sector < sectors; ++sector) {
             mElements2.push_back(k1);
             mElements2.push_back(k1 + 1);
             mElements2.push_back(k2);
@@ -129,8 +129,8 @@ void Capsule::Build(std::uint32_t sectors, std::uint32_t stacks) {
     }
 
     const std::uint32_t offset2 = offset1 + (stacks + 1) * (sectors + 1);
-    for (std::uint32_t i = 0; i < sectors; ++i) {
-        const std::uint32_t top1 = offset2 + i * 2;
+    for (std::uint32_t sector = 0; sector < sectors; ++sector) {
+        const std::uint32_t top1 = offset2 + sector * 2;
         const std::uint32_t top2 = top1 + 1;
         const std::uint32_t bottom1 = top1 + 2;
         const std::uint32_t bottom2 = bottom1 + 1;

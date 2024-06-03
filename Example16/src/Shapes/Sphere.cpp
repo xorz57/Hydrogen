@@ -33,38 +33,38 @@ Sphere::Sphere(std::uint32_t sectors, std::uint32_t stacks) {
 }
 
 void Sphere::Build(std::uint32_t sectors, std::uint32_t stacks) {
-    for (std::uint32_t i = 0; i <= stacks; ++i) {
+    for (std::uint32_t stack = 0; stack <= stacks; ++stack) {
         const float stack_step = glm::pi<float>() / static_cast<float>(stacks);
-        const float stack_angle = static_cast<float>(i) * stack_step;
+        const float stack_angle = static_cast<float>(stack) * stack_step;
 
         const float y = glm::cos(stack_angle);
 
-        for (std::uint32_t j = 0; j <= sectors; ++j) {
+        for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
             const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
-            const float sector_angle = static_cast<float>(j) * sector_step;
+            const float sector_angle = static_cast<float>(sector) * sector_step;
 
             const float x = glm::sin(stack_angle) * glm::cos(sector_angle);
             const float z = glm::sin(stack_angle) * glm::sin(sector_angle);
 
-            const float u = static_cast<float>(j) / static_cast<float>(sectors);
-            const float v = static_cast<float>(i) / static_cast<float>(stacks);
+            const float u = static_cast<float>(sector) / static_cast<float>(sectors);
+            const float v = static_cast<float>(stack) / static_cast<float>(stacks);
 
             mVertices.push_back({{0.5f * x, 0.5f * y, 0.5f * z}, {u, v}});
         }
     }
 
-    for (std::uint32_t i = 0; i < stacks; ++i) {
-        std::uint32_t k1 = i * (sectors + 1);
+    for (std::uint32_t stack = 0; stack < stacks; ++stack) {
+        std::uint32_t k1 = stack * (sectors + 1);
         std::uint32_t k2 = k1 + sectors + 1;
 
-        for (std::uint32_t j = 0; j < sectors; ++j) {
-            if (i != 0) {
+        for (std::uint32_t sector = 0; sector < sectors; ++sector) {
+            if (stack != 0) {
                 mElements.push_back(k1);
                 mElements.push_back(k2);
                 mElements.push_back(k1 + 1);
             }
 
-            if (i != (stacks - 1)) {
+            if (stack != (stacks - 1)) {
                 mElements.push_back(k1 + 1);
                 mElements.push_back(k2);
                 mElements.push_back(k2 + 1);
