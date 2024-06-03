@@ -1,4 +1,5 @@
 #include "Texture.hpp"
+#include "Logging.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
@@ -21,6 +22,9 @@ Texture::Texture(const char *texturePath) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture_w, texture_h, 0, GL_RGBA, GL_UNSIGNED_BYTE, (void *) pixels);
         glGenerateMipmap(GL_TEXTURE_2D);
         stbi_image_free(pixels);
+        SERVER_INFO("Loaded texture {}", texturePath);
+    } else {
+        SERVER_ERROR("Failed to load texture {}", texturePath);
     }
 }
 
