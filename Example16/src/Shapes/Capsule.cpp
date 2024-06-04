@@ -40,7 +40,8 @@ void Capsule::Build(std::uint32_t sectors, std::uint32_t stacks) {
     const float height = 0.5f;
 
     for (std::uint32_t stack = 0; stack <= stacks; ++stack) {
-        const float stack_angle = glm::half_pi<float>() * static_cast<float>(stack) / static_cast<float>(stacks);
+        const float stack_step = glm::half_pi<float>() / static_cast<float>(stacks);
+        const float stack_angle = static_cast<float>(stack) * stack_step;
 
         const float y = 0.5f * glm::cos(stack_angle) + height;
 
