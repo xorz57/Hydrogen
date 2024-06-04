@@ -37,11 +37,6 @@ Cylinder::Cylinder(std::uint32_t sectors) {
 }
 
 void Cylinder::Build(std::uint32_t sectors) {
-    mVertices.clear();
-    mElements1.clear();
-    mElements2.clear();
-    mElements3.clear();
-
     mVertices.push_back({{0.0f, 0.5f, 0.0f}, {0.5f, 0.5f}});
     for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
         float angle = 2.0f * glm::pi<float>() * static_cast<float>(sector) / static_cast<float>(sectors);
