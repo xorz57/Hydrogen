@@ -39,11 +39,11 @@ Cylinder::Cylinder(std::uint32_t sectors) {
 void Cylinder::Build(std::uint32_t sectors) {
     mVertices.push_back({{0.0f, 0.5f, 0.0f}, {0.5f, 0.5f}});
     for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
-        float angle = 2.0f * glm::pi<float>() * static_cast<float>(sector) / static_cast<float>(sectors);
-        float x = 0.5f * glm::cos(angle);
-        float z = 0.5f * glm::sin(angle);
-        float u = 0.5f + 0.5f * glm::cos(angle);
-        float v = 0.5f + 0.5f * glm::sin(angle);
+        const float angle = 2.0f * glm::pi<float>() * static_cast<float>(sector) / static_cast<float>(sectors);
+        const float x = 0.5f * glm::cos(angle);
+        const float z = 0.5f * glm::sin(angle);
+        const float u = 0.5f + 0.5f * glm::cos(angle);
+        const float v = 0.5f + 0.5f * glm::sin(angle);
         mVertices.push_back({{x, 0.5f, z}, {u, v}});
     }
     for (std::uint32_t sector = 1; sector <= sectors; ++sector) {
@@ -56,11 +56,11 @@ void Cylinder::Build(std::uint32_t sectors) {
 
     mVertices.push_back({{0.0f, -0.5f, 0.0f}, {0.5f, 0.5f}});
     for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
-        float angle = 2.0f * glm::pi<float>() * static_cast<float>(sector) / static_cast<float>(sectors);
-        float x = 0.5f * glm::cos(angle);
-        float z = 0.5f * glm::sin(angle);
-        float u = 0.5f + 0.5f * glm::cos(angle);
-        float v = 0.5f + 0.5f * glm::sin(angle);
+        const float angle = 2.0f * glm::pi<float>() * static_cast<float>(sector) / static_cast<float>(sectors);
+        const float x = 0.5f * glm::cos(angle);
+        const float z = 0.5f * glm::sin(angle);
+        const float u = 0.5f + 0.5f * glm::cos(angle);
+        const float v = 0.5f + 0.5f * glm::sin(angle);
         mVertices.push_back({{x, -0.5f, z}, {u, v}});
     }
     for (std::uint32_t sector = 1; sector <= sectors; ++sector) {
@@ -70,10 +70,10 @@ void Cylinder::Build(std::uint32_t sectors) {
     }
 
     for (std::uint32_t sector = 1; sector <= sectors; ++sector) {
-        std::uint32_t top1 = sector;
-        std::uint32_t top2 = sector + 1;
-        std::uint32_t bottom1 = static_cast<std::uint32_t>(offset) + sector;
-        std::uint32_t bottom2 = static_cast<std::uint32_t>(offset) + sector + 1;
+        const std::uint32_t top1 = sector;
+        const std::uint32_t top2 = sector + 1;
+        const std::uint32_t bottom1 = static_cast<std::uint32_t>(offset) + sector;
+        const std::uint32_t bottom2 = static_cast<std::uint32_t>(offset) + sector + 1;
 
         mElements3.push_back(top1);
         mElements3.push_back(bottom1);

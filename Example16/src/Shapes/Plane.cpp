@@ -66,7 +66,9 @@ void Plane::Build(std::uint32_t segmentsX, std::uint32_t segmentsZ) {
 void Plane::Draw() const {
     mVAO->Bind();
     mTexture->Bind();
+
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
+
     Texture::Unbind();
     VAO::Unbind();
 }

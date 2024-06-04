@@ -40,12 +40,12 @@ void Circle::Build(std::uint32_t sectors) {
     mElements.push_back(0);
 
     for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
-        const float step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
-        const float angle = static_cast<float>(sector) * step;
-        const float x = 0.5f * glm::cos(angle);
-        const float y = 0.5f * glm::sin(angle);
-        const float u = 0.5f + 0.5f * glm::cos(angle);
-        const float v = 0.5f + 0.5f * glm::sin(angle);
+        const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
+        const float sector_angle = static_cast<float>(sector) * sector_step;
+        const float x = 0.5f * glm::cos(sector_angle);
+        const float y = 0.5f * glm::sin(sector_angle);
+        const float u = 0.5f + 0.5f * glm::cos(sector_angle);
+        const float v = 0.5f + 0.5f * glm::sin(sector_angle);
         mVertices.push_back({{x, y, 0.0f}, {u, v}});
         mElements.push_back(sector + 1);
     }
@@ -54,7 +54,9 @@ void Circle::Build(std::uint32_t sectors) {
 void Circle::Draw() const {
     mVAO->Bind();
     mTexture->Bind();
+
     glDrawElements(GL_TRIANGLE_FAN, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
+
     Texture::Unbind();
     VAO::Unbind();
 }

@@ -79,7 +79,9 @@ void Sphere::Build(std::uint32_t sectors, std::uint32_t stacks) {
 void Sphere::Draw() const {
     mVAO->Bind();
     mTexture->Bind();
+
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
+
     Texture::Unbind();
     VAO::Unbind();
 }
