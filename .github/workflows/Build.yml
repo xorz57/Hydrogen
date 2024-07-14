@@ -102,8 +102,11 @@ jobs:
         working-directory: ${{ steps.strings.outputs.build-output-dir }}
         run: ctest --build-config ${{ matrix.build_type }}
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload Artifacts
+        if: matrix.build_type == 'Release'
+        uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.os }}-${{ matrix.build_type }}
+          name: ${{ matrix.os }}
           path: |
-            ${{ steps.strings.outputs.build-output-dir }}/
+            ${{ steps.strings.outputs.build-output-dir }}/Example*/
+          compression-level: 9
