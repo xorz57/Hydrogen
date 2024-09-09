@@ -10,8 +10,8 @@ Plane::Plane() {
 
     mVAO->Bind();
     mVBO->Bind();
-    VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
-    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
+    VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -26,13 +26,13 @@ Plane::Plane(std::uint32_t segmentsX, std::uint32_t segmentsZ) {
 
     mVAO->Bind();
     mVBO->Bind();
-    VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
-    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
+    VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
 
-void Plane::Build(std::uint32_t segmentsX, std::uint32_t segmentsZ) {
+void Plane::Build(const std::uint32_t segmentsX, const std::uint32_t segmentsZ) {
     const float stepX = 1.0f / static_cast<float>(segmentsX);
     const float stepZ = 1.0f / static_cast<float>(segmentsZ);
 
@@ -67,7 +67,7 @@ void Plane::Draw() const {
     mVAO->Bind();
     mTexture->Bind();
 
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, static_cast<void *>(nullptr));
 
     Texture::Unbind();
     VAO::Unbind();
@@ -87,7 +87,7 @@ void Plane::Translate(const glm::vec3 &v) {
     mModel = glm::translate(mModel, v);
 }
 
-void Plane::Rotate(float angle, const glm::vec3 &v) {
+void Plane::Rotate(const float angle, const glm::vec3 &v) {
     mModel = glm::rotate(mModel, angle, v);
 }
 

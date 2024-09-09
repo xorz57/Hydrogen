@@ -10,13 +10,13 @@ Sphere::Sphere() {
 
     mVAO->Bind();
     mVBO->Bind();
-    VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
-    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
+    VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
 
-Sphere::Sphere(std::uint32_t sectors, std::uint32_t stacks) {
+Sphere::Sphere(const std::uint32_t sectors, const std::uint32_t stacks) {
     Build(sectors, stacks);
 
     mVAO = VAO::Create();
@@ -26,13 +26,13 @@ Sphere::Sphere(std::uint32_t sectors, std::uint32_t stacks) {
 
     mVAO->Bind();
     mVBO->Bind();
-    VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
-    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
+    VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
 
-void Sphere::Build(std::uint32_t sectors, std::uint32_t stacks) {
+void Sphere::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
     for (std::uint32_t stack = 0; stack <= stacks; ++stack) {
         const float stack_step = glm::pi<float>() / static_cast<float>(stacks);
         const float stack_angle = static_cast<float>(stack) * stack_step;
@@ -80,7 +80,7 @@ void Sphere::Draw() const {
     mVAO->Bind();
     mTexture->Bind();
 
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, (void *) nullptr);
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, static_cast<void *>(nullptr));
 
     Texture::Unbind();
     VAO::Unbind();

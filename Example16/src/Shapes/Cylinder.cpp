@@ -12,8 +12,8 @@ Cylinder::Cylinder() {
 
     mVAO->Bind();
     mVBO->Bind();
-    VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
-    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
+    VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -30,8 +30,8 @@ Cylinder::Cylinder(std::uint32_t sectors) {
 
     mVAO->Bind();
     mVBO->Bind();
-    VAO::SetFloat3(0, sizeof(Vertex), (void *) offsetof(Vertex, position));
-    VAO::SetFloat2(1, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
+    VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -118,7 +118,7 @@ void Cylinder::Translate(const glm::vec3 &v) {
     mModel = glm::translate(mModel, v);
 }
 
-void Cylinder::Rotate(float angle, const glm::vec3 &v) {
+void Cylinder::Rotate(const float angle, const glm::vec3 &v) {
     mModel = glm::rotate(mModel, angle, v);
 }
 
