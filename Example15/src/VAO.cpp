@@ -17,17 +17,17 @@ void VAO::Unbind() {
     glBindVertexArray(0);
 }
 
-void VAO::SetFloat(GLuint index, GLsizei stride, void *pointer) {
+void VAO::SetFloat(const GLuint index, const GLsizei stride, const void *pointer) {
     glEnableVertexAttribArray(index);
     glVertexAttribPointer(index, 1, GL_FLOAT, GL_FALSE, stride, pointer);
 }
 
-void VAO::SetFloat2(GLuint index, GLsizei stride, void *pointer) {
+void VAO::SetFloat2(const GLuint index, const GLsizei stride, const void *pointer) {
     glEnableVertexAttribArray(index);
     glVertexAttribPointer(index, 2, GL_FLOAT, GL_FALSE, stride, pointer);
 }
 
-void VAO::SetFloat3(GLuint index, GLsizei stride, void *pointer) {
+void VAO::SetFloat3(const GLuint index, const GLsizei stride, const void *pointer) {
     glEnableVertexAttribArray(index);
     glVertexAttribPointer(index, 3, GL_FLOAT, GL_FALSE, stride, pointer);
 }

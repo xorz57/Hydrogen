@@ -12,9 +12,9 @@ public:
     void Delete() const;
 
     static void Unbind();
-    static void SetFloat(GLuint index, GLsizei stride, void *pointer);
-    static void SetFloat2(GLuint index, GLsizei stride, void *pointer);
-    static void SetFloat3(GLuint index, GLsizei stride, void *pointer);
+    static void SetFloat(GLuint index, GLsizei stride, const void *pointer);
+    static void SetFloat2(GLuint index, GLsizei stride, const void *pointer);
+    static void SetFloat3(GLuint index, GLsizei stride, const void *pointer);
 
 private:
     GLuint mID = 0;

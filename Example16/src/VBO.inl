@@ -1,3 +1,5 @@
+#pragma once
+
 #include "VBO.hpp"
 
 template<typename T>

@@ -47,16 +47,16 @@ int main() {
 
     glfwSwapInterval(1);
 
-    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+    if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
         glfwDestroyWindow(window);
         glfwTerminate();
         std::exit(EXIT_FAILURE);
     }
 
-    std::clog << "OpenGL Vendor: " << (const GLchar *) glGetString(GL_VENDOR) << std::endl;
-    std::clog << "OpenGL Renderer: " << (const GLchar *) glGetString(GL_RENDERER) << std::endl;
-    std::clog << "OpenGL Version: " << (const GLchar *) glGetString(GL_VERSION) << std::endl;
-    std::clog << "OpenGL Shading Language Version: " << (const GLchar *) glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+    std::clog << "OpenGL Vendor: " << reinterpret_cast<const GLchar *>(glGetString(GL_VENDOR)) << std::endl;
+    std::clog << "OpenGL Renderer: " << reinterpret_cast<const GLchar *>(glGetString(GL_RENDERER)) << std::endl;
+    std::clog << "OpenGL Version: " << reinterpret_cast<const GLchar *>(glGetString(GL_VERSION)) << std::endl;
+    std::clog << "OpenGL Shading Language Version: " << reinterpret_cast<const GLchar *>(glGetString(GL_SHADING_LANGUAGE_VERSION)) << std::endl;
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -101,10 +101,10 @@ int main() {
     glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices.size() * sizeof(Vertex)), vertices.data(), GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *) offsetof(Vertex, position));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
 
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *) offsetof(Vertex, texture_coordinates));
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
 
     GLuint EBO = 0;
     glGenBuffers(1, &EBO);
@@ -124,9 +124,8 @@ int main() {
     int texture_w;
     int texture_h;
     stbi_set_flip_vertically_on_load(true);
-    stbi_uc *pixels = stbi_load("assets/textures/texture.png", &texture_w, &texture_h, nullptr, STBI_rgb_alpha);
-    if (pixels) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture_w, texture_h, 0, GL_RGBA, GL_UNSIGNED_BYTE, (void *) pixels);
+    if (stbi_uc *pixels = stbi_load("assets/textures/texture.png", &texture_w, &texture_h, nullptr, STBI_rgb_alpha)) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture_w, texture_h, 0, GL_RGBA, GL_UNSIGNED_BYTE, static_cast<void *>(pixels));
         glGenerateMipmap(GL_TEXTURE_2D);
         stbi_image_free(pixels);
     }
@@ -176,7 +175,7 @@ int main() {
         shader.SetFloat4x4("u_view", view);
         shader.SetFloat4x4("u_projection", projection);
 
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
+        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, static_cast<void *>(nullptr));
 
         ///////////////////////////////////////////////////////////////////////
 

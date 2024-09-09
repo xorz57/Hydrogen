@@ -44,16 +44,16 @@ int main() {
 
     glfwSwapInterval(0);
 
-    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+    if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
         glfwDestroyWindow(window);
         glfwTerminate();
         std::exit(EXIT_FAILURE);
     }
 
-    std::clog << "OpenGL Vendor: " << (const GLchar *) glGetString(GL_VENDOR) << std::endl;
-    std::clog << "OpenGL Renderer: " << (const GLchar *) glGetString(GL_RENDERER) << std::endl;
-    std::clog << "OpenGL Version: " << (const GLchar *) glGetString(GL_VERSION) << std::endl;
-    std::clog << "OpenGL Shading Language Version: " << (const GLchar *) glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+    std::clog << "OpenGL Vendor: " << reinterpret_cast<const GLchar *>(glGetString(GL_VENDOR)) << std::endl;
+    std::clog << "OpenGL Renderer: " << reinterpret_cast<const GLchar *>(glGetString(GL_RENDERER)) << std::endl;
+    std::clog << "OpenGL Version: " << reinterpret_cast<const GLchar *>(glGetString(GL_VERSION)) << std::endl;
+    std::clog << "OpenGL Shading Language Version: " << reinterpret_cast<const GLchar *>(glGetString(GL_SHADING_LANGUAGE_VERSION)) << std::endl;
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -86,8 +86,6 @@ int main() {
             glm::vec3(+2.0f, -2.0f, +0.0f),// 8
     };
 
-    Camera camera;
-
     Cube cube;
 
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
@@ -98,6 +96,8 @@ int main() {
     double t0 = glfwGetTime();
 
     while (!glfwWindowShouldClose(window)) {
+        Camera camera;
+
         ++frame;
         const double t1 = glfwGetTime();
         const double dt = t1 - t0;

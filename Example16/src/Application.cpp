@@ -27,7 +27,6 @@
 
 #include <cinttypes>
 #include <cstdlib>
-#include <vector>
 
 static void glfw_error_callback(int error, const char *description) {
     std::fprintf(stderr, "GLFW Error %d: %s\n", error, description);
@@ -59,16 +58,16 @@ void Application::Run() {
 
     glfwSwapInterval(0);
 
-    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+    if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
         glfwDestroyWindow(window);
         glfwTerminate();
         std::exit(EXIT_FAILURE);
     }
 
-    SERVER_INFO("OpenGL Vendor: {}", (const GLchar *) glGetString(GL_VENDOR));
-    SERVER_INFO("OpenGL Renderer: {}", (const GLchar *) glGetString(GL_RENDERER));
-    SERVER_INFO("OpenGL Version: {}", (const GLchar *) glGetString(GL_VERSION));
-    SERVER_INFO("OpenGL Shading Language Version: {}", (const GLchar *) glGetString(GL_SHADING_LANGUAGE_VERSION));
+    SERVER_INFO("OpenGL Vendor: {}", reinterpret_cast<const GLchar *>(glGetString(GL_VENDOR)));
+    SERVER_INFO("OpenGL Renderer: {}", reinterpret_cast<const GLchar *>(glGetString(GL_RENDERER)));
+    SERVER_INFO("OpenGL Version: {}", reinterpret_cast<const GLchar *>(glGetString(GL_VERSION)));
+    SERVER_INFO("OpenGL Shading Language Version: {}", reinterpret_cast<const GLchar *>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "EBO.hpp"
 
 template<typename T>

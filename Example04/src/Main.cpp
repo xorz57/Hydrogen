@@ -38,16 +38,16 @@ int main() {
 
     glfwSwapInterval(1);
 
-    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+    if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
         glfwDestroyWindow(window);
         glfwTerminate();
         std::exit(EXIT_FAILURE);
     }
 
-    std::clog << "OpenGL Vendor: " << (const GLchar *) glGetString(GL_VENDOR) << std::endl;
-    std::clog << "OpenGL Renderer: " << (const GLchar *) glGetString(GL_RENDERER) << std::endl;
-    std::clog << "OpenGL Version: " << (const GLchar *) glGetString(GL_VERSION) << std::endl;
-    std::clog << "OpenGL Shading Language Version: " << (const GLchar *) glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+    std::clog << "OpenGL Vendor: " << reinterpret_cast<const GLchar *>(glGetString(GL_VENDOR)) << std::endl;
+    std::clog << "OpenGL Renderer: " << reinterpret_cast<const GLchar *>(glGetString(GL_RENDERER)) << std::endl;
+    std::clog << "OpenGL Version: " << reinterpret_cast<const GLchar *>(glGetString(GL_VERSION)) << std::endl;
+    std::clog << "OpenGL Shading Language Version: " << reinterpret_cast<const GLchar *>(glGetString(GL_SHADING_LANGUAGE_VERSION)) << std::endl;
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -94,7 +94,7 @@ int main() {
     glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices1.size() * sizeof(GLfloat)), vertices1.data(), GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *) nullptr);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), static_cast<void *>(nullptr));
 
     GLuint VBO2 = 0;
     glGenBuffers(1, &VBO2);
@@ -102,7 +102,7 @@ int main() {
     glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices2.size() * sizeof(GLfloat)), vertices2.data(), GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *) nullptr);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), static_cast<void *>(nullptr));
 
     GLuint EBO = 0;
     glGenBuffers(1, &EBO);
@@ -217,7 +217,7 @@ void main() {
 
         glUseProgram(program);
 
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, (void *) nullptr);
+        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, static_cast<void *>(nullptr));
 
         ///////////////////////////////////////////////////////////////////////
 

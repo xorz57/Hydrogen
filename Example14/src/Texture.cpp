@@ -16,8 +16,7 @@ Texture::Texture(const char *texturePath) {
     int texture_w;
     int texture_h;
     stbi_set_flip_vertically_on_load(true);
-    stbi_uc *pixels = stbi_load(texturePath, &texture_w, &texture_h, nullptr, STBI_rgb_alpha);
-    if (pixels) {
+    if (stbi_uc *pixels = stbi_load(texturePath, &texture_w, &texture_h, nullptr, STBI_rgb_alpha)) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture_w, texture_h, 0, GL_RGBA, GL_UNSIGNED_BYTE, (void *) pixels);
         glGenerateMipmap(GL_TEXTURE_2D);
         stbi_image_free(pixels);
