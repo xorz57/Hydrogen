@@ -10,9 +10,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 if (VCPKG_TARGET_TRIPLET MATCHES "-static$")
     set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-else()
+else ()
     set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
-endif()
+endif ()
 
 find_package(glad REQUIRED)
 find_package(glfw3 REQUIRED)
