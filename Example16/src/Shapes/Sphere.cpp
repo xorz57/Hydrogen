@@ -100,7 +100,7 @@ void Sphere::Translate(const glm::vec3 &v) {
     mModel = glm::translate(mModel, v);
 }
 
-void Sphere::Rotate(float angle, const glm::vec3 &v) {
+void Sphere::Rotate(const float angle, const glm::vec3 &v) {
     mModel = glm::rotate(mModel, angle, v);
 }
 

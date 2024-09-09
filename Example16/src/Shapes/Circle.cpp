@@ -16,7 +16,7 @@ Circle::Circle() {
     VAO::Unbind();
 }
 
-Circle::Circle(std::uint32_t sectors) {
+Circle::Circle(const std::uint32_t sectors) {
     Build(sectors);
 
     mVAO = VAO::Create();
@@ -32,7 +32,7 @@ Circle::Circle(std::uint32_t sectors) {
     VAO::Unbind();
 }
 
-void Circle::Build(std::uint32_t sectors) {
+void Circle::Build(const std::uint32_t sectors) {
     mVertices.reserve(sectors + 2);
     mElements.reserve(sectors + 2);
 
@@ -75,7 +75,7 @@ void Circle::Translate(const glm::vec3 &v) {
     mModel = glm::translate(mModel, v);
 }
 
-void Circle::Rotate(float angle, const glm::vec3 &v) {
+void Circle::Rotate(const float angle, const glm::vec3 &v) {
     mModel = glm::rotate(mModel, angle, v);
 }
 

@@ -18,7 +18,7 @@ Capsule::Capsule() {
     VAO::Unbind();
 }
 
-Capsule::Capsule(std::uint32_t sectors, std::uint32_t stacks) {
+Capsule::Capsule(const std::uint32_t sectors, const std::uint32_t stacks) {
     Build(sectors, stacks);
 
     mVAO = VAO::Create();
@@ -36,8 +36,8 @@ Capsule::Capsule(std::uint32_t sectors, std::uint32_t stacks) {
     VAO::Unbind();
 }
 
-void Capsule::Build(std::uint32_t sectors, std::uint32_t stacks) {
-    const float height = 0.5f;
+void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
+    constexpr float height = 0.5f;
 
     for (std::uint32_t stack = 0; stack <= stacks; ++stack) {
         const float stack_step = glm::half_pi<float>() / static_cast<float>(stacks);
@@ -179,7 +179,7 @@ void Capsule::Translate(const glm::vec3 &v) {
     mModel = glm::translate(mModel, v);
 }
 
-void Capsule::Rotate(float angle, const glm::vec3 &v) {
+void Capsule::Rotate(const float angle, const glm::vec3 &v) {
     mModel = glm::rotate(mModel, angle, v);
 }
 

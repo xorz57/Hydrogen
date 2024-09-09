@@ -38,7 +38,7 @@ void Cube::Translate(const glm::vec3 &v) {
     mModel = glm::translate(mModel, v);
 }
 
-void Cube::Rotate(float angle, const glm::vec3 &v) {
+void Cube::Rotate(const float angle, const glm::vec3 &v) {
     mModel = glm::rotate(mModel, angle, v);
 }
 

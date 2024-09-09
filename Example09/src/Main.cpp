@@ -15,7 +15,7 @@
 #include <iostream>
 #include <vector>
 
-static void glfw_error_callback(int error, const char *description) {
+static void glfw_error_callback(const int error, const char *description) {
     std::fprintf(stderr, "GLFW Error %d: %s\n", error, description);
 }
 
@@ -105,7 +105,7 @@ int main() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(elements.size() * sizeof(GLuint)), elements.data(), GL_STATIC_DRAW);
 
-    Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
+    const Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
     ///////////////////////////////////////////////////////////////////////////
 

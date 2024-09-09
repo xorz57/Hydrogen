@@ -10,7 +10,7 @@
 Shader::Shader(const GLchar *vShaderSource, const GLchar *fShaderSource) {
     GLint success;
 
-    GLuint vShader = glCreateShader(GL_VERTEX_SHADER);
+    const GLuint vShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vShader, 1, &vShaderSource, nullptr);
     glCompileShader(vShader);
     glGetShaderiv(vShader, GL_COMPILE_STATUS, &success);
@@ -23,7 +23,7 @@ Shader::Shader(const GLchar *vShaderSource, const GLchar *fShaderSource) {
         std::exit(EXIT_FAILURE);
     }
 
-    GLuint fShader = glCreateShader(GL_FRAGMENT_SHADER);
+    const GLuint fShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fShader, 1, &fShaderSource, nullptr);
     glCompileShader(fShader);
     glGetShaderiv(fShader, GL_COMPILE_STATUS, &success);

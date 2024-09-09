@@ -28,7 +28,7 @@
 #include <cinttypes>
 #include <cstdlib>
 
-static void glfw_error_callback(int error, const char *description) {
+static void glfw_error_callback(const int error, const char *description) {
     std::fprintf(stderr, "GLFW Error %d: %s\n", error, description);
 }
 

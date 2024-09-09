@@ -21,7 +21,7 @@
 #include <iostream>
 #include <vector>
 
-static void glfw_error_callback(int error, const char *description) {
+static void glfw_error_callback(const int error, const char *description) {
     std::fprintf(stderr, "GLFW Error %d: %s\n", error, description);
 }
 
@@ -130,7 +130,7 @@ int main() {
         stbi_image_free(pixels);
     }
 
-    Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
+    const Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
 
     ///////////////////////////////////////////////////////////////////////////
 

@@ -38,7 +38,7 @@ void Quad::Translate(const glm::vec3 &v) {
     mModel = glm::translate(mModel, v);
 }
 
-void Quad::Rotate(float angle, const glm::vec3 &v) {
+void Quad::Rotate(const float angle, const glm::vec3 &v) {
     mModel = glm::rotate(mModel, angle, v);
 }
 
