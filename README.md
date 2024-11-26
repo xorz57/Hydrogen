@@ -27,7 +27,7 @@ git clone https://github.com/xorz57/OpenGLSandbox.git
 cd OpenGLSandbox
 cmake -B build -DCMAKE_BUILD_TYPE=Release -S . -DCMAKE_TOOLCHAIN_FILE=~/vcpkg/scripts/buildsystems/vcpkg.cmake
 cmake --build build --config Release
-ctest --build-config Release
+ctest --test-dir build --build-config Release
 ```
 
 #### Windows
@@ -41,5 +41,5 @@ git clone https://github.com/xorz57/OpenGLSandbox.git
 cd OpenGLSandbox
 cmake -B build -DCMAKE_BUILD_TYPE=Release -S . -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
 cmake --build build --config Release
-ctest --build-config Release
+ctest --test-dir build --build-config Release
 ```
