@@ -79,8 +79,19 @@ int main() {
         ImGui::NewFrame();
 
         ImGui::Begin("Statistics");
-        ImGui::Text("frame: %" PRIu64, frame);
-        ImGui::Text("dt: %.5lf sec", dt);
+        if (ImGui::BeginTable("##statistics_table", 2, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg)) {
+            ImGui::TableNextColumn();
+            ImGui::Text("Frame");
+            ImGui::TableNextColumn();
+            ImGui::Text("%" PRIu64, frame);
+
+            ImGui::TableNextColumn();
+            ImGui::Text("Delta Time");
+            ImGui::TableNextColumn();
+            ImGui::Text("%.8lf sec", dt);
+
+            ImGui::EndTable();
+        }
         ImGui::End();
 
         ImGui::Render();
