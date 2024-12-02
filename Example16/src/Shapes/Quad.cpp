@@ -29,23 +29,3 @@ void Quad::Delete() const {
     mVBO->Delete();
     mEBO->Delete();
 }
-
-void Quad::Scale(const glm::vec3 &v) {
-    mModel = glm::scale(mModel, v);
-}
-
-void Quad::Translate(const glm::vec3 &v) {
-    mModel = glm::translate(mModel, v);
-}
-
-void Quad::Rotate(const float angle, const glm::vec3 &v) {
-    mModel = glm::rotate(mModel, angle, v);
-}
-
-void Quad::Reset() {
-    mModel = glm::mat4(1.0f);
-}
-
-glm::mat4 Quad::GetModel() const {
-    return mModel;
-}

@@ -109,23 +109,3 @@ void Cylinder::Delete() const {
     mEBO2->Delete();
     mEBO3->Delete();
 }
-
-void Cylinder::Scale(const glm::vec3 &v) {
-    mModel = glm::scale(mModel, v);
-}
-
-void Cylinder::Translate(const glm::vec3 &v) {
-    mModel = glm::translate(mModel, v);
-}
-
-void Cylinder::Rotate(const float angle, const glm::vec3 &v) {
-    mModel = glm::rotate(mModel, angle, v);
-}
-
-void Cylinder::Reset() {
-    mModel = glm::mat4(1.0f);
-}
-
-glm::mat4 Cylinder::GetModel() const {
-    return mModel;
-}

@@ -91,23 +91,3 @@ void Sphere::Delete() const {
     mVBO->Delete();
     mEBO->Delete();
 }
-
-void Sphere::Scale(const glm::vec3 &v) {
-    mModel = glm::scale(mModel, v);
-}
-
-void Sphere::Translate(const glm::vec3 &v) {
-    mModel = glm::translate(mModel, v);
-}
-
-void Sphere::Rotate(const float angle, const glm::vec3 &v) {
-    mModel = glm::rotate(mModel, angle, v);
-}
-
-void Sphere::Reset() {
-    mModel = glm::mat4(1.0f);
-}
-
-glm::mat4 Sphere::GetModel() const {
-    return mModel;
-}

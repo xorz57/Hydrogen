@@ -1,7 +1,7 @@
 #include "Plane.hpp"
 
 Plane::Plane() {
-    Build(16, 16);
+    Build(2, 2);
 
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
@@ -77,24 +77,4 @@ void Plane::Delete() const {
     mVAO->Delete();
     mVBO->Delete();
     mEBO->Delete();
-}
-
-void Plane::Scale(const glm::vec3 &v) {
-    mModel = glm::scale(mModel, v);
-}
-
-void Plane::Translate(const glm::vec3 &v) {
-    mModel = glm::translate(mModel, v);
-}
-
-void Plane::Rotate(const float angle, const glm::vec3 &v) {
-    mModel = glm::rotate(mModel, angle, v);
-}
-
-void Plane::Reset() {
-    mModel = glm::mat4(1.0f);
-}
-
-glm::mat4 Plane::GetModel() const {
-    return mModel;
 }

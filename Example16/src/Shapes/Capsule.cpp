@@ -170,23 +170,3 @@ void Capsule::Delete() const {
     mEBO2->Delete();
     mEBO3->Delete();
 }
-
-void Capsule::Scale(const glm::vec3 &v) {
-    mModel = glm::scale(mModel, v);
-}
-
-void Capsule::Translate(const glm::vec3 &v) {
-    mModel = glm::translate(mModel, v);
-}
-
-void Capsule::Rotate(const float angle, const glm::vec3 &v) {
-    mModel = glm::rotate(mModel, angle, v);
-}
-
-void Capsule::Reset() {
-    mModel = glm::mat4(1.0f);
-}
-
-glm::mat4 Capsule::GetModel() const {
-    return mModel;
-}

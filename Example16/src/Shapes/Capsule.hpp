@@ -23,13 +23,6 @@ public:
     void Draw() const;
     void Delete() const;
 
-    [[nodiscard]] glm::mat4 GetModel() const;
-
-    void Scale(const glm::vec3 &v);
-    void Translate(const glm::vec3 &v);
-    void Rotate(float angle, const glm::vec3 &v);
-    void Reset();
-
 private:
     void Build(std::uint32_t sectors, std::uint32_t stacks);
 
@@ -44,8 +37,6 @@ private:
     std::vector<GLuint> mElements1;
     std::vector<GLuint> mElements2;
     std::vector<GLuint> mElements3;
-
-    glm::mat4 mModel{1.0f};
 
     std::shared_ptr<VAO> mVAO;
     std::shared_ptr<VBO<Vertex>> mVBO;

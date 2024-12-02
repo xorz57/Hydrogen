@@ -66,23 +66,3 @@ void Circle::Delete() const {
     mVBO->Delete();
     mEBO->Delete();
 }
-
-void Circle::Scale(const glm::vec3 &v) {
-    mModel = glm::scale(mModel, v);
-}
-
-void Circle::Translate(const glm::vec3 &v) {
-    mModel = glm::translate(mModel, v);
-}
-
-void Circle::Rotate(const float angle, const glm::vec3 &v) {
-    mModel = glm::rotate(mModel, angle, v);
-}
-
-void Circle::Reset() {
-    mModel = glm::mat4(1.0f);
-}
-
-glm::mat4 Circle::GetModel() const {
-    return mModel;
-}

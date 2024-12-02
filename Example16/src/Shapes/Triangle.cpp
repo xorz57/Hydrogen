@@ -29,23 +29,3 @@ void Triangle::Delete() const {
     mVBO->Delete();
     mEBO->Delete();
 }
-
-void Triangle::Scale(const glm::vec3 &v) {
-    mModel = glm::scale(mModel, v);
-}
-
-void Triangle::Translate(const glm::vec3 &v) {
-    mModel = glm::translate(mModel, v);
-}
-
-void Triangle::Rotate(const float angle, const glm::vec3 &v) {
-    mModel = glm::rotate(mModel, angle, v);
-}
-
-void Triangle::Reset() {
-    mModel = glm::mat4(1.0f);
-}
-
-glm::mat4 Triangle::GetModel() const {
-    return mModel;
-}

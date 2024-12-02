@@ -176,61 +176,77 @@ void Application::Run() {
         shader.SetFloat4x4("u_view", camera.GetView());
         shader.SetFloat4x4("u_projection", camera.GetProjection(window_a));
 
-        triangle.Reset();
-        triangle.Translate(glm::vec3(0.0f, 0.0f, 0.0f));
-        triangle.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        triangle.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-        shader.SetFloat4x4("u_model", triangle.GetModel());
-        triangle.Draw();
+        {
+            glm::mat4 model(1.0f);
+            model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+            model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+            shader.SetFloat4x4("u_model", model);
+            triangle.Draw();
+        }
 
-        quad.Reset();
-        quad.Translate(glm::vec3(32.0f, 0.0f, 0.0f));
-        quad.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        quad.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-        shader.SetFloat4x4("u_model", quad.GetModel());
-        quad.Draw();
+        {
+            glm::mat4 model(1.0f);
+            model = glm::translate(model, glm::vec3(32.0f, 0.0f, 0.0f));
+            model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+            shader.SetFloat4x4("u_model", model);
+            quad.Draw();
+        }
 
-        cube.Reset();
-        cube.Translate(glm::vec3(64.0f, 0.0f, 0.0f));
-        cube.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        cube.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-        shader.SetFloat4x4("u_model", cube.GetModel());
-        cube.Draw();
+        {
+            glm::mat4 model(1.0f);
+            model = glm::translate(model, glm::vec3(64.0f, 0.0f, 0.0f));
+            model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+            shader.SetFloat4x4("u_model", model);
+            cube.Draw();
+        }
 
-        plane.Reset();
-        plane.Translate(glm::vec3(0.0f, 0.0f, 32.0f));
-        plane.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        plane.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-        shader.SetFloat4x4("u_model", plane.GetModel());
-        plane.Draw();
+        {
+            glm::mat4 model(1.0f);
+            model = glm::translate(model, glm::vec3(0.0f, 0.0f, 32.0f));
+            model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+            shader.SetFloat4x4("u_model", model);
+            plane.Draw();
+        }
 
-        circle.Reset();
-        circle.Translate(glm::vec3(32.0f, 0.0f, 32.0f));
-        circle.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        circle.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-        shader.SetFloat4x4("u_model", circle.GetModel());
-        circle.Draw();
+        {
+            glm::mat4 model(1.0f);
+            model = glm::translate(model, glm::vec3(32.0f, 0.0f, 32.0f));
+            model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+            shader.SetFloat4x4("u_model", model);
+            circle.Draw();
+        }
 
-        sphere.Reset();
-        sphere.Translate(glm::vec3(64.0f, 0.0f, 32.0f));
-        sphere.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        sphere.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-        shader.SetFloat4x4("u_model", sphere.GetModel());
-        sphere.Draw();
+        {
+            glm::mat4 model(1.0f);
+            model = glm::translate(model, glm::vec3(64.0f, 0.0f, 32.0f));
+            model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+            shader.SetFloat4x4("u_model", model);
+            sphere.Draw();
+        }
 
-        cylinder.Reset();
-        cylinder.Translate(glm::vec3(0.0f, 0.0f, 64.0f));
-        cylinder.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        cylinder.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-        shader.SetFloat4x4("u_model", cylinder.GetModel());
-        cylinder.Draw();
+        {
+            glm::mat4 model(1.0f);
+            model = glm::translate(model, glm::vec3(0.0f, 0.0f, 64.0f));
+            model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+            shader.SetFloat4x4("u_model", model);
+            cylinder.Draw();
+        }
 
-        capsule.Reset();
-        capsule.Translate(glm::vec3(32.0f, 0.0f, 64.0f));
-        capsule.Rotate(glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        capsule.Scale(glm::vec3(16.0f, 16.0f, 16.0f));
-        shader.SetFloat4x4("u_model", capsule.GetModel());
-        capsule.Draw();
+        {
+            glm::mat4 model(1.0f);
+            model = glm::translate(model, glm::vec3(32.0f, 0.0f, 64.0f));
+            model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+            shader.SetFloat4x4("u_model", model);
+            capsule.Draw();
+        }
 
         ///////////////////////////////////////////////////////////////////////
 
