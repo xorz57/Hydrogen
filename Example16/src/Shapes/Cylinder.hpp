@@ -35,13 +35,4 @@ private:
     std::shared_ptr<VAO> mVAO;
     std::shared_ptr<VBO<Vertex>> mVBO;
     std::shared_ptr<EBO<GLuint>> mEBO;
-
-    struct DrawRange {
-        std::size_t start;
-        std::size_t count;
-    };
-
-    DrawRange mTopCapRange;
-    DrawRange mBottomCapRange;
-    DrawRange mSideRange;
 };

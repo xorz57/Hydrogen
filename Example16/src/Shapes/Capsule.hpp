@@ -30,14 +30,9 @@ private:
     };
 
     std::vector<Vertex> mVertices;
-
-    std::vector<GLuint> mElements1;
-    std::vector<GLuint> mElements2;
-    std::vector<GLuint> mElements3;
+    std::vector<GLuint> mElements;
 
     std::shared_ptr<VAO> mVAO;
     std::shared_ptr<VBO<Vertex>> mVBO;
-    std::shared_ptr<EBO<GLuint>> mEBO1;
-    std::shared_ptr<EBO<GLuint>> mEBO2;
-    std::shared_ptr<EBO<GLuint>> mEBO3;
+    std::shared_ptr<EBO<GLuint>> mEBO;
 };

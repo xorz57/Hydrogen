@@ -5,9 +5,7 @@ Capsule::Capsule() {
 
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
-    mEBO1 = EBO<GLuint>::Create(mElements1);
-    mEBO2 = EBO<GLuint>::Create(mElements2);
-    mEBO3 = EBO<GLuint>::Create(mElements3);
+    mEBO = EBO<GLuint>::Create(mElements);
 
     mVAO->Bind();
     mVBO->Bind();
@@ -21,9 +19,7 @@ Capsule::Capsule(const std::uint32_t sectors, const std::uint32_t stacks) {
 
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
-    mEBO1 = EBO<GLuint>::Create(mElements1);
-    mEBO2 = EBO<GLuint>::Create(mElements2);
-    mEBO3 = EBO<GLuint>::Create(mElements3);
+    mEBO = EBO<GLuint>::Create(mElements);
 
     mVAO->Bind();
     mVBO->Bind();
@@ -35,6 +31,7 @@ Capsule::Capsule(const std::uint32_t sectors, const std::uint32_t stacks) {
 void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
     constexpr float height = 0.5f;
 
+    // Top hemisphere vertices
     for (std::uint32_t stack = 0; stack <= stacks; ++stack) {
         const float stack_step = glm::half_pi<float>() / static_cast<float>(stacks);
         const float stack_angle = static_cast<float>(stack) * stack_step;
@@ -52,6 +49,7 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
         }
     }
 
+    // Bottom hemisphere vertices
     for (std::uint32_t stack = 0; stack <= stacks; ++stack) {
         const float stack_step = glm::half_pi<float>() / static_cast<float>(stacks);
         const float stack_angle = glm::half_pi<float>() + static_cast<float>(stack) * stack_step;
@@ -69,6 +67,7 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
         }
     }
 
+    // Cylinder vertices
     for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
         const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
         const float sector_angle = static_cast<float>(sector) * sector_step;
@@ -80,79 +79,67 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
         mVertices.push_back({{x, -height, z}});
     }
 
+    const std::uint32_t hemisphere_offset = (stacks + 1) * (sectors + 1);
+
+    // Top hemisphere indices
     for (std::uint32_t stack = 0; stack < stacks; ++stack) {
-        std::uint32_t k1 = stack * (sectors + 1);
-        std::uint32_t k2 = k1 + sectors + 1;
+        const std::uint32_t k1 = stack * (sectors + 1);
+        const std::uint32_t k2 = k1 + sectors + 1;
 
         for (std::uint32_t sector = 0; sector < sectors; ++sector) {
-            mElements1.push_back(k1);
-            mElements1.push_back(k2);
-            mElements1.push_back(k1 + 1);
+            mElements.push_back(k1 + sector);
+            mElements.push_back(k2 + sector);
+            mElements.push_back(k1 + sector + 1);
 
-            mElements1.push_back(k1 + 1);
-            mElements1.push_back(k2);
-            mElements1.push_back(k2 + 1);
-
-            ++k1;
-            ++k2;
+            mElements.push_back(k1 + sector + 1);
+            mElements.push_back(k2 + sector);
+            mElements.push_back(k2 + sector + 1);
         }
     }
 
-    const std::uint32_t offset1 = (stacks + 1) * (sectors + 1);
+    // Bottom hemisphere indices
     for (std::uint32_t stack = 0; stack < stacks; ++stack) {
-        std::uint32_t k1 = offset1 + stack * (sectors + 1);
-        std::uint32_t k2 = k1 + sectors + 1;
+        const std::uint32_t k1 = hemisphere_offset + stack * (sectors + 1);
+        const std::uint32_t k2 = k1 + sectors + 1;
 
         for (std::uint32_t sector = 0; sector < sectors; ++sector) {
-            mElements2.push_back(k1);
-            mElements2.push_back(k1 + 1);
-            mElements2.push_back(k2);
+            mElements.push_back(k1 + sector);
+            mElements.push_back(k1 + sector + 1);
+            mElements.push_back(k2 + sector);
 
-            mElements2.push_back(k2);
-            mElements2.push_back(k1 + 1);
-            mElements2.push_back(k2 + 1);
-
-            ++k1;
-            ++k2;
+            mElements.push_back(k2 + sector);
+            mElements.push_back(k1 + sector + 1);
+            mElements.push_back(k2 + sector + 1);
         }
     }
 
-    const std::uint32_t offset2 = offset1 + (stacks + 1) * (sectors + 1);
+    // Cylinder indices
+    const std::uint32_t cylinder_offset = hemisphere_offset * 2;
     for (std::uint32_t sector = 0; sector < sectors; ++sector) {
-        const std::uint32_t top1 = offset2 + sector * 2;
+        const std::uint32_t top1 = cylinder_offset + sector * 2;
         const std::uint32_t top2 = top1 + 1;
         const std::uint32_t bottom1 = top1 + 2;
         const std::uint32_t bottom2 = bottom1 + 1;
 
-        mElements3.push_back(top1);
-        mElements3.push_back(bottom1);
-        mElements3.push_back(top2);
+        mElements.push_back(top1);
+        mElements.push_back(bottom1);
+        mElements.push_back(top2);
 
-        mElements3.push_back(top2);
-        mElements3.push_back(bottom1);
-        mElements3.push_back(bottom2);
+        mElements.push_back(top2);
+        mElements.push_back(bottom1);
+        mElements.push_back(bottom2);
     }
 }
 
 void Capsule::Draw() const {
     mVAO->Bind();
-
-    mEBO1->Bind();
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements1.size()), GL_UNSIGNED_INT, nullptr);
-
-    mEBO2->Bind();
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements2.size()), GL_UNSIGNED_INT, nullptr);
-
-    mEBO3->Bind();
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements3.size()), GL_UNSIGNED_INT, nullptr);
-
+    mEBO->Bind();
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, nullptr);
     VAO::Unbind();
 }
 
 void Capsule::Delete() const {
     mVAO->Delete();
     mVBO->Delete();
-    mEBO1->Delete();
-    mEBO2->Delete();
-    mEBO3->Delete();
+    mEBO->Delete();
 }
