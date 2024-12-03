@@ -6,12 +6,10 @@ Circle::Circle() {
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
     mEBO = EBO<GLuint>::Create(mElements);
-    mTexture = Texture::Create("assets/textures/purple.png");
 
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
-    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -22,12 +20,10 @@ Circle::Circle(const std::uint32_t sectors) {
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
     mEBO = EBO<GLuint>::Create(mElements);
-    mTexture = Texture::Create("assets/textures/purple.png");
 
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
-    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -36,7 +32,7 @@ void Circle::Build(const std::uint32_t sectors) {
     mVertices.reserve(sectors + 2);
     mElements.reserve(sectors + 2);
 
-    mVertices.push_back({{0.0f, 0.0f, 0.0f}, {0.5f, 0.5f}});
+    mVertices.push_back({{0.0f, 0.0f, 0.0f}});
     mElements.push_back(0);
 
     for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
@@ -44,20 +40,16 @@ void Circle::Build(const std::uint32_t sectors) {
         const float sector_angle = static_cast<float>(sector) * sector_step;
         const float x = 0.5f * glm::cos(sector_angle);
         const float y = 0.5f * glm::sin(sector_angle);
-        const float u = 0.5f + 0.5f * glm::cos(sector_angle);
-        const float v = 0.5f + 0.5f * glm::sin(sector_angle);
-        mVertices.push_back({{x, y, 0.0f}, {u, v}});
+        mVertices.push_back({{x, y, 0.0f}});
         mElements.push_back(sector + 1);
     }
 }
 
 void Circle::Draw() const {
     mVAO->Bind();
-    mTexture->Bind();
 
     glDrawElements(GL_TRIANGLE_FAN, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, static_cast<void *>(nullptr));
 
-    Texture::Unbind();
     VAO::Unbind();
 }
 

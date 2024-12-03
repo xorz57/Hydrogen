@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../EBO.hpp"
-#include "../Texture.hpp"
 #include "../VAO.hpp"
 #include "../VBO.hpp"
 
@@ -32,8 +31,7 @@ private:
     };
 
     std::vector<Vertex> mVertices;
-    
-    // Index buffers and element vectors
+
     std::vector<GLuint> mElements1;
     std::vector<GLuint> mElements2;
     std::vector<GLuint> mElements3;
@@ -43,5 +41,4 @@ private:
     std::shared_ptr<EBO<GLuint>> mEBO1;
     std::shared_ptr<EBO<GLuint>> mEBO2;
     std::shared_ptr<EBO<GLuint>> mEBO3;
-    std::shared_ptr<Texture> mTexture;
 };

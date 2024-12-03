@@ -8,12 +8,10 @@ Capsule::Capsule() {
     mEBO1 = EBO<GLuint>::Create(mElements1);
     mEBO2 = EBO<GLuint>::Create(mElements2);
     mEBO3 = EBO<GLuint>::Create(mElements3);
-    mTexture = Texture::Create("assets/textures/capsule.png");
 
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
-    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -26,12 +24,10 @@ Capsule::Capsule(const std::uint32_t sectors, const std::uint32_t stacks) {
     mEBO1 = EBO<GLuint>::Create(mElements1);
     mEBO2 = EBO<GLuint>::Create(mElements2);
     mEBO3 = EBO<GLuint>::Create(mElements3);
-    mTexture = Texture::Create("assets/textures/capsule.png");
 
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
-    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -52,10 +48,7 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
             const float x = 0.5f * glm::sin(stack_angle) * glm::cos(sector_angle);
             const float z = 0.5f * glm::sin(stack_angle) * glm::sin(sector_angle);
 
-            const float u = static_cast<float>(sector) / static_cast<float>(sectors);
-            const float v = static_cast<float>(stack) / static_cast<float>(stacks * 2);
-
-            mVertices.push_back({{x, y, z}, {u, v}});
+            mVertices.push_back({{x, y, z}});
         }
     }
 
@@ -72,10 +65,7 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
             const float x = 0.5f * glm::sin(stack_angle) * glm::cos(sector_angle);
             const float z = 0.5f * glm::sin(stack_angle) * glm::sin(sector_angle);
 
-            const float u = static_cast<float>(sector) / static_cast<float>(sectors);
-            const float v = static_cast<float>(stack + stacks) / static_cast<float>(stacks * 2);
-
-            mVertices.push_back({{x, y, z}, {u, v}});
+            mVertices.push_back({{x, y, z}});
         }
     }
 
@@ -86,10 +76,8 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
         const float x = 0.5f * glm::cos(sector_angle);
         const float z = 0.5f * glm::sin(sector_angle);
 
-        const float u = static_cast<float>(sector) / static_cast<float>(sectors);
-
-        mVertices.push_back({{x, height, z}, {u, 1.0f}});
-        mVertices.push_back({{x, -height, z}, {u, 0.0f}});
+        mVertices.push_back({{x, height, z}});
+        mVertices.push_back({{x, -height, z}});
     }
 
     for (std::uint32_t stack = 0; stack < stacks; ++stack) {
@@ -148,7 +136,6 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
 
 void Capsule::Draw() const {
     mVAO->Bind();
-    mTexture->Bind();
 
     mEBO1->Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements1.size()), GL_UNSIGNED_INT, nullptr);
@@ -159,7 +146,6 @@ void Capsule::Draw() const {
     mEBO3->Bind();
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements3.size()), GL_UNSIGNED_INT, nullptr);
 
-    Texture::Unbind();
     VAO::Unbind();
 }
 

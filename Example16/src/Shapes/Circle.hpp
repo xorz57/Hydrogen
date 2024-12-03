@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../EBO.hpp"
-#include "../Texture.hpp"
 #include "../VAO.hpp"
 #include "../VBO.hpp"
 
@@ -28,7 +27,6 @@ private:
 
     struct Vertex {
         glm::vec3 position;
-        glm::vec2 texture_coordinates;
     };
 
     std::vector<Vertex> mVertices;
@@ -38,5 +36,4 @@ private:
     std::shared_ptr<VAO> mVAO;
     std::shared_ptr<VBO<Vertex>> mVBO;
     std::shared_ptr<EBO<GLuint>> mEBO;
-    std::shared_ptr<Texture> mTexture;
 };
