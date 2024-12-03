@@ -6,12 +6,10 @@ Sphere::Sphere() {
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
     mEBO = EBO<GLuint>::Create(mElements);
-    mTexture = Texture::Create("assets/textures/sphere.png");
 
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
-    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -22,12 +20,10 @@ Sphere::Sphere(const std::uint32_t sectors, const std::uint32_t stacks) {
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
     mEBO = EBO<GLuint>::Create(mElements);
-    mTexture = Texture::Create("assets/textures/sphere.png");
 
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
-    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -46,10 +42,7 @@ void Sphere::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
             const float x = glm::sin(stack_angle) * glm::cos(sector_angle);
             const float z = glm::sin(stack_angle) * glm::sin(sector_angle);
 
-            const float u = static_cast<float>(sector) / static_cast<float>(sectors);
-            const float v = static_cast<float>(stack) / static_cast<float>(stacks);
-
-            mVertices.push_back({{0.5f * x, 0.5f * y, 0.5f * z}, {u, v}});
+            mVertices.push_back({{0.5f * x, 0.5f * y, 0.5f * z}});
         }
     }
 
@@ -78,11 +71,9 @@ void Sphere::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
 
 void Sphere::Draw() const {
     mVAO->Bind();
-    mTexture->Bind();
 
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, static_cast<void *>(nullptr));
 
-    Texture::Unbind();
     VAO::Unbind();
 }
 

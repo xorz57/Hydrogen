@@ -6,12 +6,10 @@ Plane::Plane() {
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
     mEBO = EBO<GLuint>::Create(mElements);
-    mTexture = Texture::Create("assets/textures/plane.png");
 
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
-    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -22,12 +20,10 @@ Plane::Plane(std::uint32_t segmentsX, std::uint32_t segmentsZ) {
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
     mEBO = EBO<GLuint>::Create(mElements);
-    mTexture = Texture::Create("assets/textures/plane.png");
 
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
-    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -41,9 +37,7 @@ void Plane::Build(const std::uint32_t segmentsX, const std::uint32_t segmentsZ) 
         for (std::uint32_t j = 0; j <= segmentsX; ++j) {
             const float x = static_cast<float>(j) * stepX - 0.5f;
             const float z = static_cast<float>(i) * stepZ - 0.5f;
-            const float u = static_cast<float>(j) * stepX;
-            const float v = static_cast<float>(i) * stepZ;
-            mVertices.push_back({{x, 0.0f, z}, {u, v}});
+            mVertices.push_back({{x, 0.0f, z}});
         }
     }
 
@@ -65,11 +59,9 @@ void Plane::Build(const std::uint32_t segmentsX, const std::uint32_t segmentsZ) 
 
 void Plane::Draw() const {
     mVAO->Bind();
-    mTexture->Bind();
 
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, static_cast<void *>(nullptr));
 
-    Texture::Unbind();
     VAO::Unbind();
 }
 
