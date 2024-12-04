@@ -183,6 +183,8 @@ void Application::Run() {
         shader.SetFloat4("u_light_color", light_color);
 
         {
+            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
+            shader.SetFloat4("u_color", color);
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
