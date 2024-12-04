@@ -116,6 +116,14 @@ int main() {
 
         glfwPollEvents();
 
+        int window_w;
+        int window_h;
+        glfwGetFramebufferSize(window, &window_w, &window_h);
+        glViewport(0, 0, window_w, window_h);
+
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -136,16 +144,6 @@ int main() {
         }
         ImGui::End();
 
-        ImGui::Render();
-
-        int window_w;
-        int window_h;
-        glfwGetFramebufferSize(window, &window_w, &window_h);
-        glViewport(0, 0, window_w, window_h);
-
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
         ///////////////////////////////////////////////////////////////////////
 
         shader.Use();
@@ -153,6 +151,8 @@ int main() {
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, static_cast<void *>(nullptr));
 
         ///////////////////////////////////////////////////////////////////////
+
+        ImGui::Render();
 
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 

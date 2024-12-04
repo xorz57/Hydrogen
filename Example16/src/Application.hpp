@@ -5,7 +5,4 @@ public:
     void Run();
 
     static Application &GetInstance();
-
-private:
-    bool mWireframe = false;
 };

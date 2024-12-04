@@ -123,6 +123,16 @@ void Application::Run() {
 
         glfwPollEvents();
 
+        int window_w;
+        int window_h;
+        glfwGetFramebufferSize(window, &window_w, &window_h);
+        glViewport(0, 0, window_w, window_h);
+
+        const float window_a = static_cast<float>(window_w) / static_cast<float>(window_h);
+
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -143,25 +153,15 @@ void Application::Run() {
         }
         ImGui::End();
 
-        ImGui::Begin("Settings");
-        ImGui::Checkbox("Wireframe", &mWireframe);
-        ImGui::End();
-
-        ImGui::Render();
-
-        int window_w;
-        int window_h;
-        glfwGetFramebufferSize(window, &window_w, &window_h);
-        glViewport(0, 0, window_w, window_h);
-
-        const float window_a = static_cast<float>(window_w) / static_cast<float>(window_h);
-
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
         ///////////////////////////////////////////////////////////////////////
 
-        if (mWireframe) {
+        static bool wireframe = false;
+
+        ImGui::Begin("Settings");
+        ImGui::Checkbox("Wireframe", &wireframe);
+        ImGui::End();
+
+        if (wireframe) {
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         } else {
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -185,92 +185,110 @@ void Application::Run() {
         {
             glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
+
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
             shader.SetFloat4x4("u_model", model);
+
             triangle.Draw();
         }
 
         {
             glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
+
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(32.0f, 0.0f, 0.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
             shader.SetFloat4x4("u_model", model);
+
             quad.Draw();
         }
 
         {
             glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
+
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(64.0f, 0.0f, 0.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
             shader.SetFloat4x4("u_model", model);
+
             cube.Draw();
         }
 
         {
             glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
+
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(0.0f, 0.0f, 32.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
             shader.SetFloat4x4("u_model", model);
+
             plane.Draw();
         }
 
         {
             glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
+
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(32.0f, 0.0f, 32.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
             shader.SetFloat4x4("u_model", model);
+
             circle.Draw();
         }
 
         {
             glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
+
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(64.0f, 0.0f, 32.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
             shader.SetFloat4x4("u_model", model);
+
             sphere.Draw();
         }
 
         {
             glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
+
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(0.0f, 0.0f, 64.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
             shader.SetFloat4x4("u_model", model);
+
             cylinder.Draw();
         }
 
         {
             glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
+
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(32.0f, 0.0f, 64.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
             shader.SetFloat4x4("u_model", model);
+
             capsule.Draw();
         }
 
         ///////////////////////////////////////////////////////////////////////
+
+        ImGui::Render();
 
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
