@@ -27,15 +27,15 @@ private:
     };
 
     const std::vector<Vertex> mVertices{
-            {{-0.5f, -0.5f, +0.0f}},// 0
-            {{+0.5f, -0.5f, +0.0f}},// 1
-            {{+0.0f, +0.5f, +0.0f}},// 2
+            {{-0.5f, -0.5f, +0.0f}},
+            {{+0.5f, -0.5f, +0.0f}},
+            {{+0.0f, +0.5f, +0.0f}},
     };
 
     const std::vector<GLuint> mElements{
-            0,// 0
-            1,// 1
-            2,// 2
+            0,
+            1,
+            2,
     };
 
     std::shared_ptr<VAO> mVAO;
