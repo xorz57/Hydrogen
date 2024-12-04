@@ -176,6 +176,9 @@ void Application::Run() {
         shader.SetFloat4x4("u_view", camera.GetView());
         shader.SetFloat4x4("u_projection", camera.GetProjection(window_a));
 
+        float light_strength = 1.0f;
+        shader.SetFloat("u_light_strength", light_strength);
+
         glm::vec4 light_color(1.0f, 0.6f, 0.4f, 1.0f);
         shader.SetFloat4("u_light_color", light_color);
 
