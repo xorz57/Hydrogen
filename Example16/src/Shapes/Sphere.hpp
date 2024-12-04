@@ -30,7 +30,6 @@ private:
     };
 
     std::vector<Vertex> mVertices;
-
     std::vector<GLuint> mElements;
 
     std::shared_ptr<VAO> mVAO;
