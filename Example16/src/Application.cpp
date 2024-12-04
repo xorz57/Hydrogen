@@ -176,17 +176,20 @@ void Application::Run() {
         shader.SetFloat4x4("u_view", camera.GetView());
         shader.SetFloat4x4("u_projection", camera.GetProjection(window_a));
 
-        // {
-        //     glm::mat4 model(1.0f);
-        //     model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-        //     model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        //     model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
-        //     shader.SetFloat4x4("u_model", model);
-        //     triangle.Draw();
-        // }
+        glm::vec4 light_color(1.0f, 0.6f, 0.4f, 1.0f);
+        shader.SetFloat4("u_light_color", light_color);
 
         {
-            glm::vec4 color(1.0f, 0.0f, 0.0f, 1.0f);
+            glm::mat4 model(1.0f);
+            model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+            model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+            shader.SetFloat4x4("u_model", model);
+            triangle.Draw();
+        }
+
+        {
+            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(32.0f, 0.0f, 0.0f));
@@ -197,7 +200,7 @@ void Application::Run() {
         }
 
         {
-            glm::vec4 color(1.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(64.0f, 0.0f, 0.0f));
@@ -208,7 +211,7 @@ void Application::Run() {
         }
 
         {
-            glm::vec4 color(1.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(0.0f, 0.0f, 32.0f));
@@ -219,7 +222,7 @@ void Application::Run() {
         }
 
         {
-            glm::vec4 color(1.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(32.0f, 0.0f, 32.0f));
@@ -230,7 +233,7 @@ void Application::Run() {
         }
 
         {
-            glm::vec4 color(1.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(64.0f, 0.0f, 32.0f));
@@ -241,7 +244,7 @@ void Application::Run() {
         }
 
         {
-            glm::vec4 color(1.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(0.0f, 0.0f, 64.0f));
@@ -252,7 +255,7 @@ void Application::Run() {
         }
 
         {
-            glm::vec4 color(1.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
             shader.SetFloat4("u_color", color);
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(32.0f, 0.0f, 64.0f));
@@ -285,7 +288,7 @@ void Application::Run() {
     plane.Delete();
     quad.Delete();
     sphere.Delete();
-    // triangle.Delete();
+    triangle.Delete();
 
     shader.Delete();
 
