@@ -184,7 +184,7 @@ void Application::Run() {
 
         shader.SetFloat3("u_camera_position", camera.GetPosition());
 
-        glm::vec3 light_position(32.0f, 64.0f, 32.0f);
+        glm::vec3 light_position(32.0f + 64.0f * sin(glfwGetTime()), 64.0f, 32.0f + 64.0f * cos(glfwGetTime()));
         shader.SetFloat3("u_light_position", light_position);
 
         glm::vec4 light_color(0.0f, 0.4f, 0.6f, 1.0f);
