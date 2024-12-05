@@ -33,20 +33,21 @@ Capsule::Capsule(const std::uint32_t sectors, const std::uint32_t stacks) {
 void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
     constexpr float height = 0.5f;
 
+    const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
+    const float stack_step = glm::half_pi<float>() / static_cast<float>(stacks);
+
     // Top Hemisphere Vertices
     for (std::uint32_t stack = 0; stack <= stacks; ++stack) {
-        const float stack_step = glm::half_pi<float>() / static_cast<float>(stacks);
         const float stack_angle = static_cast<float>(stack) * stack_step;
+        const float stack_radius = 0.5f * glm::sin(stack_angle);
 
         const float y = 0.5f * glm::cos(stack_angle) + height;
-        const float radius = 0.5f * glm::sin(stack_angle);
 
         for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
-            const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
             const float sector_angle = static_cast<float>(sector) * sector_step;
 
-            const float x = radius * glm::cos(sector_angle);
-            const float z = radius * glm::sin(sector_angle);
+            const float x = stack_radius * glm::cos(sector_angle);
+            const float z = stack_radius * glm::sin(sector_angle);
 
             const glm::vec3 position = {x, y, z};
             const glm::vec3 normal = glm::normalize(position - glm::vec3(0.0f, height, 0.0f));
@@ -56,18 +57,16 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
 
     // Bottom Hemisphere Vertices
     for (std::uint32_t stack = 0; stack <= stacks; ++stack) {
-        const float stack_step = glm::half_pi<float>() / static_cast<float>(stacks);
         const float stack_angle = glm::half_pi<float>() + static_cast<float>(stack) * stack_step;
+        const float stack_radius = 0.5f * glm::sin(stack_angle);
 
         const float y = 0.5f * glm::cos(stack_angle) - height;
-        const float radius = 0.5f * glm::sin(stack_angle);
 
         for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
-            const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
             const float sector_angle = static_cast<float>(sector) * sector_step;
 
-            const float x = radius * glm::cos(sector_angle);
-            const float z = radius * glm::sin(sector_angle);
+            const float x = stack_radius * glm::cos(sector_angle);
+            const float z = stack_radius * glm::sin(sector_angle);
 
             const glm::vec3 position = {x, y, z};
             const glm::vec3 normal = glm::normalize(position - glm::vec3(0.0f, -height, 0.0f));
@@ -77,7 +76,6 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
 
     // Cylinder Vertices
     for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
-        const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
         const float sector_angle = static_cast<float>(sector) * sector_step;
 
         const float x = 0.5f * glm::cos(sector_angle);
