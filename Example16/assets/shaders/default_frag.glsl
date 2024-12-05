@@ -1,8 +1,8 @@
 #version 330 core
 
+uniform vec3 u_camera_position;
 uniform float u_ambient_strength;
 uniform float u_specular_strength;
-uniform vec3 u_camera_position;
 uniform vec3 u_light_position;
 uniform vec4 u_light_color;
 uniform vec4 u_color;

@@ -176,119 +176,108 @@ void Application::Run() {
         shader.SetFloat4x4("u_view", camera.GetView());
         shader.SetFloat4x4("u_projection", camera.GetProjection(window_a));
 
-        float ambient_strength = 1.0f;
-        shader.SetFloat("u_ambient_strength", ambient_strength);
-
-        float specular_strength = 1.0f;
-        shader.SetFloat("u_specular_strength", specular_strength);
+        const float ambient_strength = 1.0f;
+        const float specular_strength = 1.0f;
+        const glm::vec3 light_position(32.0f + 64.0f * sin(glfwGetTime()), 64.0f, 32.0f + 64.0f * cos(glfwGetTime()));
+        const glm::vec4 light_color(0.0f, 0.4f, 0.6f, 1.0f);
 
         shader.SetFloat3("u_camera_position", camera.GetPosition());
-
-        glm::vec3 light_position(32.0f + 64.0f * sin(glfwGetTime()), 64.0f, 32.0f + 64.0f * cos(glfwGetTime()));
+        shader.SetFloat("u_ambient_strength", ambient_strength);
+        shader.SetFloat("u_specular_strength", specular_strength);
         shader.SetFloat3("u_light_position", light_position);
-
-        glm::vec4 light_color(0.0f, 0.4f, 0.6f, 1.0f);
         shader.SetFloat4("u_light_color", light_color);
 
         {
-            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
-            shader.SetFloat4("u_color", color);
-
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+
+            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
             shader.SetFloat4x4("u_model", model);
 
             triangle.Draw();
         }
 
         {
-            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
-            shader.SetFloat4("u_color", color);
-
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(32.0f, 0.0f, 0.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+
+            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
             shader.SetFloat4x4("u_model", model);
 
             quad.Draw();
         }
 
         {
-            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
-            shader.SetFloat4("u_color", color);
-
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(64.0f, 0.0f, 0.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+
+            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
             shader.SetFloat4x4("u_model", model);
 
             cube.Draw();
         }
 
         {
-            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
-            shader.SetFloat4("u_color", color);
-
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(0.0f, 0.0f, 32.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+
+            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
             shader.SetFloat4x4("u_model", model);
 
             plane.Draw();
         }
 
         {
-            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
-            shader.SetFloat4("u_color", color);
-
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(32.0f, 0.0f, 32.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+
+            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
             shader.SetFloat4x4("u_model", model);
 
             circle.Draw();
         }
 
         {
-            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
-            shader.SetFloat4("u_color", color);
-
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(64.0f, 0.0f, 32.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+
+            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
             shader.SetFloat4x4("u_model", model);
 
             sphere.Draw();
         }
 
         {
-            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
-            shader.SetFloat4("u_color", color);
-
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(0.0f, 0.0f, 64.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+
+            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
             shader.SetFloat4x4("u_model", model);
 
             cylinder.Draw();
         }
 
         {
-            glm::vec4 color(1.0f, 1.0f, 1.0f, 1.0f);
-            shader.SetFloat4("u_color", color);
-
             glm::mat4 model(1.0f);
             model = glm::translate(model, glm::vec3(32.0f, 0.0f, 64.0f));
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+
+            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
             shader.SetFloat4x4("u_model", model);
 
             capsule.Draw();
