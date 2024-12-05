@@ -108,7 +108,10 @@ void Application::Run() {
     Sphere sphere;
     Triangle triangle;
 
+    Sphere light_sphere;
+
     Shader shader = Shader::LoadFromFile("assets/shaders/default_vert.glsl", "assets/shaders/default_frag.glsl");
+    Shader light_shader = Shader::LoadFromFile("assets/shaders/light_vert.glsl", "assets/shaders/light_frag.glsl");
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -179,7 +182,7 @@ void Application::Run() {
         const float ambient_strength = 1.0f;
         const float specular_strength = 1.0f;
         const glm::vec3 light_position(32.0f + 64.0f * sin(glfwGetTime()), 64.0f, 32.0f + 64.0f * cos(glfwGetTime()));
-        const glm::vec4 light_color(0.0f, 0.4f, 0.6f, 1.0f);
+        const glm::vec4 light_color(1.0f, 1.0f, 1.0f, 1.0f);
 
         shader.SetFloat3("u_camera_position", camera.GetPosition());
         shader.SetFloat("u_ambient_strength", ambient_strength);
@@ -193,9 +196,8 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
+            shader.SetFloat4("u_color", glm::vec4(0.4f, 0.2f, 0.1f, 1.0f));
             shader.SetFloat4x4("u_model", model);
-
             triangle.Draw();
         }
 
@@ -205,9 +207,8 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
+            shader.SetFloat4("u_color", glm::vec4(0.4f, 0.5f, 0.2f, 1.0f));
             shader.SetFloat4x4("u_model", model);
-
             quad.Draw();
         }
 
@@ -217,9 +218,8 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
+            shader.SetFloat4("u_color", glm::vec4(0.6f, 0.3f, 0.2f, 1.0f));
             shader.SetFloat4x4("u_model", model);
-
             cube.Draw();
         }
 
@@ -229,9 +229,8 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
+            shader.SetFloat4("u_color", glm::vec4(0.8f, 0.7f, 0.5f, 1.0f));
             shader.SetFloat4x4("u_model", model);
-
             plane.Draw();
         }
 
@@ -241,9 +240,8 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
+            shader.SetFloat4("u_color", glm::vec4(0.2f, 0.4f, 0.2f, 1.0f));
             shader.SetFloat4x4("u_model", model);
-
             circle.Draw();
         }
 
@@ -253,9 +251,8 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
+            shader.SetFloat4("u_color", glm::vec4(0.4f, 0.4f, 0.4f, 1.0f));
             shader.SetFloat4x4("u_model", model);
-
             sphere.Draw();
         }
 
@@ -265,9 +262,8 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
+            shader.SetFloat4("u_color", glm::vec4(0.7f, 0.4f, 0.3f, 1.0f));
             shader.SetFloat4x4("u_model", model);
-
             cylinder.Draw();
         }
 
@@ -277,10 +273,25 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", {1.0f, 1.0f, 1.0f, 1.0f});
+            shader.SetFloat4("u_color", glm::vec4(0.6f, 0.5f, 0.3f, 1.0f));
             shader.SetFloat4x4("u_model", model);
-
             capsule.Draw();
+        }
+
+        light_shader.Use();
+
+        light_shader.SetFloat4x4("u_view", camera.GetView());
+        light_shader.SetFloat4x4("u_projection", camera.GetProjection(window_a));
+
+        {
+            glm::mat4 model(1.0f);
+            model = glm::translate(model, light_position);
+            model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
+
+            light_shader.SetFloat4("u_color", light_color);
+            light_shader.SetFloat4x4("u_model", model);
+            light_sphere.Draw();
         }
 
         ///////////////////////////////////////////////////////////////////////
