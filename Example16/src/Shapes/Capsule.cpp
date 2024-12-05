@@ -32,6 +32,7 @@ Capsule::Capsule(const std::uint32_t sectors, const std::uint32_t stacks) {
 
 void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
     constexpr float height = 0.5f;
+    constexpr float radius = 0.5f;
 
     const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
     const float stack_step = glm::half_pi<float>() / static_cast<float>(stacks);
@@ -78,8 +79,8 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
     for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
         const float sector_angle = static_cast<float>(sector) * sector_step;
 
-        const float x = 0.5f * glm::cos(sector_angle);
-        const float z = 0.5f * glm::sin(sector_angle);
+        const float x = radius * glm::cos(sector_angle);
+        const float z = radius * glm::sin(sector_angle);
 
         const glm::vec3 normal = glm::normalize(glm::vec3(x, 0.0f, z));
         mVertices.push_back({{x, height, z}, normal});

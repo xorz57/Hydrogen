@@ -31,21 +31,23 @@ Sphere::Sphere(const std::uint32_t sectors, const std::uint32_t stacks) {
 }
 
 void Sphere::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
+    constexpr float radius = 0.5f;
+
     const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
     const float stack_step = glm::pi<float>() / static_cast<float>(stacks);
 
     for (std::uint32_t stack = 0; stack <= stacks; ++stack) {
         const float stack_angle = static_cast<float>(stack) * stack_step;
 
-        const float y = glm::cos(stack_angle);
+        const float y = radius * glm::cos(stack_angle);
 
         for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
             const float sector_angle = static_cast<float>(sector) * sector_step;
 
-            const float x = glm::sin(stack_angle) * glm::cos(sector_angle);
-            const float z = glm::sin(stack_angle) * glm::sin(sector_angle);
+            const float x = radius * glm::sin(stack_angle) * glm::cos(sector_angle);
+            const float z = radius * glm::sin(stack_angle) * glm::sin(sector_angle);
 
-            const glm::vec3 position = {0.5f * x, 0.5f * y, 0.5f * z};
+            const glm::vec3 position = {x, y, z};
             const glm::vec3 normal = glm::normalize(position);
 
             mVertices.push_back({position, normal});
