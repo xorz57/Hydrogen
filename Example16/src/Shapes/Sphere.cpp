@@ -10,6 +10,7 @@ Sphere::Sphere() {
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetFloat3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -24,6 +25,7 @@ Sphere::Sphere(const std::uint32_t sectors, const std::uint32_t stacks) {
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetFloat3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -42,7 +44,10 @@ void Sphere::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
             const float x = glm::sin(stack_angle) * glm::cos(sector_angle);
             const float z = glm::sin(stack_angle) * glm::sin(sector_angle);
 
-            mVertices.push_back({{0.5f * x, 0.5f * y, 0.5f * z}});
+            const glm::vec3 position = {0.5f * x, 0.5f * y, 0.5f * z};
+            const glm::vec3 normal = glm::normalize(position);
+
+            mVertices.push_back({position, normal});
         }
     }
 

@@ -10,6 +10,7 @@ Capsule::Capsule() {
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetFloat3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -24,6 +25,7 @@ Capsule::Capsule(const std::uint32_t sectors, const std::uint32_t stacks) {
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetFloat3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -31,43 +33,49 @@ Capsule::Capsule(const std::uint32_t sectors, const std::uint32_t stacks) {
 void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
     constexpr float height = 0.5f;
 
-    // Top hemisphere vertices
+    // Top Hemisphere Vertices
     for (std::uint32_t stack = 0; stack <= stacks; ++stack) {
         const float stack_step = glm::half_pi<float>() / static_cast<float>(stacks);
         const float stack_angle = static_cast<float>(stack) * stack_step;
 
         const float y = 0.5f * glm::cos(stack_angle) + height;
+        const float radius = 0.5f * glm::sin(stack_angle);
 
         for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
             const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
             const float sector_angle = static_cast<float>(sector) * sector_step;
 
-            const float x = 0.5f * glm::sin(stack_angle) * glm::cos(sector_angle);
-            const float z = 0.5f * glm::sin(stack_angle) * glm::sin(sector_angle);
+            const float x = radius * glm::cos(sector_angle);
+            const float z = radius * glm::sin(sector_angle);
 
-            mVertices.push_back({{x, y, z}});
+            const glm::vec3 position = {x, y, z};
+            const glm::vec3 normal = glm::normalize(position - glm::vec3(0.0f, height, 0.0f));
+            mVertices.push_back({position, normal});
         }
     }
 
-    // Bottom hemisphere vertices
+    // Bottom Hemisphere Vertices
     for (std::uint32_t stack = 0; stack <= stacks; ++stack) {
         const float stack_step = glm::half_pi<float>() / static_cast<float>(stacks);
         const float stack_angle = glm::half_pi<float>() + static_cast<float>(stack) * stack_step;
 
         const float y = 0.5f * glm::cos(stack_angle) - height;
+        const float radius = 0.5f * glm::sin(stack_angle);
 
         for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
             const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
             const float sector_angle = static_cast<float>(sector) * sector_step;
 
-            const float x = 0.5f * glm::sin(stack_angle) * glm::cos(sector_angle);
-            const float z = 0.5f * glm::sin(stack_angle) * glm::sin(sector_angle);
+            const float x = radius * glm::cos(sector_angle);
+            const float z = radius * glm::sin(sector_angle);
 
-            mVertices.push_back({{x, y, z}});
+            const glm::vec3 position = {x, y, z};
+            const glm::vec3 normal = glm::normalize(position - glm::vec3(0.0f, -height, 0.0f));
+            mVertices.push_back({position, normal});
         }
     }
 
-    // Cylinder vertices
+    // Cylinder Vertices
     for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
         const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
         const float sector_angle = static_cast<float>(sector) * sector_step;
@@ -75,13 +83,14 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
         const float x = 0.5f * glm::cos(sector_angle);
         const float z = 0.5f * glm::sin(sector_angle);
 
-        mVertices.push_back({{x, height, z}});
-        mVertices.push_back({{x, -height, z}});
+        const glm::vec3 normal = glm::normalize(glm::vec3(x, 0.0f, z));
+        mVertices.push_back({{x, height, z}, normal});
+        mVertices.push_back({{x, -height, z}, normal});
     }
 
     const std::uint32_t hemisphere_offset = (stacks + 1) * (sectors + 1);
 
-    // Top hemisphere indices
+    // Top Hemisphere Indices
     for (std::uint32_t stack = 0; stack < stacks; ++stack) {
         const std::uint32_t k1 = stack * (sectors + 1);
         const std::uint32_t k2 = k1 + sectors + 1;
@@ -97,7 +106,7 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
         }
     }
 
-    // Bottom hemisphere indices
+    // Bottom Hemisphere Indices
     for (std::uint32_t stack = 0; stack < stacks; ++stack) {
         const std::uint32_t k1 = hemisphere_offset + stack * (sectors + 1);
         const std::uint32_t k2 = k1 + sectors + 1;
@@ -113,7 +122,7 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
         }
     }
 
-    // Cylinder indices
+    // Cylinder Indices
     const std::uint32_t cylinder_offset = hemisphere_offset * 2;
     for (std::uint32_t sector = 0; sector < sectors; ++sector) {
         const std::uint32_t top1 = cylinder_offset + sector * 2;

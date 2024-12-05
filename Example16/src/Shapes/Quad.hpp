@@ -24,22 +24,19 @@ public:
 private:
     struct Vertex {
         glm::vec3 position;
+        glm::vec3 normal;
     };
 
     const std::vector<Vertex> mVertices{
-            {{-0.5f, -0.5f, +0.0f}},
-            {{+0.5f, -0.5f, +0.0f}},
-            {{-0.5f, +0.5f, +0.0f}},
-            {{+0.5f, +0.5f, +0.0f}},
+            {{-0.5f, -0.5f, +0.0f}, {0.0f, 0.0f, +1.0f}},// Bottom Left Vertex
+            {{+0.5f, -0.5f, +0.0f}, {0.0f, 0.0f, +1.0f}},// Bottom Right Vertex
+            {{-0.5f, +0.5f, +0.0f}, {0.0f, 0.0f, +1.0f}},// Top Left Vertex
+            {{+0.5f, +0.5f, +0.0f}, {0.0f, 0.0f, +1.0f}},// Top Right Vertex
     };
 
     const std::vector<GLuint> mElements{
-            0,
-            1,
-            2,
-            2,
-            1,
-            3,
+            0, 1, 2,
+            2, 1, 3,
     };
 
     std::shared_ptr<VAO> mVAO;

@@ -10,6 +10,7 @@ Plane::Plane() {
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetFloat3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -24,6 +25,7 @@ Plane::Plane(std::uint32_t segmentsX, std::uint32_t segmentsZ) {
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetFloat3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -33,11 +35,13 @@ void Plane::Build(const std::uint32_t segmentsX, const std::uint32_t segmentsZ) 
     const float stepZ = 1.0f / static_cast<float>(segmentsZ);
 
     mVertices.reserve((segmentsX + 1) * (segmentsZ + 1));
+    const glm::vec3 normal = {0.0f, 1.0f, 0.0f};
+
     for (std::uint32_t i = 0; i <= segmentsZ; ++i) {
         for (std::uint32_t j = 0; j <= segmentsX; ++j) {
             const float x = static_cast<float>(j) * stepX - 0.5f;
             const float z = static_cast<float>(i) * stepZ - 0.5f;
-            mVertices.push_back({{x, 0.0f, z}});
+            mVertices.push_back({{x, 0.0f, z}, normal});
         }
     }
 
