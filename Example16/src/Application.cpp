@@ -196,7 +196,7 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", glm::vec4(0.4f, 0.2f, 0.1f, 1.0f));
+            shader.SetFloat4("u_color", glm::vec4(0.2f, 0.6f, 0.8f, 1.0f));
             shader.SetFloat4x4("u_model", model);
             triangle.Draw();
         }
@@ -207,7 +207,7 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", glm::vec4(0.4f, 0.5f, 0.2f, 1.0f));
+            shader.SetFloat4("u_color", glm::vec4(0.8f, 0.4f, 0.6f, 1.0f));
             shader.SetFloat4x4("u_model", model);
             quad.Draw();
         }
@@ -218,7 +218,7 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", glm::vec4(0.6f, 0.3f, 0.2f, 1.0f));
+            shader.SetFloat4("u_color", glm::vec4(0.9f, 0.7f, 0.2f, 1.0f));
             shader.SetFloat4x4("u_model", model);
             cube.Draw();
         }
@@ -229,7 +229,7 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", glm::vec4(0.8f, 0.7f, 0.5f, 1.0f));
+            shader.SetFloat4("u_color", glm::vec4(0.3f, 0.8f, 0.4f, 1.0f));
             shader.SetFloat4x4("u_model", model);
             plane.Draw();
         }
@@ -240,7 +240,7 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", glm::vec4(0.2f, 0.4f, 0.2f, 1.0f));
+            shader.SetFloat4("u_color", glm::vec4(0.7f, 0.5f, 0.9f, 1.0f));
             shader.SetFloat4x4("u_model", model);
             circle.Draw();
         }
@@ -251,7 +251,7 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", glm::vec4(0.4f, 0.4f, 0.4f, 1.0f));
+            shader.SetFloat4("u_color", glm::vec4(0.5f, 0.5f, 0.5f, 1.0f));
             shader.SetFloat4x4("u_model", model);
             sphere.Draw();
         }
@@ -262,7 +262,7 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", glm::vec4(0.7f, 0.4f, 0.3f, 1.0f));
+            shader.SetFloat4("u_color", glm::vec4(0.9f, 0.6f, 0.3f, 1.0f));
             shader.SetFloat4x4("u_model", model);
             cylinder.Draw();
         }
@@ -273,7 +273,7 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            shader.SetFloat4("u_color", glm::vec4(0.6f, 0.5f, 0.3f, 1.0f));
+            shader.SetFloat4("u_color", glm::vec4(0.4f, 0.7f, 0.8f, 1.0f));
             shader.SetFloat4x4("u_model", model);
             capsule.Draw();
         }
