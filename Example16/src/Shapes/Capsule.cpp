@@ -1,7 +1,7 @@
 #include "Capsule.hpp"
 
 Capsule::Capsule() {
-    Build(32, 16);
+    Build(32, 32);
 
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);

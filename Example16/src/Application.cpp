@@ -194,6 +194,12 @@ void Application::Run() {
 
         camera.Update();
 
+        ImGui::Begin("Light");
+        ImGui::DragFloat3("Ambient", (float *)&light.ambient, 0.01f, 0.0f, 1.0f);
+        ImGui::DragFloat3("Diffuse", (float *)&light.diffuse, 0.01f, 0.0f, 1.0f);
+        ImGui::DragFloat3("Specular", (float *)&light.specular, 0.01f, 0.0f, 1.0f);
+        ImGui::End();
+
         const glm::vec3 light_position(32.0f + 64.0f * sin(glfwGetTime()), 64.0f, 32.0f + 64.0f * cos(glfwGetTime()));
 
         light_shader.Use();
