@@ -3,6 +3,8 @@
 #include "Camera.hpp"
 #include "Logging.hpp"
 #include "Shader.hpp"
+#include "Light.hpp"
+#include "Material.hpp"
 
 #include "Shapes/Capsule.hpp"
 #include "Shapes/Circle.hpp"
@@ -179,20 +181,26 @@ void Application::Run() {
         shader.SetFloat4x4("u_view", camera.GetView());
         shader.SetFloat4x4("u_projection", camera.GetProjection(window_a));
 
-        const float ambient_strength = 1.0f;
-        const float specular_strength = 1.0f;
-        const float shininess = 32.0f;
-        const glm::vec3 light_position(32.0f + 64.0f * sin(glfwGetTime()), 64.0f, 32.0f + 64.0f * cos(glfwGetTime()));
-        const glm::vec3 light_color(1.0f, 1.0f, 1.0f);
+        Light light;
+        light.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
+        light.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+        light.specular = glm::vec3(1.0f, 1.0f, 1.0f);
 
+        const glm::vec3 light_position(32.0f + 64.0f * sin(glfwGetTime()), 64.0f, 32.0f + 64.0f * cos(glfwGetTime()));
+
+        shader.SetFloat3("u_light.ambient", light.ambient);
+        shader.SetFloat3("u_light.diffuse", light.diffuse);
+        shader.SetFloat3("u_light.specular", light.specular);
         shader.SetFloat3("u_camera_position", camera.GetPosition());
-        shader.SetFloat("u_ambient_strength", ambient_strength);
-        shader.SetFloat("u_specular_strength", specular_strength);
-        shader.SetFloat("u_shininess", shininess);
         shader.SetFloat3("u_light_position", light_position);
-        shader.SetFloat3("u_light_color", light_color);
 
         {
+            Material material;
+            material.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.shininess = 32.0f;
+
             glm::vec3 color(0.2f, 0.6f, 0.8f);
 
             glm::mat4 model(1.0f);
@@ -200,12 +208,22 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetFloat3("u_material.ambient", material.ambient);
+            shader.SetFloat3("u_material.diffuse", material.diffuse);
+            shader.SetFloat3("u_material.specular", material.specular);
+            shader.SetFloat("u_material.shininess", material.shininess);
             shader.SetFloat3("u_color", color);
             shader.SetFloat4x4("u_model", model);
             triangle.Draw();
         }
 
         {
+            Material material;
+            material.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.shininess = 32.0f;
+
             glm::vec3 color(0.8f, 0.4f, 0.6f);
 
             glm::mat4 model(1.0f);
@@ -213,12 +231,22 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetFloat3("u_material.ambient", material.ambient);
+            shader.SetFloat3("u_material.diffuse", material.diffuse);
+            shader.SetFloat3("u_material.specular", material.specular);
+            shader.SetFloat("u_material.shininess", material.shininess);
             shader.SetFloat3("u_color", color);
             shader.SetFloat4x4("u_model", model);
             quad.Draw();
         }
 
         {
+            Material material;
+            material.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.shininess = 32.0f;
+
             glm::vec3 color(0.9f, 0.7f, 0.2f);
 
             glm::mat4 model(1.0f);
@@ -226,12 +254,22 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetFloat3("u_material.ambient", material.ambient);
+            shader.SetFloat3("u_material.diffuse", material.diffuse);
+            shader.SetFloat3("u_material.specular", material.specular);
+            shader.SetFloat("u_material.shininess", material.shininess);
             shader.SetFloat3("u_color", color);
             shader.SetFloat4x4("u_model", model);
             cube.Draw();
         }
 
         {
+            Material material;
+            material.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.shininess = 32.0f;
+
             glm::vec3 color(0.3f, 0.8f, 0.4f);
 
             glm::mat4 model(1.0f);
@@ -239,12 +277,22 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetFloat3("u_material.ambient", material.ambient);
+            shader.SetFloat3("u_material.diffuse", material.diffuse);
+            shader.SetFloat3("u_material.specular", material.specular);
+            shader.SetFloat("u_material.shininess", material.shininess);
             shader.SetFloat3("u_color", color);
             shader.SetFloat4x4("u_model", model);
             plane.Draw();
         }
 
         {
+            Material material;
+            material.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.shininess = 32.0f;
+
             glm::vec3 color(0.7f, 0.5f, 0.9f);
 
             glm::mat4 model(1.0f);
@@ -252,12 +300,22 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetFloat3("u_material.ambient", material.ambient);
+            shader.SetFloat3("u_material.diffuse", material.diffuse);
+            shader.SetFloat3("u_material.specular", material.specular);
+            shader.SetFloat("u_material.shininess", material.shininess);
             shader.SetFloat3("u_color", color);
             shader.SetFloat4x4("u_model", model);
             circle.Draw();
         }
 
         {
+            Material material;
+            material.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.shininess = 32.0f;
+
             glm::vec3 color(0.5f, 0.5f, 0.5f);
 
             glm::mat4 model(1.0f);
@@ -265,12 +323,22 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetFloat3("u_material.ambient", material.ambient);
+            shader.SetFloat3("u_material.diffuse", material.diffuse);
+            shader.SetFloat3("u_material.specular", material.specular);
+            shader.SetFloat("u_material.shininess", material.shininess);
             shader.SetFloat3("u_color", color);
             shader.SetFloat4x4("u_model", model);
             sphere.Draw();
         }
 
         {
+            Material material;
+            material.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.shininess = 32.0f;
+
             glm::vec3 color(0.9f, 0.6f, 0.3f);
 
             glm::mat4 model(1.0f);
@@ -278,12 +346,22 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetFloat3("u_material.ambient", material.ambient);
+            shader.SetFloat3("u_material.diffuse", material.diffuse);
+            shader.SetFloat3("u_material.specular", material.specular);
+            shader.SetFloat("u_material.shininess", material.shininess);
             shader.SetFloat3("u_color", color);
             shader.SetFloat4x4("u_model", model);
             cylinder.Draw();
         }
 
         {
+            Material material;
+            material.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+            material.shininess = 32.0f;
+
             glm::vec3 color(0.4f, 0.7f, 0.8f);
 
             glm::mat4 model(1.0f);
@@ -291,6 +369,10 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetFloat3("u_material.ambient", material.ambient);
+            shader.SetFloat3("u_material.diffuse", material.diffuse);
+            shader.SetFloat3("u_material.specular", material.specular);
+            shader.SetFloat("u_material.shininess", material.shininess);
             shader.SetFloat3("u_color", color);
             shader.SetFloat4x4("u_model", model);
             capsule.Draw();
@@ -307,7 +389,6 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
-            light_shader.SetFloat3("u_color", light_color);
             light_shader.SetFloat4x4("u_model", model);
             light_sphere.Draw();
         }
