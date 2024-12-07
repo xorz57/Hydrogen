@@ -3,6 +3,7 @@
 uniform vec3 u_camera_position;
 uniform float u_ambient_strength;
 uniform float u_specular_strength;
+uniform float u_shininess;
 uniform vec3 u_light_position;
 uniform vec4 u_light_color;
 uniform vec4 u_color;
@@ -20,7 +21,7 @@ void main() {
 
     vec3 view_direction = normalize(u_camera_position - v_position);
     vec3 reflection_direction = reflect(-light_direction, normalize(v_normal));
-    vec4 specular = u_specular_strength * pow(max(dot(view_direction, reflection_direction), 0.0), 32) * u_light_color;
+    vec4 specular = u_specular_strength * pow(max(dot(view_direction, reflection_direction), 0.0), u_shininess) * u_light_color;
 
     f_color = (ambient + diffuse + specular) * u_color;
 }

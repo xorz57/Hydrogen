@@ -181,12 +181,14 @@ void Application::Run() {
 
         const float ambient_strength = 1.0f;
         const float specular_strength = 1.0f;
+        const float shininess = 32.0f;
         const glm::vec3 light_position(32.0f + 64.0f * sin(glfwGetTime()), 64.0f, 32.0f + 64.0f * cos(glfwGetTime()));
         const glm::vec4 light_color(1.0f, 1.0f, 1.0f, 1.0f);
 
         shader.SetFloat3("u_camera_position", camera.GetPosition());
         shader.SetFloat("u_ambient_strength", ambient_strength);
         shader.SetFloat("u_specular_strength", specular_strength);
+        shader.SetFloat("u_shininess", shininess);
         shader.SetFloat3("u_light_position", light_position);
         shader.SetFloat4("u_light_color", light_color);
 
