@@ -18,22 +18,21 @@ uniform Material u_material;
 
 uniform vec3 u_camera_position;
 uniform vec3 u_light_position;
-uniform vec3 u_color;
 
 in vec3 v_position;
 in vec3 v_normal;
 
-out vec3 f_color;
+out vec4 f_color;
 
 void main() {
-    vec3 ambient = u_material.ambient * u_light.ambient;
+    vec3 ambient = u_light.ambient * u_material.ambient;
 
     vec3 light_direction = normalize(u_light_position - v_position);
-    vec3 diffuse = max(dot(normalize(v_normal), light_direction), 0.0) * u_material.diffuse * u_light.diffuse;
+    vec3 diffuse = u_light.diffuse * max(dot(normalize(v_normal), light_direction), 0.0) * u_material.diffuse;
 
-    vec3 view_direction = normalize(u_camera_position - v_position);
+    vec3 camera_direction = normalize(u_camera_position - v_position);
     vec3 reflection_direction = reflect(-light_direction, normalize(v_normal));
-    vec3 specular = u_material.specular * pow(max(dot(view_direction, reflection_direction), 0.0), u_material.shininess) * u_light.specular;
+    vec3 specular = u_light.specular * pow(max(dot(camera_direction, reflection_direction), 0.0), u_material.shininess) * u_material.specular;
 
-    f_color = (ambient + diffuse + specular) * u_color;
+    f_color = vec4(ambient + diffuse + specular, 1.0);
 }
