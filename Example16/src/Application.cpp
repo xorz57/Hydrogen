@@ -229,12 +229,11 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetMat4("u_model", model);
             shader.SetVec3("u_material.ambient", material.ambient);
             shader.SetVec3("u_material.diffuse", material.diffuse);
             shader.SetVec3("u_material.specular", material.specular);
             shader.SetFloat("u_material.shininess", material.shininess);
-
-            shader.SetMat4("u_model", model);
 
             triangle.Draw();
         }
@@ -245,12 +244,11 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetMat4("u_model", model);
             shader.SetVec3("u_material.ambient", material.ambient);
             shader.SetVec3("u_material.diffuse", material.diffuse);
             shader.SetVec3("u_material.specular", material.specular);
             shader.SetFloat("u_material.shininess", material.shininess);
-
-            shader.SetMat4("u_model", model);
 
             quad.Draw();
         }
@@ -261,12 +259,11 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetMat4("u_model", model);
             shader.SetVec3("u_material.ambient", material.ambient);
             shader.SetVec3("u_material.diffuse", material.diffuse);
             shader.SetVec3("u_material.specular", material.specular);
             shader.SetFloat("u_material.shininess", material.shininess);
-
-            shader.SetMat4("u_model", model);
 
             cube.Draw();
         }
@@ -277,12 +274,11 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetMat4("u_model", model);
             shader.SetVec3("u_material.ambient", material.ambient);
             shader.SetVec3("u_material.diffuse", material.diffuse);
             shader.SetVec3("u_material.specular", material.specular);
             shader.SetFloat("u_material.shininess", material.shininess);
-
-            shader.SetMat4("u_model", model);
 
             plane.Draw();
         }
@@ -293,12 +289,11 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetMat4("u_model", model);
             shader.SetVec3("u_material.ambient", material.ambient);
             shader.SetVec3("u_material.diffuse", material.diffuse);
             shader.SetVec3("u_material.specular", material.specular);
             shader.SetFloat("u_material.shininess", material.shininess);
-
-            shader.SetMat4("u_model", model);
 
             circle.Draw();
         }
@@ -309,12 +304,11 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetMat4("u_model", model);
             shader.SetVec3("u_material.ambient", material.ambient);
             shader.SetVec3("u_material.diffuse", material.diffuse);
             shader.SetVec3("u_material.specular", material.specular);
             shader.SetFloat("u_material.shininess", material.shininess);
-
-            shader.SetMat4("u_model", model);
 
             sphere.Draw();
         }
@@ -325,12 +319,11 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetMat4("u_model", model);
             shader.SetVec3("u_material.ambient", material.ambient);
             shader.SetVec3("u_material.diffuse", material.diffuse);
             shader.SetVec3("u_material.specular", material.specular);
             shader.SetFloat("u_material.shininess", material.shininess);
-
-            shader.SetMat4("u_model", model);
 
             cylinder.Draw();
         }
@@ -341,12 +334,11 @@ void Application::Run() {
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
+            shader.SetMat4("u_model", model);
             shader.SetVec3("u_material.ambient", material.ambient);
             shader.SetVec3("u_material.diffuse", material.diffuse);
             shader.SetVec3("u_material.specular", material.specular);
             shader.SetFloat("u_material.shininess", material.shininess);
-
-            shader.SetMat4("u_model", model);
 
             capsule.Draw();
         }
