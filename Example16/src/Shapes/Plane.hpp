@@ -17,13 +17,13 @@
 class Plane {
 public:
     Plane();
-    Plane(std::uint32_t segmentsX, std::uint32_t segmentsZ);
+    Plane(std::uint32_t segments_x, std::uint32_t segments_z);
 
     void Draw() const;
     void Delete() const;
 
 private:
-    void Build(std::uint32_t segmentsX, std::uint32_t segmentsZ);
+    void Build(std::uint32_t segments_x, std::uint32_t segments_z);
 
     struct Vertex {
         glm::vec3 position;

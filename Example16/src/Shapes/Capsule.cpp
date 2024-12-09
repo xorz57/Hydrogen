@@ -50,9 +50,10 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
             const float x = stack_radius * glm::cos(sector_angle);
             const float z = stack_radius * glm::sin(sector_angle);
 
-            const glm::vec3 position = {x, y, z};
-            const glm::vec3 normal = glm::normalize(position - glm::vec3(0.0f, height, 0.0f));
-            mVertices.push_back({position, normal});
+            const glm::vec3 position(x, y, z);
+            const glm::vec3 normal = glm::normalize(position - glm::vec3(0.0f, +height, 0.0f));
+
+            mVertices.emplace_back(position, normal);
         }
     }
 
@@ -69,9 +70,10 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
             const float x = stack_radius * glm::cos(sector_angle);
             const float z = stack_radius * glm::sin(sector_angle);
 
-            const glm::vec3 position = {x, y, z};
+            const glm::vec3 position(x, y, z);
             const glm::vec3 normal = glm::normalize(position - glm::vec3(0.0f, -height, 0.0f));
-            mVertices.push_back({position, normal});
+
+            mVertices.emplace_back(position, normal);
         }
     }
 
@@ -83,8 +85,8 @@ void Capsule::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
         const float z = radius * glm::sin(sector_angle);
 
         const glm::vec3 normal = glm::normalize(glm::vec3(x, 0.0f, z));
-        mVertices.push_back({{x, height, z}, normal});
-        mVertices.push_back({{x, -height, z}, normal});
+        mVertices.emplace_back(glm::vec3(x, +height, z), normal);
+        mVertices.emplace_back(glm::vec3(x, -height, z), normal);
     }
 
     const std::uint32_t hemisphere_offset = (stacks + 1) * (sectors + 1);

@@ -15,8 +15,8 @@ Plane::Plane() {
     VAO::Unbind();
 }
 
-Plane::Plane(std::uint32_t segmentsX, std::uint32_t segmentsZ) {
-    Build(segmentsX, segmentsZ);
+Plane::Plane(std::uint32_t segments_x, std::uint32_t segments_z) {
+    Build(segments_x, segments_z);
 
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
@@ -30,33 +30,34 @@ Plane::Plane(std::uint32_t segmentsX, std::uint32_t segmentsZ) {
     VAO::Unbind();
 }
 
-void Plane::Build(const std::uint32_t segmentsX, const std::uint32_t segmentsZ) {
-    const float stepX = 1.0f / static_cast<float>(segmentsX);
-    const float stepZ = 1.0f / static_cast<float>(segmentsZ);
+void Plane::Build(const std::uint32_t segments_x, const std::uint32_t segments_z) {
+    const float step_x = 1.0f / static_cast<float>(segments_x);
+    const float step_z = 1.0f / static_cast<float>(segments_z);
 
-    mVertices.reserve((segmentsX + 1) * (segmentsZ + 1));
-    const glm::vec3 normal = {0.0f, 1.0f, 0.0f};
+    const glm::vec3 normal(0.0f, 1.0f, 0.0f);
 
-    for (std::uint32_t i = 0; i <= segmentsZ; ++i) {
-        for (std::uint32_t j = 0; j <= segmentsX; ++j) {
-            const float x = static_cast<float>(j) * stepX - 0.5f;
-            const float z = static_cast<float>(i) * stepZ - 0.5f;
-            mVertices.push_back({{x, 0.0f, z}, normal});
+    for (std::uint32_t i = 0; i <= segments_z; ++i) {
+        for (std::uint32_t j = 0; j <= segments_x; ++j) {
+            const float x = static_cast<float>(j) * step_x - 0.5f;
+            const float z = static_cast<float>(i) * step_z - 0.5f;
+
+            const glm::vec3 position(x, 0.0f, z);
+
+            mVertices.emplace_back(position, normal);
         }
     }
 
-    mElements.reserve(segmentsX * segmentsZ * 6);
-    for (std::uint32_t i = 0; i < segmentsZ; ++i) {
-        for (std::uint32_t j = 0; j < segmentsX; ++j) {
-            const GLuint base = i * (segmentsX + 1) + j;
+    for (std::uint32_t i = 0; i < segments_z; ++i) {
+        for (std::uint32_t j = 0; j < segments_x; ++j) {
+            const std::uint32_t base = i * (segments_x + 1) + j;
 
             mElements.push_back(base);
             mElements.push_back(base + 1);
-            mElements.push_back(base + segmentsX + 1);
+            mElements.push_back(base + segments_x + 1);
 
-            mElements.push_back(base + segmentsX + 1);
+            mElements.push_back(base + segments_x + 1);
             mElements.push_back(base + 1);
-            mElements.push_back(base + segmentsX + 2);
+            mElements.push_back(base + segments_x + 2);
         }
     }
 }

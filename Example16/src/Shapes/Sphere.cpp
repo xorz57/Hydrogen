@@ -47,10 +47,10 @@ void Sphere::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
             const float x = radius * glm::sin(stack_angle) * glm::cos(sector_angle);
             const float z = radius * glm::sin(stack_angle) * glm::sin(sector_angle);
 
-            const glm::vec3 position = {x, y, z};
+            const glm::vec3 position(x, y, z);
             const glm::vec3 normal = glm::normalize(position);
 
-            mVertices.push_back({position, normal});
+            mVertices.emplace_back(position, normal);
         }
     }
 
