@@ -33,14 +33,14 @@ Circle::Circle(const std::uint32_t sectors) {
 void Circle::Build(const std::uint32_t sectors) {
     const float sector_step = 2.0f * glm::pi<float>() / static_cast<float>(sectors);
 
-    mVertices.push_back(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    mVertices.push_back({glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f)});
     mElements.push_back(0);
 
     for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
         const float sector_angle = static_cast<float>(sector) * sector_step;
         const float x = 0.5f * glm::cos(sector_angle);
         const float y = 0.5f * glm::sin(sector_angle);
-        mVertices.push_back(glm::vec3(x, y, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        mVertices.push_back({glm::vec3(x, y, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f)});
         mElements.push_back(sector + 1);
     }
 }

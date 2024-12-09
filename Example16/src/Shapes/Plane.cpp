@@ -43,7 +43,7 @@ void Plane::Build(const std::uint32_t segments_x, const std::uint32_t segments_z
 
             const glm::vec3 position(x, 0.0f, z);
 
-            mVertices.push_back(position, normal);
+            mVertices.push_back({position, normal});
         }
     }
 
