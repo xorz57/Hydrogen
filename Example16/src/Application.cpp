@@ -188,12 +188,12 @@ void Application::Run() {
         camera.Update();
 
         ImGui::Begin("Light");
-        ImGui::DragFloat3("Ambient", (float *)&light.ambient, 0.01f, 0.0f, 1.0f);
-        ImGui::DragFloat3("Diffuse", (float *)&light.diffuse, 0.01f, 0.0f, 1.0f);
-        ImGui::DragFloat3("Specular", (float *)&light.specular, 0.01f, 0.0f, 1.0f);
+        ImGui::DragFloat3("Ambient", (float *) &light.ambient, 0.01f, 0.0f, 1.0f);
+        ImGui::DragFloat3("Diffuse", (float *) &light.diffuse, 0.01f, 0.0f, 1.0f);
+        ImGui::DragFloat3("Specular", (float *) &light.specular, 0.01f, 0.0f, 1.0f);
         ImGui::End();
 
-        const glm::vec3 light_position(32.0f + 64.0f * sin(glfwGetTime()), 64.0f, 32.0f + 64.0f * cos(glfwGetTime()));
+        light.position = glm::vec3(32.0f + 64.0f * sin(glfwGetTime()), 64.0f, 32.0f + 64.0f * cos(glfwGetTime()));
 
         light_shader.Use();
 
@@ -202,7 +202,7 @@ void Application::Run() {
 
         {
             glm::mat4 model(1.0f);
-            model = glm::translate(model, light_position);
+            model = glm::translate(model, light.position);
             model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             model = glm::scale(model, glm::vec3(16.0f, 16.0f, 16.0f));
 
@@ -216,12 +216,12 @@ void Application::Run() {
         shader.SetMat4("u_view", camera.GetView());
         shader.SetMat4("u_projection", camera.GetProjection(window_a));
 
+        shader.SetVec3("u_light.position", light.position);
         shader.SetVec3("u_light.ambient", light.ambient);
         shader.SetVec3("u_light.diffuse", light.diffuse);
         shader.SetVec3("u_light.specular", light.specular);
 
         shader.SetVec3("u_camera_position", camera.GetPosition());
-        shader.SetVec3("u_light_position", light_position);
 
         {
             glm::mat4 model(1.0f);
