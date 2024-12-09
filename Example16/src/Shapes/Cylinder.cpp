@@ -35,25 +35,25 @@ void Cylinder::Build(const std::uint32_t sectors) {
     constexpr float radius = 0.5f;
 
     // Bottom Center Vertex
-    mVertices.emplace_back(glm::vec3(0.0f, -height, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+    mVertices.push_back(glm::vec3(0.0f, -height, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
 
     // Bottom Circle Vertices
     for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
         const float sector_angle = 2.0f * glm::pi<float>() * sector / sectors;
         const float x = radius * glm::cos(sector_angle);
         const float z = radius * glm::sin(sector_angle);
-        mVertices.emplace_back(glm::vec3(x, -height, z), glm::vec3(0.0f, -1.0f, 0.0f));
+        mVertices.push_back(glm::vec3(x, -height, z), glm::vec3(0.0f, -1.0f, 0.0f));
     }
 
     // Top Center Vertex
-    mVertices.emplace_back(glm::vec3(0.0f, height, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    mVertices.push_back(glm::vec3(0.0f, height, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
     // Top Circle Vertices
     for (std::uint32_t sector = 0; sector <= sectors; ++sector) {
         const float sector_angle = 2.0f * glm::pi<float>() * sector / sectors;
         const float x = radius * glm::cos(sector_angle);
         const float z = radius * glm::sin(sector_angle);
-        mVertices.emplace_back(glm::vec3(x, +height, z), glm::vec3(0.0f, +1.0f, 0.0f));
+        mVertices.push_back(glm::vec3(x, +height, z), glm::vec3(0.0f, +1.0f, 0.0f));
     }
 
     // Bottom Circle Indices

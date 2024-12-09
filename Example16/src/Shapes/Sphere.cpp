@@ -50,7 +50,7 @@ void Sphere::Build(const std::uint32_t sectors, const std::uint32_t stacks) {
             const glm::vec3 position(x, y, z);
             const glm::vec3 normal = glm::normalize(position);
 
-            mVertices.emplace_back(position, normal);
+            mVertices.push_back(position, normal);
         }
     }
 
