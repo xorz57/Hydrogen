@@ -13,12 +13,12 @@ public:
     void Use() const;
     void Delete() const;
     void SetFloat(const char *name, float s) const;
-    void SetFloat2(const char *name, const glm::vec2 &v) const;
-    void SetFloat3(const char *name, const glm::vec3 &v) const;
-    void SetFloat4(const char *name, const glm::vec4 &v) const;
-    void SetFloat2x2(const char *name, const glm::mat2 &m) const;
-    void SetFloat3x3(const char *name, const glm::mat3 &m) const;
-    void SetFloat4x4(const char *name, const glm::mat4 &m) const;
+    void SetVec2(const char *name, const glm::vec2 &v) const;
+    void SetVec3(const char *name, const glm::vec3 &v) const;
+    void SetVec4(const char *name, const glm::vec4 &v) const;
+    void SetMat2(const char *name, const glm::mat2 &m) const;
+    void SetMat3(const char *name, const glm::mat3 &m) const;
+    void SetMat4(const char *name, const glm::mat4 &m) const;
 
     static Shader LoadFromFile(const char *vShaderPath, const char *fShaderPath);
 

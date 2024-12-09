@@ -210,9 +210,9 @@ int main() {
         const glm::mat4 projection = glm::perspective(glm::radians(45.0f), static_cast<float>(window_w) / static_cast<float>(window_h), 0.1f, 100.0f);
 
         shader.Use();
-        shader.SetFloat4x4("u_model", model);
-        shader.SetFloat4x4("u_view", view);
-        shader.SetFloat4x4("u_projection", projection);
+        shader.SetMat4("u_model", model);
+        shader.SetMat4("u_view", view);
+        shader.SetMat4("u_projection", projection);
 
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements.size()), GL_UNSIGNED_INT, static_cast<void *>(nullptr));
 

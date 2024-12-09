@@ -139,8 +139,8 @@ int main() {
 
         shader.Use();
 
-        shader.SetFloat4x4("u_view", camera.GetView());
-        shader.SetFloat4x4("u_projection", camera.GetProjection(window_a));
+        shader.SetMat4("u_view", camera.GetView());
+        shader.SetMat4("u_projection", camera.GetProjection(window_a));
 
         const float angle = static_cast<float>(glfwGetTime()) * glm::radians(-45.0f);
 
@@ -150,7 +150,7 @@ int main() {
             model = glm::translate(model, position);
             model = glm::rotate(model, angle, glm::vec3(1.0f, 1.0f, 1.0f));
 
-            shader.SetFloat4x4("u_model", model);
+            shader.SetMat4("u_model", model);
 
             cube.Draw();
         }

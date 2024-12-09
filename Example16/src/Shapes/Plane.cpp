@@ -9,8 +9,8 @@ Plane::Plane() {
 
     mVAO->Bind();
     mVBO->Bind();
-    VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
-    VAO::SetFloat3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
+    VAO::SetVec3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetVec3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -24,8 +24,8 @@ Plane::Plane(std::uint32_t segments_x, std::uint32_t segments_z) {
 
     mVAO->Bind();
     mVBO->Bind();
-    VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
-    VAO::SetFloat3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
+    VAO::SetVec3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetVec3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }

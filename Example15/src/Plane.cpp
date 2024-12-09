@@ -3,8 +3,8 @@
 Plane::Plane() {
     mVAO.Bind();
     mVBO.Bind();
-    VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
-    VAO::SetFloat2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
+    VAO::SetVec3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetVec2(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, texture_coordinates)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }

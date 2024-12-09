@@ -9,8 +9,8 @@ Sphere::Sphere() {
 
     mVAO->Bind();
     mVBO->Bind();
-    VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
-    VAO::SetFloat3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
+    VAO::SetVec3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetVec3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
@@ -24,8 +24,8 @@ Sphere::Sphere(const std::uint32_t sectors, const std::uint32_t stacks) {
 
     mVAO->Bind();
     mVBO->Bind();
-    VAO::SetFloat3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
-    VAO::SetFloat3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
+    VAO::SetVec3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
+    VAO::SetVec3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
     VBO<GLuint>::Unbind();
     VAO::Unbind();
 }
