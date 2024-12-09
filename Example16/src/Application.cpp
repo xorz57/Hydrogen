@@ -120,7 +120,11 @@ void Application::Run() {
     light.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
     light.specular = glm::vec3(1.0f, 1.0f, 1.0f);
 
-    Material material{glm::vec3(0.329412f, 0.223529f, 0.027451f), glm::vec3(0.780392f, 0.568627f, 0.113725f), glm::vec3(0.992157f, 0.941176f, 0.807843f), 0.21794872f * 128.0f};
+    Material material;
+    material.ambient = glm::vec3(0.329412f, 0.223529f, 0.027451f);
+    material.diffuse = glm::vec3(0.780392f, 0.568627f, 0.113725f);
+    material.specular = glm::vec3(0.992157f, 0.941176f, 0.807843f);
+    material.shininess = 128.0f * 0.21794872f;
 
     ///////////////////////////////////////////////////////////////////////////
 
