@@ -378,6 +378,7 @@ void Application::Run() {
     sphere.Delete();
     triangle.Delete();
 
+    light_shader.Delete();
     shader.Delete();
 
     ///////////////////////////////////////////////////////////////////////////
