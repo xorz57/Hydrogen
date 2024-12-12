@@ -5,7 +5,6 @@
 #include "../VBO.hpp"
 #include "../Vertex.hpp"
 
-#include <memory>
 #include <vector>
 
 class Triangle {
@@ -28,7 +27,7 @@ private:
             2,
     };
 
-    std::shared_ptr<VAO> mVAO;
-    std::shared_ptr<VBO<Vertex>> mVBO;
-    std::shared_ptr<EBO<std::uint32_t>> mEBO;
+    VAO mVAO;
+    VBO<Vertex> mVBO{mVertices};
+    EBO<std::uint32_t> mEBO{mElements};
 };
