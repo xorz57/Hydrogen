@@ -16,6 +16,7 @@ add_executable(Example16 src/Main.cpp
 
 target_include_directories(Example16 PRIVATE ${Stb_INCLUDE_DIR})
 
+target_link_libraries(Example16 PRIVATE assimp::assimp)
 target_link_libraries(Example16 PRIVATE glad::glad)
 target_link_libraries(Example16 PRIVATE glfw)
 target_link_libraries(Example16 PRIVATE glm::glm)
