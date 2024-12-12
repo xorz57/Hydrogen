@@ -5,10 +5,6 @@
 #include "../VBO.hpp"
 #include "../Vertex.hpp"
 
-#define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
-
 #include <memory>
 #include <vector>
 
@@ -24,9 +20,9 @@ private:
     void Build(std::uint32_t segments_x, std::uint32_t segments_z);
 
     std::vector<Vertex> mVertices;
-    std::vector<GLuint> mElements;
+    std::vector<std::uint32_t> mElements;
 
     std::shared_ptr<VAO> mVAO;
     std::shared_ptr<VBO<Vertex>> mVBO;
-    std::shared_ptr<EBO<GLuint>> mEBO;
+    std::shared_ptr<EBO<std::uint32_t>> mEBO;
 };

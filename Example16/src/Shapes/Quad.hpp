@@ -5,10 +5,6 @@
 #include "../VBO.hpp"
 #include "../Vertex.hpp"
 
-#define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
-
 #include <memory>
 #include <vector>
 
@@ -27,7 +23,7 @@ private:
             {{+0.5f, +0.5f, +0.0f}, {0.0f, 0.0f, +1.0f}},
     };
 
-    const std::vector<GLuint> mElements{
+    const std::vector<std::uint32_t> mElements{
             0,
             1,
             2,
@@ -38,5 +34,5 @@ private:
 
     std::shared_ptr<VAO> mVAO;
     std::shared_ptr<VBO<Vertex>> mVBO;
-    std::shared_ptr<EBO<GLuint>> mEBO;
+    std::shared_ptr<EBO<std::uint32_t>> mEBO;
 };

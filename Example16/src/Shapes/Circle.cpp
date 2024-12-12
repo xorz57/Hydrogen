@@ -1,5 +1,9 @@
 #include "Circle.hpp"
 
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 
@@ -8,13 +12,13 @@ Circle::Circle() {
 
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
-    mEBO = EBO<GLuint>::Create(mElements);
+    mEBO = EBO<std::uint32_t>::Create(mElements);
 
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetVec3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
     VAO::SetVec3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
-    VBO<GLuint>::Unbind();
+    VBO<std::uint32_t>::Unbind();
     VAO::Unbind();
 }
 
@@ -23,13 +27,13 @@ Circle::Circle(const std::uint32_t sectors) {
 
     mVAO = VAO::Create();
     mVBO = VBO<Vertex>::Create(mVertices);
-    mEBO = EBO<GLuint>::Create(mElements);
+    mEBO = EBO<std::uint32_t>::Create(mElements);
 
     mVAO->Bind();
     mVBO->Bind();
     VAO::SetVec3(0, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, position)));
     VAO::SetVec3(1, sizeof(Vertex), reinterpret_cast<void *>(offsetof(Vertex, normal)));
-    VBO<GLuint>::Unbind();
+    VBO<std::uint32_t>::Unbind();
     VAO::Unbind();
 }
 
@@ -44,8 +48,8 @@ void Circle::Build(const std::uint32_t sectors) {
         const float y = 0.5f * glm::sin(sector_angle);
         mVertices.push_back({glm::vec3(x, y, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f)});
 
-        GLuint current = sector + 1;
-        GLuint next = (sector + 1) % sectors + 1;
+        std::uint32_t current = sector + 1;
+        std::uint32_t next = (sector + 1) % sectors + 1;
 
         mElements.push_back(0);
         mElements.push_back(current);
@@ -55,9 +59,7 @@ void Circle::Build(const std::uint32_t sectors) {
 
 void Circle::Draw() const {
     mVAO->Bind();
-
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mElements.size()), GL_UNSIGNED_INT, static_cast<void *>(nullptr));
-
+    glDrawElements(GL_TRIANGLES, static_cast<std::int32_t>(mElements.size()), GL_UNSIGNED_INT, static_cast<void *>(nullptr));
     VAO::Unbind();
 }
 

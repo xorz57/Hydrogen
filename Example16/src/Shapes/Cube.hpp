@@ -5,10 +5,6 @@
 #include "../VBO.hpp"
 #include "../Vertex.hpp"
 
-#define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
-
 #include <memory>
 #include <vector>
 
@@ -58,7 +54,7 @@ private:
             {{-0.5f, +0.5f, +0.5f}, {0.0f, +1.0f, 0.0f}},
     };
 
-    const std::vector<GLuint> mElements{
+    const std::vector<std::uint32_t> mElements{
             0, 1, 2, 2, 3, 0,      // Front Face
             4, 5, 6, 6, 7, 4,      // Back Face
             8, 9, 10, 10, 11, 8,   // Left Face
@@ -69,5 +65,5 @@ private:
 
     std::shared_ptr<VAO> mVAO;
     std::shared_ptr<VBO<Vertex>> mVBO;
-    std::shared_ptr<EBO<GLuint>> mEBO;
+    std::shared_ptr<EBO<std::uint32_t>> mEBO;
 };
