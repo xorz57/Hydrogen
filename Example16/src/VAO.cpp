@@ -26,7 +26,7 @@ void VAO::SetFloat(const std::uint32_t index, const std::int32_t stride, const v
     glVertexAttribPointer(index, 1, GL_FLOAT, GL_FALSE, stride, pointer);
 }
 
-void VAO::SetFloat2(const std::uint32_t index, const std::int32_t stride, const void *pointer) {
+void VAO::SetVec2(const std::uint32_t index, const std::int32_t stride, const void *pointer) {
     glEnableVertexAttribArray(index);
     glVertexAttribPointer(index, 2, GL_FLOAT, GL_FALSE, stride, pointer);
 }
