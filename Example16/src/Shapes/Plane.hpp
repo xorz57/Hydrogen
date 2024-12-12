@@ -3,6 +3,7 @@
 #include "../EBO.hpp"
 #include "../VAO.hpp"
 #include "../VBO.hpp"
+#include "../Vertex.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -24,11 +25,6 @@ public:
 
 private:
     void Build(std::uint32_t segments_x, std::uint32_t segments_z);
-
-    struct Vertex {
-        glm::vec3 position;
-        glm::vec3 normal;
-    };
 
     std::vector<Vertex> mVertices;
     std::vector<GLuint> mElements;
