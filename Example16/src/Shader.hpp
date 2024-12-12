@@ -8,7 +8,7 @@
 
 class Shader {
 public:
-    Shader(const GLchar *vShaderSource, const GLchar *fShaderSource);
+    Shader(const char *vShaderSource, const char *fShaderSource);
 
     void Use() const;
     void Delete() const;
@@ -23,5 +23,5 @@ public:
     static Shader LoadFromFile(const char *vShaderPath, const char *fShaderPath);
 
 private:
-    GLint mProgram = 0;
+    std::int32_t mProgram = 0;
 };

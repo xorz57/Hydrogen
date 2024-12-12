@@ -14,8 +14,8 @@ Texture::Texture(const char *texturePath) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    int texture_w;
-    int texture_h;
+    std::int32_t texture_w;
+    std::int32_t texture_h;
     stbi_set_flip_vertically_on_load(true);
     if (stbi_uc *pixels = stbi_load(texturePath, &texture_w, &texture_h, nullptr, STBI_rgb_alpha)) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture_w, texture_h, 0, GL_RGBA, GL_UNSIGNED_BYTE, static_cast<void *>(pixels));

@@ -17,5 +17,5 @@ public:
     static void Unbind();
 
 private:
-    GLuint mID = 0;
+    std::uint32_t mID = 0;
 };

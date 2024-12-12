@@ -15,10 +15,10 @@ public:
 
     static std::shared_ptr<VAO> Create();
     static void Unbind();
-    static void SetFloat(GLuint index, GLsizei stride, const void *pointer);
-    static void SetFloat2(GLuint index, GLsizei stride, const void *pointer);
-    static void SetVec3(GLuint index, GLsizei stride, const void *pointer);
+    static void SetFloat(std::uint32_t index, std::int32_t stride, const void *pointer);
+    static void SetFloat2(std::uint32_t index, std::int32_t stride, const void *pointer);
+    static void SetVec3(std::uint32_t index, std::int32_t stride, const void *pointer);
 
 private:
-    GLuint mID = 0;
+    std::uint32_t mID = 0;
 };

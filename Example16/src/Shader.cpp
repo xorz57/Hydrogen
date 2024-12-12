@@ -7,31 +7,31 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
-Shader::Shader(const GLchar *vShaderSource, const GLchar *fShaderSource) {
-    GLint success;
+Shader::Shader(const char *vShaderSource, const char *fShaderSource) {
+    std::int32_t success;
 
-    const GLuint vShader = glCreateShader(GL_VERTEX_SHADER);
+    const std::uint32_t vShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vShader, 1, &vShaderSource, nullptr);
     glCompileShader(vShader);
     glGetShaderiv(vShader, GL_COMPILE_STATUS, &success);
     if (!success) {
-        GLint maxLength = 0;
+        std::int32_t maxLength = 0;
         glGetShaderiv(vShader, GL_INFO_LOG_LENGTH, &maxLength);
-        std::vector<GLchar> infoLog(maxLength);
-        glGetShaderInfoLog(vShader, static_cast<GLsizei>(infoLog.size()), nullptr, infoLog.data());
+        std::vector<char> infoLog(maxLength);
+        glGetShaderInfoLog(vShader, static_cast<std::int32_t>(infoLog.size()), nullptr, infoLog.data());
         SERVER_ERROR("{}", infoLog.data());
         std::exit(EXIT_FAILURE);
     }
 
-    const GLuint fShader = glCreateShader(GL_FRAGMENT_SHADER);
+    const std::uint32_t fShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fShader, 1, &fShaderSource, nullptr);
     glCompileShader(fShader);
     glGetShaderiv(fShader, GL_COMPILE_STATUS, &success);
     if (!success) {
-        GLint maxLength = 0;
+        std::int32_t maxLength = 0;
         glGetShaderiv(fShader, GL_INFO_LOG_LENGTH, &maxLength);
-        std::vector<GLchar> infoLog(maxLength);
-        glGetShaderInfoLog(fShader, static_cast<GLsizei>(infoLog.size()), nullptr, infoLog.data());
+        std::vector<char> infoLog(maxLength);
+        glGetShaderInfoLog(fShader, static_cast<std::int32_t>(infoLog.size()), nullptr, infoLog.data());
         SERVER_ERROR("{}", infoLog.data());
         std::exit(EXIT_FAILURE);
     }
@@ -42,10 +42,10 @@ Shader::Shader(const GLchar *vShaderSource, const GLchar *fShaderSource) {
     glLinkProgram(mProgram);
     glGetProgramiv(mProgram, GL_LINK_STATUS, &success);
     if (!success) {
-        GLint maxLength = 0;
+        std::int32_t maxLength = 0;
         glGetShaderiv(mProgram, GL_INFO_LOG_LENGTH, &maxLength);
-        std::vector<GLchar> infoLog(maxLength);
-        glGetProgramInfoLog(mProgram, static_cast<GLsizei>(infoLog.size()), nullptr, infoLog.data());
+        std::vector<char> infoLog(maxLength);
+        glGetProgramInfoLog(mProgram, static_cast<std::int32_t>(infoLog.size()), nullptr, infoLog.data());
         SERVER_ERROR("{}", infoLog.data());
         std::exit(EXIT_FAILURE);
     }
@@ -111,8 +111,8 @@ Shader Shader::LoadFromFile(const char *vShaderPath, const char *fShaderPath) {
     const std::string vShaderText = vShaderStream.str();
     const std::string fShaderText = fShaderStream.str();
 
-    const GLchar *vShaderSource = vShaderText.c_str();
-    const GLchar *fShaderSource = fShaderText.c_str();
+    const char *vShaderSource = vShaderText.c_str();
+    const char *fShaderSource = fShaderText.c_str();
 
     return {vShaderSource, fShaderSource};
 }
