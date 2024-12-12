@@ -1,5 +1,8 @@
 #include "Sphere.hpp"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/constants.hpp>
+
 Sphere::Sphere() {
     Build(32, 32);
 

@@ -1,5 +1,8 @@
 #include "Capsule.hpp"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/constants.hpp>
+
 Capsule::Capsule() {
     Build(32, 32);
 
