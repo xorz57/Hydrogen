@@ -5,10 +5,8 @@
 class Camera {
 public:
     Camera();
-
     void ProcessInput(float window_w, float window_h, double dt);
     void Update();
-
     void SetPosition(const glm::vec3 &position);
     void SetFOV(float fov);
     void SetNear(float near);
@@ -17,7 +15,6 @@ public:
     void SetYaw(float yaw);
     void SetSensitivity(float sensitivity);
     void SetSpeed(float speed);
-
     [[nodiscard]] glm::vec3 GetPosition() const;
     [[nodiscard]] float GetFOV() const;
     [[nodiscard]] float GetNear() const;
@@ -26,7 +23,6 @@ public:
     [[nodiscard]] float GetYaw() const;
     [[nodiscard]] float GetSensitivity() const;
     [[nodiscard]] float GetSpeed() const;
-
     [[nodiscard]] glm::mat4 GetView() const;
     [[nodiscard]] glm::mat4 GetProjection(float aspect) const;
 

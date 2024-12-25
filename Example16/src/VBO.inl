@@ -2,6 +2,10 @@
 
 #include "VBO.hpp"
 
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
+
 template<typename T>
 VBO<T>::VBO(const std::vector<T> &vertices) {
     glGenBuffers(1, &mID);

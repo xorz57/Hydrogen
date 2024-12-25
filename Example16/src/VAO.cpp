@@ -1,5 +1,9 @@
 #include "VAO.hpp"
 
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
+
 VAO::VAO() {
     glGenVertexArrays(1, &mID);
     glBindVertexArray(mID);

@@ -2,6 +2,10 @@
 
 #include "EBO.hpp"
 
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
+
 template<typename T>
 EBO<T>::EBO(const std::vector<T> &elements) {
     glGenBuffers(1, &mID);

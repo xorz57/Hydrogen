@@ -5,6 +5,10 @@
 #include <sstream>
 #include <vector>
 
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
+
 #include <glm/gtc/type_ptr.hpp>
 
 Shader::Shader(const char *vShaderSource, const char *fShaderSource) {

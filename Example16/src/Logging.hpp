@@ -7,8 +7,8 @@
 class Logging {
 public:
     static void Init();
-    static std::shared_ptr<spdlog::logger> &GetServerLogger() { return sServerLogger; }
-    static std::shared_ptr<spdlog::logger> &GetClientLogger() { return sClientLogger; }
+    [[nodiscard]] static std::shared_ptr<spdlog::logger> &GetServerLogger() { return sServerLogger; }
+    [[nodiscard]] static std::shared_ptr<spdlog::logger> &GetClientLogger() { return sClientLogger; }
 
 private:
     static std::shared_ptr<spdlog::logger> sServerLogger;

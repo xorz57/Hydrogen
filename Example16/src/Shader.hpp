@@ -1,15 +1,10 @@
 #pragma once
 
-#define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
-
 #include <glm/glm.hpp>
 
 class Shader {
 public:
     Shader(const char *vShaderSource, const char *fShaderSource);
-
     void Use() const;
     void Delete() const;
     void SetFloat(const char *name, float s) const;
@@ -19,8 +14,7 @@ public:
     void SetMat2(const char *name, const glm::mat2 &m) const;
     void SetMat3(const char *name, const glm::mat3 &m) const;
     void SetMat4(const char *name, const glm::mat4 &m) const;
-
-    static Shader LoadFromFile(const char *vShaderPath, const char *fShaderPath);
+    [[nodiscard]] static Shader LoadFromFile(const char *vShaderPath, const char *fShaderPath);
 
 private:
     std::int32_t mProgram = 0;
