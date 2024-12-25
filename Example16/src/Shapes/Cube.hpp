@@ -10,7 +10,6 @@
 class Cube {
 public:
     Cube();
-
     void Draw() const;
     void Delete() const;
 
@@ -52,7 +51,6 @@ private:
             {{+0.5f, +0.5f, +0.5f}, {0.0f, +1.0f, 0.0f}},
             {{-0.5f, +0.5f, +0.5f}, {0.0f, +1.0f, 0.0f}},
     };
-
     const std::vector<std::uint32_t> mElements{
             0, 1, 2, 2, 3, 0,      // Front Face
             4, 5, 6, 6, 7, 4,      // Back Face
@@ -61,7 +59,6 @@ private:
             16, 17, 18, 18, 19, 16,// Bottom Face
             20, 21, 22, 22, 23, 20 // Top Face
     };
-
     VAO mVAO;
     VBO<Vertex> mVBO{mVertices};
     EBO<std::uint32_t> mEBO{mElements};
